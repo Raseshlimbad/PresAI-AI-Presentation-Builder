@@ -1,4 +1,5 @@
 import { Home, LayoutTemplate, Settings, Trash } from "lucide-react";
+import { Theme } from "./types";
 
 export const data = {
     user: {
@@ -39,3 +40,31 @@ export const containerVarients = {
         }
     }
 }
+
+export const itemVariants = {
+    hidden: {y:20, opacity: 0},
+    visible: {
+        y:0,
+        opacity: 1,
+        transition: {
+            type:'spring',
+            stiffness: 100,
+        }
+    }
+}
+
+export const themes: Theme[] = [
+{
+    name:"",
+    fontFamily: "",
+    fontColor: "",
+    backgroundColor: "",
+    slideBackgroundColor: "",
+    accentColor: "" ,
+    gradientBackground : "",
+    slideColor: "",
+    navbarColor: "",
+    type: 'dark',
+}
+]
+   

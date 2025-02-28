@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 // import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -29,14 +29,16 @@ const AppSidebar = ({
   const { theme } = useTheme();
   return (
     <Sidebar
-    collapsible="icon"
-    className="max-w-[212px] bg-background-90"
-    {...props}>
-        <SidebarHeader className="pt-6 px-3 pb-0">
+      collapsible="icon"
+      className="max-w-[212px] bg-background-90"
+      {...props}
+    >
+      <SidebarHeader className="pt-6 px-3 pb-0">
         <SidebarMenuButton
-        size={'lg'}
-        className="data-[state=open]:text-sidebar-accent-foreground flex justify-center">
-        {/* <div className="flex aspect-square size-8 items-center justify-normal text-sidebar-primary-foreground">
+          size={"lg"}
+          className="data-[state=open]:text-sidebar-accent-foreground flex justify-center"
+        >
+          {/* <div className="flex aspect-square size-8 items-center justify-normal text-sidebar-primary-foreground">
             <Avatar className="h-12 w-20">
               <AvatarImage
                 src={ "/PresAi_dark.png" }
@@ -46,34 +48,34 @@ const AppSidebar = ({
             </Avatar>
         </div> */}
 
-        {theme === 'dark' ? (
-          <Image 
-        className="text-sidebar-primary-foreground"
-        src={"/PresAi_light-removebg.png"}
-        height={70}
-        width={140}
-        alt="PresAI"
-        />
-      ) : (
-          <Image 
-        className="text-sidebar-primary-foreground"
-        src={"/PresAi_dark-removebg.png"}
-        height={70}
-        width={140}
-        alt="PresAI"
-        />
-        )}
-        {/* <span className="truncate text-primary text-3xl font-semibold pl-2">
+          {theme === "light" ? (
+            <Image
+              className="text-sidebar-primary-foreground"
+              src={"/PresAi_dark-removebg.png"}
+              height={70}
+              width={140}
+              alt="PresAI"
+            />
+          ) : (
+            <Image
+              className="text-sidebar-primary-foreground"
+              src={"/PresAi_light-removebg.png"}
+              height={70}
+              width={140}
+              alt="PresAI"
+            />
+          )}
+          {/* <span className="truncate text-primary text-3xl font-semibold pl-2">
             PresAI
         </span> */}
         </SidebarMenuButton>
       </SidebarHeader>
       <SidebarContent className="px-3 mt-10 gap-y-6">
-        <NavMain items={data.navItems}/>
-        <RecentOpen recentProjects={recentProjects}/>
+        <NavMain items={data.navItems} />
+        <RecentOpen recentProjects={recentProjects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavFooter prismaUser={user}/>
+        <NavFooter prismaUser={user} />
       </SidebarFooter>
     </Sidebar>
   );
