@@ -27,21 +27,21 @@ export const onAuthenticateUser = async () => {
 
     // if user doesnt exists
     const newUser = await client.user.create({
-        data: {
-            clerkId: user.id,
-            email: user.emailAddresses[0].emailAddress,
-            name: user.firstName + ' ' + user.lastName,
-            profileImage: user.imageUrl
-        },
-    })
+      data: {
+        clerkId: user.id,
+        email: user.emailAddresses[0].emailAddress,
+        name: user.firstName + " " + user.lastName,
+        profileImage: user.imageUrl,
+      },
+    });
 
-    if(newUser){
-        return { status: 200, user: newUser };
+    if (newUser) {
+      return { status: 200, user: newUser };
     }
 
-    return {status: 400}
+    return { status: 400 };
   } catch (error) {
     console.log("Error: ", error);
-    return { status: 500 };
+    return { status: 500, message: "Internal Server Error" };
   }
 };
