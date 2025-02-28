@@ -15,6 +15,7 @@ import NavMain from "./nav-main";
 import { data } from "@/lib/constants";
 import RecentOpen from "./recent-open";
 import NavFooter from "./nav-footer";
+import { useTheme } from "next-themes";
 
 const AppSidebar = ({
   recentProjects,
@@ -25,6 +26,7 @@ const AppSidebar = ({
 } & {
   user: User;
 } & React.ComponentProps<typeof Sidebar>) => {
+  const { theme } = useTheme();
   return (
     <Sidebar
     collapsible="icon"
@@ -43,13 +45,24 @@ const AppSidebar = ({
                 <AvatarFallback className="">PresAI</AvatarFallback>
             </Avatar>
         </div> */}
-        {(<Image 
+
+        {theme === 'dark' ? (
+          <Image 
         className="text-sidebar-primary-foreground"
         src={"/PresAi_light-removebg.png"}
         height={70}
         width={140}
         alt="PresAI"
-        />) }
+        />
+      ) : (
+          <Image 
+        className="text-sidebar-primary-foreground"
+        src={"/PresAi_dark-removebg.png"}
+        height={70}
+        width={140}
+        alt="PresAI"
+        />
+        )}
         {/* <span className="truncate text-primary text-3xl font-semibold pl-2">
             PresAI
         </span> */}

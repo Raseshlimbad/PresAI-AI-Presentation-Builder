@@ -51,7 +51,7 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
                     <span className="truncate font-semibold">
                         {user?.fullName}
                     </span>
-                    <span className="truncate text-secondary">
+                    <span className="truncate  dark:text-secondary">
                         {user?.emailAddresses[0].emailAddress}
                     </span>
                 </div>
