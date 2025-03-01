@@ -1,17 +1,18 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import {SignedIn, useUser, UserButton} from '@clerk/nextjs'
+import { User } from "@prisma/client";
 import React, { useState } from "react";
 
 const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
   const { user, isSignedIn, isLoaded } = useUser();
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   if (!isLoaded || !isSignedIn) {
     return null;
@@ -65,3 +66,4 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
 };
 
 export default NavFooter;
+

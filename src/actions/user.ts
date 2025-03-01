@@ -1,3 +1,5 @@
+"use server";
+
 import { client } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 
@@ -25,23 +27,19 @@ export const onAuthenticateUser = async () => {
       return { status: 200, user: userExists };
     }
 
-    // if user doesnt exists
+    // If user doesn't exist, create a new user
     const newUser = await client.user.create({
       data: {
         clerkId: user.id,
         email: user.emailAddresses[0].emailAddress,
-        name: user.firstName + " " + user.lastName,
+        name: `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim(),
         profileImage: user.imageUrl,
       },
     });
 
-    if (newUser) {
-      return { status: 200, user: newUser };
-    }
-
-    return { status: 400 };
+    return { status: 200, user: newUser };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };

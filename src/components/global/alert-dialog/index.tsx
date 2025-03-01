@@ -1,4 +1,17 @@
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+'use client'
+
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 import React from "react";
 
@@ -22,19 +35,31 @@ const AlertDialogBox = ({
   onClick,
 }: Props) => {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger>Open</AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={handleOpen}>
+      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            {description}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <Button
+          variant={'destructive'}
+          onClick={onClick}
+          className={`${className}`}
+          >
+            {loading ? (
+                <>
+                <Loader2 className="animate-spin" />
+                Loading...
+                </>
+            ) : (
+
+            'Continue')}
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

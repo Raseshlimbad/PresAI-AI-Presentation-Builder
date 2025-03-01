@@ -18,6 +18,7 @@ const DashboardPage = async () => {
         </div>
       </div>
 
+
       {/* {"Projects"} */}
       {allProjects.data && allProjects.data.length > 0 ? (
         <Projects projects={allProjects.data}/>

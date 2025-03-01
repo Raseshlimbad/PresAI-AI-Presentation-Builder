@@ -50,7 +50,7 @@ const RecentOpen = ({ recentProjects }: Props) => {
                   <Button
                     variant="link"
                     className="text-xs items-center justify-center"
-                    onClick={handleClick(item.id, item.slides)}
+                    onClick={() => handleClick(item.id, item.slides)}
                   >
                     <span>{item.title}</span>
                   </Button>
