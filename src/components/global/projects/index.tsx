@@ -1,7 +1,7 @@
 import { Project } from "@prisma/client";
 import React from "react";
 import { motion } from "framer-motion";
-import { containerVarients } from "@/lib/constants";
+import { containerVariants } from "@/lib/constants";
 import ProjectCard from "../project-card";
 
 interface Props {
@@ -12,7 +12,7 @@ const Projects = ({ projects }: Props) => {
   return (
     <motion.div
       className="grid grid-cols-1 sm:grid-cols-4 gap-4"
-      variants={containerVarients}
+      variants={containerVariants}
       initial="hidden"
       animate="visible"
     >

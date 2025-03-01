@@ -42,7 +42,10 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
                 </Button>
               </div>
             </div>
-            <SignedIn>
+            
+          </div>
+        )}
+        <SignedIn>
               <SidebarMenuButton
                 size={"lg"}
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
@@ -58,8 +61,6 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
                 </div>
               </SidebarMenuButton>
             </SignedIn>
-          </div>
-        )}
       </SidebarMenuItem>
     </SidebarMenu>
   );
