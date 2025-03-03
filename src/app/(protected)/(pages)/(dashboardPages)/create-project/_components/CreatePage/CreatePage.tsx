@@ -97,7 +97,7 @@ const CreatePage = ({ onSelectOption }: Props) => {
         ))}
       </motion.div>
 
-      {prompts.length > 0 &&<RecentPrompts />}
+      {prompts.length > 0 && <RecentPrompts />}
     </motion.div>
   );
 };

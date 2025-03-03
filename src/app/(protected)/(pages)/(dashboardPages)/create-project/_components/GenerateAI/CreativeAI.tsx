@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, RotateCcw } from "lucide-react";
 import { containerVariants, itemVariants } from "@/lib/constants";
@@ -15,19 +15,30 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import CardList from "../Common/CardList";
+import usePromptStore from "@/store/usePromptStore";
+import RecentPrompts from "./RecentPrompts";
+import { toast } from "sonner";
+import { generateCreativePrompt } from "@/actions/chatgpt";
 
 type Props = {
   onBack: () => void;
 };
 
 const CreativeAI = ({ onBack }: Props) => {
-  const { currentAiPrompt, setCurrentAiPrompt, outlines , resetOutlines} =
-    useCreativeAIStore();
+  const {
+    currentAiPrompt,
+    setCurrentAiPrompt,
+    outlines,
+    resetOutlines,
+    addOutline,
+    addMultipleOutlines,
+  } = useCreativeAIStore();
   const [noOfCards, setNoOfCards] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
   const [editingCard, setEditingCard] = useState<string | null>(null);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [editText, setEditText] = useState<string>("");
+  const { prompts } = usePromptStore();
 
   const handleBack = () => {
     onBack();
@@ -42,9 +53,28 @@ const CreativeAI = ({ onBack }: Props) => {
     resetOutlines();
   };
 
-  const handleGenerateOutline = () => {
+  const generateOutline = async () => {
+    if (currentAiPrompt === "") {
+      toast.error("Error", {
+        description: "Please enter a prompt to generate an outline",
+      });
+      return;
+    }
 
+    setIsGenerating(true);
+    const res = await generateCreativePrompt(currentAiPrompt)
+
+    //WIP: open AI api integration
+  };
+
+  const handleGenerate = () => {
+    //WIP
   }
+
+  useEffect(() => {
+    setNoOfCards(outlines.length);
+  }, [outlines.length]);
+
   return (
     <motion.div
       className="space-y-6 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -116,23 +146,55 @@ const CreativeAI = ({ onBack }: Props) => {
         </div>
       </motion.div>
       <div className="w-full flex justify-center items-center">
-        <Button className="font-medium text-lg gap-2 items-center"
-        onClick={handleGenerateOutline}
-        disabled={isGenerating}>
-            {isGenerating ? (
-                <>
-                <Loader2 className="animate-spin mr-2"/> Generating...
-                </>
-            ) : (
-                <>
-                    Generate Outline
-                </>
-            )}
-                
+        <Button
+          className="font-medium text-lg gap-2 items-center"
+          onClick={generateOutline}
+          disabled={isGenerating}
+        >
+          {isGenerating ? (
+            <>
+              <Loader2 className="animate-spin mr-2" /> Generating...
+            </>
+          ) : (
+            <>Generate Outline</>
+          )}
         </Button>
       </div>
 
-      <CardList />
+      <CardList
+        outlines={outlines}
+        editingCard={editingCard}
+        selectedCard={selectedCard}
+        editText={editText}
+        onEditChange={setEditText}
+        onCardSelect={setSelectedCard}
+        setEditText={setEditText}
+        setEditingCard={setEditingCard}
+        setSelectedCard={setSelectedCard}
+        addOutline={addOutline}
+        addMultipleOutlines={addMultipleOutlines}
+        onCardDoubleClick={(id, title) => {
+          setEditingCard(id);
+          setEditText(title);
+        }}
+      />
+
+      {outlines.length > 0 && (
+        <Button
+          className="w-full"
+          onClick={handleGenerate}
+          disabled={isGenerating}
+        >
+          {isGenerating ? (
+            <>
+              <Loader2 className="animate-spin mr-2" /> Generating...
+            </>
+          ) : (
+            "Generate"
+          )}
+        </Button>
+      )}
+      {prompts?.length > 0 && <RecentPrompts />}
     </motion.div>
   );
 };
