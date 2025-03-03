@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4} from "uuid";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2, RotateCcw } from "lucide-react";
 import { containerVariants, itemVariants } from "@/lib/constants";
@@ -18,7 +19,8 @@ import CardList from "../Common/CardList";
 import usePromptStore from "@/store/usePromptStore";
 import RecentPrompts from "./RecentPrompts";
 import { toast } from "sonner";
-import { generateCreativePrompt } from "@/actions/chatgpt";
+import { generateCreativePrompt } from "@/actions/ai";
+import { OutlineCard } from "@/lib/types";
 
 type Props = {
   onBack: () => void;
@@ -63,6 +65,28 @@ const CreativeAI = ({ onBack }: Props) => {
 
     setIsGenerating(true);
     const res = await generateCreativePrompt(currentAiPrompt)
+
+    if(res.status === 200 && res?.data?.outlines){
+      const cardsData: OutlineCard[] = [];
+      res.data?.outlines.map((outline:string, index:number) => {
+        const newCard = {
+          id: uuidv4(),
+          title: outline,
+          order: index + 1,
+        }
+        cardsData.push(newCard);
+      })
+      addMultipleOutlines(cardsData);
+      setIsGenerating(false);
+      toast.success("Success", {
+        description: "Outline generated successfully",
+      })
+    }else{
+      toast.error("Error", {
+        description:"Failed to generate outline, Please try again",
+      });
+      setIsGenerating(false);
+    }
 
     //WIP: open AI api integration
   };
