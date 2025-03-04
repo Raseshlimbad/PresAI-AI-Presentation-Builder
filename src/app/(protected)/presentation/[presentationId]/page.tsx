@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Navbar from "./_components/Navbar";
 
 const Page = () => {
 
@@ -61,6 +62,9 @@ const Page = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
+      <div className="min-h-screen flex flex-col">
+      <Navbar presentationId={params.presentationId as string}/>
+      </div>
       Inside the project
 
     </DndProvider>
