@@ -21,6 +21,9 @@ import RecentPrompts from "./RecentPrompts";
 import { toast } from "sonner";
 import { generateCreativePrompt } from "@/actions/ai";
 import { OutlineCard } from "@/lib/types";
+import { createProject } from "@/actions/project";
+import { useRouter } from "next/navigation";
+import { useSlideStore } from "@/store/useSlideStore";
 
 type Props = {
   onBack: () => void;
@@ -35,12 +38,14 @@ const CreativeAI = ({ onBack }: Props) => {
     addOutline,
     addMultipleOutlines,
   } = useCreativeAIStore();
+  const {setProject} = useSlideStore();
   const [noOfCards, setNoOfCards] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
   const [editingCard, setEditingCard] = useState<string | null>(null);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [editText, setEditText] = useState<string>("");
-  const { prompts } = usePromptStore();
+  const { prompts ,addPrompt} = usePromptStore();
+  const router = useRouter();
 
   const handleBack = () => {
     onBack();
@@ -88,11 +93,53 @@ const CreativeAI = ({ onBack }: Props) => {
       setIsGenerating(false);
     }
 
-    //WIP: open AI api integration
   };
 
-  const handleGenerate = () => {
-    //WIP
+  const handleGenerate = async () => {
+
+    // TODO: change cards functionality to handle generate number of outlines 
+
+   setIsGenerating(true);
+   if(outlines.length === 0){
+    toast.error('Error', {
+      description: "Failed to generate outline. Please try again.",
+    })
+    return;
+   }
+
+   try {
+    const res = await createProject(currentAiPrompt, outlines.slice(0, noOfCards))
+    // console.log("create project response: ",res)
+    if(res.status !== 200 || !res.data){
+      throw new Error("Failed to create project")
+    }
+
+    router.push(`/presentation/${res.data.id}/select-theme`)
+    setProject(res.data)
+
+    addPrompt({
+      id: uuidv4(),
+      title: currentAiPrompt || outlines?.[0]?.title,
+      outlines: outlines,
+      createdAt: new Date().toISOString(),
+    })
+
+    toast.success("Success", {
+      description: "Project created successfully",
+    })
+
+    setCurrentAiPrompt('')
+    resetOutlines();
+
+
+   } catch (error) {
+    console.log(error)
+    toast.error("Error", {
+      description: "Failed to create project. Please try again.",
+    })
+   } finally{
+    setIsGenerating(false);
+   }
   }
 
   useEffect(() => {

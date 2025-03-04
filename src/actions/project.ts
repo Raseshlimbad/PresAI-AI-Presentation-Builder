@@ -1,3 +1,5 @@
+'use server'
+
 import { client } from "@/lib/prisma";
 import { onAuthenticateUser } from "./user";
 import { OutlineCard } from "@/lib/types";
@@ -140,6 +142,28 @@ export const createProject = async (title: string, outlines: OutlineCard[]) => {
     
     if(!project){
       return { status: 500, error: "Failed to create project" };
+    }
+
+    return { status: 200, data: project };
+  } catch (error) {
+    console.log("Error: ", error);
+    return { status: 500, message: "Internal Server Error" };
+  }
+}
+
+export const getProjectById = async (projectId: string) => {
+  try {
+    const checkUser = await onAuthenticateUser();
+    if(checkUser.status !== 200 || !checkUser.user){
+      return { status: 403, error: "User Not Authanticated" };
+    }
+
+    const project = await client.project.findFirst({
+      where: { id: projectId}
+    })
+
+    if(!project){
+      return { status: 404, error: "Project Not Found" };
     }
 
     return { status: 200, data: project };
