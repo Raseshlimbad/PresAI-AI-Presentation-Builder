@@ -1,0 +1,320 @@
+
+
+// existing layout referance Responce 1 ----------------------------------------------------------
+
+[
+  {
+    id: uuidv4(),
+    slideName: 'Hero Section',
+    type: 'heroLayout',
+    className: 'p-6 mx-auto flex flex-col justify-center items-center text-center',
+    content: {
+      id: uuidv4(),
+      type: 'column' as ContentType,
+      name: 'Main Column',
+      content: [
+        {
+          id: uuidv4(),
+          type: 'title' as ContentType,
+          name: 'Hero Title',
+          content: '',
+          placeholder: 'Welcome to Our Platform',
+        },
+        {
+          id: uuidv4(),
+          type: 'paragraph' as ContentType,
+          name: 'Hero Subtitle',
+          content: '',
+          placeholder: 'Empower your ideas with our tools!',
+        },
+        {
+          id: uuidv4(),
+          type: 'button' as ContentType,
+          name: 'CTA Button',
+          content: 'Get Started',
+          className: 'bg-blue-500 text-white px-4 py-2 rounded',
+        }
+      ]
+    }
+  },
+  {
+    id: uuidv4(),
+    slideName: 'Image & Text Split',
+    type: 'splitLayout',
+    className: 'grid grid-cols-2 gap-4 p-6',
+    content: [
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Image Column',
+        className: 'w-full h-full flex justify-center items-center',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'image' as ContentType,
+            name: 'Showcase Image',
+            content: '',
+            placeholder: 'Upload an image...',
+          }
+        ]
+      },
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Text Column',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'title' as ContentType,
+            name: 'Section Title',
+            content: '',
+            placeholder: 'Your Success Story',
+          },
+          {
+            id: uuidv4(),
+            type: 'paragraph' as ContentType,
+            name: 'Description',
+            content: '',
+            placeholder: 'Describe your journey here...',
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: uuidv4(),
+    slideName: 'Testimonial Grid',
+    type: 'testimonialGrid',
+    className: 'grid grid-cols-3 gap-4 p-6',
+    content: [
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Testimonial 1',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'paragraph' as ContentType,
+            name: 'Quote',
+            content: '',
+            placeholder: '“Amazing experience with this product!”',
+          },
+          {
+            id: uuidv4(),
+            type: 'title' as ContentType,
+            name: 'Author',
+            content: '',
+            placeholder: 'John Doe',
+          }
+        ]
+      },
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Testimonial 2',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'paragraph' as ContentType,
+            name: 'Quote',
+            content: '',
+            placeholder: '“Truly transformed my workflow!”',
+          },
+          {
+            id: uuidv4(),
+            type: 'title' as ContentType,
+            name: 'Author',
+            content: '',
+            placeholder: 'Jane Smith',
+          }
+        ]
+      },
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Testimonial 3',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'paragraph' as ContentType,
+            name: 'Quote',
+            content: '',
+            placeholder: '“Would highly recommend to everyone.”',
+          },
+          {
+            id: uuidv4(),
+            type: 'title' as ContentType,
+            name: 'Author',
+            content: '',
+            placeholder: 'Alex Johnson',
+          }
+        ]
+      }
+    ]
+  }
+]
+
+
+
+
+
+// existing layout referance Responce 2 ----------------------------------------------------------
+
+
+[
+  {
+    id: uuidv4(),
+    slideName: 'Two Column with Header',
+    type: 'twoColumns',
+    className: 'p-6 mx-auto flex flex-col items-center',
+    content: {
+      id: uuidv4(),
+      type: 'row' as ContentType,
+      name: 'Header Row',
+      content: [
+        {
+          id: uuidv4(),
+          type: 'title' as ContentType,
+          name: 'Main Header',
+          content: '',
+          placeholder: 'Enter Slide Title...',
+        }
+      ]
+    },
+    body: {
+      id: uuidv4(),
+      type: 'row' as ContentType,
+      name: 'Two Columns',
+      content: [
+        {
+          id: uuidv4(),
+          type: 'column' as ContentType,
+          name: 'Left Column',
+          className: 'p-4 border-r',
+          content: [
+            {
+              id: uuidv4(),
+              type: 'paragraph' as ContentType,
+              name: '',
+              content: '',
+              placeholder: 'Write something here...',
+            }
+          ]
+        },
+        {
+          id: uuidv4(),
+          type: 'column' as ContentType,
+          name: 'Right Column',
+          className: 'p-4',
+          content: [
+            {
+              id: uuidv4(),
+              type: 'image' as ContentType,
+              name: 'Image Block',
+              content: '',
+              placeholder: 'Upload an image...',
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    id: uuidv4(),
+    slideName: 'Single Column Text',
+    type: 'singleColumn',
+    className: 'p-6 mx-auto flex flex-col items-center',
+    content: {
+      id: uuidv4(),
+      type: 'column' as ContentType,
+      name: 'Main Column',
+      content: [
+        {
+          id: uuidv4(),
+          type: 'title' as ContentType,
+          name: 'Slide Title',
+          content: '',
+          placeholder: 'Enter your title...',
+        },
+        {
+          id: uuidv4(),
+          type: 'paragraph' as ContentType,
+          name: '',
+          content: '',
+          placeholder: 'Write detailed content here...',
+        },
+        {
+          id: uuidv4(),
+          type: 'paragraph' as ContentType,
+          name: '',
+          content: '',
+          placeholder: 'Add more details...',
+        }
+      ]
+    }
+  },
+  {
+    id: uuidv4(),
+    slideName: 'Grid Layout',
+    type: 'grid',
+    className: 'p-6 mx-auto grid grid-cols-2 gap-4',
+    content: [
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Top Left',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'title' as ContentType,
+            name: 'Subtitle',
+            content: '',
+            placeholder: 'Enter subtitle...',
+          }
+        ]
+      },
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Top Right',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'image' as ContentType,
+            name: 'Picture Block',
+            content: '',
+            placeholder: 'Upload an image...',
+          }
+        ]
+      },
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Bottom Left',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'paragraph' as ContentType,
+            name: '',
+            content: '',
+            placeholder: 'Write additional text...',
+          }
+        ]
+      },
+      {
+        id: uuidv4(),
+        type: 'column' as ContentType,
+        name: 'Bottom Right',
+        content: [
+          {
+            id: uuidv4(),
+            type: 'list' as ContentType,
+            name: 'Bullet Points',
+            content: '',
+            placeholder: 'Add bullet points...',
+          }
+        ]
+      }
+    ]
+  }
+]

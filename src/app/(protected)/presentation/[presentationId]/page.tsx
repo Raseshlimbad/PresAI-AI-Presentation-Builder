@@ -9,6 +9,8 @@ import { redirect, useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 const Page = () => {
 
   // WIP: Create the presentation view
@@ -58,7 +60,10 @@ const Page = () => {
   }
 
   return (
-    <DndProvider></DndProvider>
+    <DndProvider backend={HTML5Backend}>
+      Inside the project
+
+    </DndProvider>
   )
 };
 
