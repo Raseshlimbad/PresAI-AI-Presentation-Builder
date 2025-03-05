@@ -2,9 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { useSlideStore } from "@/store/useSlideStore";
-import { Home } from "lucide-react";
+import { Home, Play, Share } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 type Props = {
   presentationId: string;
@@ -14,7 +15,14 @@ const Navbar = ({ presentationId }: Props) => {
   const { currentTheme } = useSlideStore();
   const [isPresentationMode, setIsPresentationMode] = useState(false);
 
-  console.log(currentTheme);
+  // console.log(currentTheme);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(
+      `${window.location.origin}/share/${presentationId}`
+    );
+    toast.success("Link copied", { description: "Link Copied to Clipboard" });
+  };
   return (
     <nav
       className="fixed top-0 right-0 z-50 w-full h-20 flex justify-between items-center px-7 py-4 border-b"
@@ -24,6 +32,7 @@ const Navbar = ({ presentationId }: Props) => {
         color: currentTheme.accentColor,
       }}
     >
+      {/* Return Home Button */}
       <Link href={"/dashboard"} passHref>
         <Button
           variant={"outline"}
@@ -36,7 +45,45 @@ const Navbar = ({ presentationId }: Props) => {
           <span className="hidden sm:inline">Return Home</span>
         </Button>
       </Link>
-      Navbar component
+
+      {/* Presentation Editor Button */}
+      <Link
+        href={"/presentation/template-market"}
+        className="text-lg font-semibold hidden sm:block"
+      >
+        Presntation Editor
+      </Link>
+
+      {/* Copy Link and Present Button */}
+      <div className="flex items-center gap-4">
+        <Button
+          variant={"outline"}
+          onClick={handleCopy}
+          style={{
+            backgroundColor: currentTheme.backgroundColor,
+          }}
+        >
+          <Share className="w-4 h-4" />
+        </Button>
+
+        {/* WIP: add lemon squeezy sell templates */}
+        {/* <SellTemplate/> */}
+
+        {/* Present Button */}
+        <Button
+          variant={"default"}
+          className="flex items-center gap-2"
+          onClick={() => setIsPresentationMode(true)}
+        >
+          <Play className="w-4 h-4 " />
+          <span className="hidden sm:inline">Present</span>
+        </Button>
+      </div>
+
+      {/* WIP: add presentation mode */}
+      {/* {isPresentationMode && <PresentationMode />} */}
+
+      
     </nav>
   );
 };

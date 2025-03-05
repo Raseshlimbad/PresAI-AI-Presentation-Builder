@@ -11,9 +11,10 @@ import { toast } from "sonner";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Navbar from "./_components/Navbar";
+import LayoutPreview from "./_components/editor-sidebar/left-sidebar/LayoutPreview";
+import Editor from "./_components/editor/Editor";
 
 const Page = () => {
-
   // WIP: Create the presentation view
 
   const params = useParams();
@@ -52,23 +53,36 @@ const Page = () => {
     })();
   }, []);
 
-  if(isLoading){
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader2 className="w-8 h-8 animate-spin" />
       </div>
-    )
+    );
   }
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-screen flex flex-col">
-      <Navbar presentationId={params.presentationId as string}/>
+        <Navbar presentationId={params.presentationId as string} />
+        <div
+          className="flex-1 flex overflow-hidden pt-16"
+          style={{
+            backgroundColor: currentTheme.backgroundColor,
+            color: currentTheme.accentColor,
+            fontFamily: currentTheme.fontFamily,
+          }}
+        >
+          <LayoutPreview />
+          <div className="flex-1 ml-64 pr-16">
+            <Editor 
+            isEditable={true}
+            />
+          </div>
+        </div>
       </div>
-      Inside the project
-
     </DndProvider>
-  )
+  );
 };
 
 export default Page;

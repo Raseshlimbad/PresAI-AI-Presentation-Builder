@@ -112,14 +112,12 @@ const ProjectCard = ({
         !isDelete && "hover:bg-muted/50"
       } `}
       variants={itemVariants}
+      onClick={handleNavigation}
     >
-      <div
-        className="relative aspect-[16/10] overflow-hidden rounded-lg cursor-pointer"
-        onClick={handleNavigation}
-      ></div>
 
+      {/* Thumbnail Preview */}
       <ThumbnailPreview
-        //   slide={JSON.parse(JSON.stringify(slideData))?.[0]}
+          slide={JSON.parse(JSON.stringify(slideData))?.[0]}
         theme={theme}
       />
 
