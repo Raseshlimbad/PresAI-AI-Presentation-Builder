@@ -293,36 +293,76 @@ const replaceImagePlaceholders = async (layout: Slide) => {
 
 // Generate layouts in Json format for the project
 export const generateLayoutsJson = async (outlineArray: string[]) => {
-  const prompt = `
-  You are highly creative AI that generates JSON-based layouts for presentations.I will provide you with an array of outlines, and for each outline, you must generate a unique and creative layout. Use the existing layouts as examples for structure and design, and generate unique designs bases on the provided outlines.
+  // const prompt = `
+  // You are highly creative AI that generates JSON-based layouts for presentations.I will provide you with an array of outlines, and for each outline, you must generate a unique and creative layout. Use the existing layouts as examples for structure and design, and generate unique designs bases on the provided outlines.
 
-  ### Guidlines:
-  1. Write layouts based on the specific outline provided.
-  2. user diverse and engaging designs, ensuring each layout is unique.
-  3. Adhere to the structure of the existing layouts but add new styles or components ifneeded.
-  4. Fill placeholder data into content fields where required.
-  5. Generate unique image placeholders for the 'content' property to image components and also alt text according to the outline. 
-  6. Ensure proper formatting and schema alignment for the output JSON. 
+  // ### Guidlines:
+  // 1. Write layouts based on the specific outline provided.
+  // 2. user diverse and engaging designs, ensuring each layout is unique.
+  // 3. Adhere to the structure of the existing layouts but add new styles or components ifneeded.
+  // 4. Fill placeholder data into content fields where required.
+  // 5. Generate unique image placeholders for the 'content' property to image components and also alt text according to the outline. 
+  // 6. Ensure proper formatting and schema alignment for the output JSON. 
 
-  ### Example Layouts:
-  ${JSON.stringify(existingLayouts, null, 2)}
+  // ### Example Layouts:
+  // ${JSON.stringify(existingLayouts, null, 2)}
 
-  ### Outline Array:
-  ${JSON.stringify(outlineArray)}
+  // ### Outline Array:
+  // ${JSON.stringify(outlineArray)}
 
-  For each entry in the outline array, generate:
-  - A unique JSON layout with creative desins.
-  - Properly filled for image components.
-  - Clear and well-structured JSON data.
+  // For each entry in the outline array, generate:
+  // - A unique JSON layout with creative desins.
+  // - Properly filled for image components.
+  // - Clear and well-structured JSON data.
 
-  For Images
-  - The alt text should describe the image clearly and concisely.
-  - Focus on the main subject(s) of the image and relavent details such as colors, shapes, people, or objects.
-  - Ensure that alt text aligns with the context of the presentation slide it will be used on (e.g., professional, educational, business-releted).
-  - Avoid using terms like "image of" or "picture of", and instead focus directly on the content and meaning.
+  // For Images
+  // - The alt text should describe the image clearly and concisely.
+  // - Focus on the main subject(s) of the image and relavent details such as colors, shapes, people, or objects.
+  // - Ensure that alt text aligns with the context of the presentation slide it will be used on (e.g., professional, educational, business-releted).
+  // - Avoid using terms like "image of" or "picture of", and instead focus directly on the content and meaning.
   
-  Output the layout in JSON format. Ensure the are no duplicate layout across the array.
-   `;
+  // Output the layout in JSON format. Ensure the are no duplicate layout across the array.
+  //  `;
+
+
+  // Test Prompt---------------------------------------------------
+  const prompt = `
+  You are a highly creative AI that generates structured JSON-based presentation layouts. Given an array of outlines, your task is to create unique and engaging layouts while following the structure of existing layouts for reference.
+
+### Guidelines:
+1. Generate layouts tailored to each provided outline.
+2. Ensure each layout is unique while maintaining diversity in design.
+3. Follow the structure of existing layouts but introduce fresh styles and components where appropriate.
+4. Populate placeholder data in content fields to provide a meaningful structure.
+5. For image components:
+   - Provide a unique placeholder image URL.
+   - Write concise and meaningful alt text relevant to the outline context.
+6. Maintain a well-formatted JSON structure with proper schema alignment.
+7. Avoid duplicate layouts across the generated array.
+
+### Example Layouts:
+${JSON.stringify(existingLayouts, null, 2)}
+
+### Outline Array:
+${JSON.stringify(outlineArray)}
+
+For each outline in the array, generate:
+- A structured and creative JSON layout.
+- Properly assigned image placeholders with descriptive alt text.
+- A well-formed JSON response ensuring variety across the layouts.
+
+**Alt Text Instructions:**
+- Clearly describe the image content in a concise manner.
+- Focus on key elements (e.g., objects, colors, actions) relevant to the slide.
+- Align descriptions with the slide’s purpose (e.g., professional, educational, business-related).
+- Avoid redundant phrases like "Image of" or "Picture of"; instead, describe the subject directly.
+
+**Output Format:**  
+A JSON array of unique layouts adhering to the given schema.
+
+Ensure no two layouts are identical while maintaining coherence and usability.
+
+  `
    
    try {
     console.log("Generating layouts JSON ....")

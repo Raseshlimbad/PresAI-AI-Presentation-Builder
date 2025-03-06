@@ -84,8 +84,10 @@ interface ImageComponentProps {
 }
 
 const CustomImage = ({ src, alt, className, isPreview, isEditable, contentId, onComponentChange }: ImageComponentProps) => {
+    // Initialize Cloudinary
     const cld = new Cloudinary({ cloud: { cloudName: 'YOUR_CLOUD_NAME' } });
 
+    // Create image object
     const img = cld
         .image(src)
         .format('auto')

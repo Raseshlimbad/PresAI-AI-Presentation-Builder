@@ -61,37 +61,45 @@ interface UploadImageProps {
 }
 
 const UploadImage = ({ contentId, onComponentChange }: UploadImageProps) => {
+    // State to handle uploading
     const [uploading, setUploading] = useState(false);
 
+    // Handle upload event
     const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;
 
         setUploading(true);
 
+        // Create form data
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('upload_preset', 'YOUR_UPLOAD_PRESET'); // Replace with your Cloudinary upload preset
+        formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET!); // Replace with your Cloudinary upload preset
 
         try {
+            // Upload image to Cloudinary
             const res = await fetch(`https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload`, {
                 method: 'POST',
                 body: formData,
             });
 
+            // Get response data
             const data = await res.json();
             if (data.secure_url) {
+                // Update component with new image URL
                 onComponentChange(contentId, data.secure_url);
             }
         } catch (error) {
             console.error('Upload failed:', error);
         } finally {
+            // Reset uploading state
             setUploading(false);
         }
     };
 
     return (
         <div>
+            {/* Upload Image Input */}
             <input 
                 type="file"
                 accept="image/*"
@@ -99,6 +107,7 @@ const UploadImage = ({ contentId, onComponentChange }: UploadImageProps) => {
                 disabled={uploading}
                 className="file-input"
             />
+            {/* Uploading state */}
             {uploading && <p>Uploading...</p>}
         </div>
     );

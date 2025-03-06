@@ -35,7 +35,7 @@ export type ContentType =
   | "codeBlock"
   | "customButton"
   | "tableOfContents"
-  
+  | "divider"
   ;
 
 export interface ContentItem {
@@ -55,6 +55,7 @@ export interface ContentItem {
   code?: string;
   language?: string;
   bgColor?: string;
+  divider? :string;
   isTransparent?: boolean;
 }
 

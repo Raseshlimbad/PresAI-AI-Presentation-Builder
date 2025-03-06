@@ -2,11 +2,20 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useSlideStore } from '@/store/useSlideStore'
 import React, { useEffect, useState } from 'react'
+import DragSlidePreviewImage from './DragSlidePreviewImage';
 
 const LayoutPreview = () => {
     const [loading, setLoading] = useState(true);
     const {getOrderedSlides} = useSlideStore();
     const slides = getOrderedSlides();
+
+
+    // Self Added -------------------------------------------------------------------
+    const moveSlide = (dragIndex: number, hoverIndex: number) => {
+        const newSlides = [...slides];
+        const [removed] = newSlides.splice(dragIndex, 1);
+        newSlides.splice(hoverIndex, 0, removed);
+    }
 
     useEffect(() => {
         if(typeof window !== 'undefined') {
@@ -48,17 +57,16 @@ const LayoutPreview = () => {
                     </span>
                 </div>
 
-                {/* WIP: Dragable slide preview */}
-                 {/* {slides.map((slide, index) => (
-                    <DragPreviewImage
+                {/* Dragable slide preview */}
+                 {slides.map((slide, index) => (
+                    <DragSlidePreviewImage
                     key={slide.id || index}
                     slide={slide}
                     index={index}
-                    moveSlide={moveSlice}
-                    >
-
-                    </DragPreviewImage>
-                 ))} */}
+                    moveSlide={moveSlide}
+                    />
+                  
+                 ))}
             </div>
          )}
       </ScrollArea>
