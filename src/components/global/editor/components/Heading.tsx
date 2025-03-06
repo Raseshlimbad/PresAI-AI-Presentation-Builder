@@ -12,7 +12,7 @@ interface HeadingProps
 
 const createHeading = (displayName: string, defaultClassName: string) => {
   const Heading = React.forwardRef<HTMLTextAreaElement, HeadingProps>(
-    ({ children, className, styles, isPreview = false, ...props }, ref) => {
+    ({ className, styles, isPreview = false, ...props }, ref) => {
       const textareaRef = useRef<HTMLTextAreaElement>(null);
 
       useEffect(() => {

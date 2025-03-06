@@ -9,7 +9,7 @@ interface ParagraphProps
 }
 
 const Paragraph = React.forwardRef<HTMLTextAreaElement, ParagraphProps>(
-  ({ children, className, styles, isPreview = false, ...props }, ref) => {
+  ({ className, styles, isPreview = false, ...props }, ref) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {

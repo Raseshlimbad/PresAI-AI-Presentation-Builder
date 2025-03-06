@@ -3,10 +3,19 @@
 import { ContentItem } from "@/lib/types";
 import React, { useCallback } from "react";
 import { motion } from "framer-motion";
-import { Heading1, Heading2, Heading3, Heading4, Title } from "@/components/global/editor/components/Heading";
+import {
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Title,
+} from "@/components/global/editor/components/Heading";
 import { cn } from "@/lib/utils";
 import DropZone from "./DropZone";
 import Paragraph from "@/components/global/editor/components/Paragraph";
+import TableComponent from "@/components/global/editor/components/TableComponent";
+import ColumnComponent from "@/components/global/editor/components/ColumnComponent";
+import CustomImage from "@/components/global/editor/components/ImageComponent";
 
 // Define the types for the MasterRecursiveComponentProps
 type MasterRecursiveComponentProps = {
@@ -23,7 +32,7 @@ type MasterRecursiveComponentProps = {
 
 // Memoized component to render the content
 const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
-  ({ content, onContentChange, slideId, isEditable, isPreview, index }) => {
+  ({ content, onContentChange, slideId, isEditable, isPreview }) => {
     // Handle change event for the content
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -50,49 +59,118 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
     // Render the component based on the content type
     // WIP: Complete types
     switch (content.type) {
+      // Heading 1
       case "heading1":
         return (
-          <motion.div className="w-full h-full"
-          {...animationProps}>
+          <motion.div className="w-full h-full" {...animationProps}>
             <Heading1 {...commonProps} />
           </motion.div>
         );
+
+      // Heading 2
       case "heading2":
         return (
-          <motion.div className="w-full h-full"
-          {...animationProps}>
+          <motion.div className="w-full h-full" {...animationProps}>
             <Heading2 {...commonProps} />
           </motion.div>
         );
+
+      // Heading 3
       case "heading3":
         return (
-          <motion.div className="w-full h-full"
-          {...animationProps}>
+          <motion.div className="w-full h-full" {...animationProps}>
             <Heading3 {...commonProps} />
           </motion.div>
         );
-        case "heading4":
+
+      // Heading 4
+      case "heading4":
+        return (
+          <motion.div className="w-full h-full" {...animationProps}>
+            <Heading4 {...commonProps} />
+          </motion.div>
+        );
+
+      // Title
+      case "title":
+        return (
+          <motion.div className="w-full h-full" {...animationProps}>
+            <Title {...commonProps} />
+          </motion.div>
+        );
+
+      // Table
+      case "table":
+        return (
+          <motion.div className="w-full h-full" {...animationProps}>
+            <TableComponent
+              content={content.content as string[][]}
+              onChange={(newContent) =>
+                onContentChange(
+                  content.id,
+                  newContent != null ? newContent : ""
+                )
+              }
+              isEditable={isEditable}
+              isPreview={isPreview}
+              initialColSize={content.initialColumns}
+              initialRowSize={content.initialRows}
+            />
+          </motion.div>
+        );
+
+      // Resizable Column
+      case "resizable-column":
+        if (Array.isArray(content.content)) {
           return (
-            <motion.div className="w-full h-full"
-            {...animationProps}>
-              <Heading4 {...commonProps} />
+            <motion.div className="w-full h-full" {...animationProps}>
+              <ColumnComponent
+                content={content.content as ContentItem[]}
+                slideId={slideId}
+                onContentChange={onContentChange}
+                isEditable={isEditable}
+                isPreview={isPreview}
+                className={content.className}
+              />
             </motion.div>
           );
-        case "title":
-          return (
-            <motion.div className="w-full h-full"
-            {...animationProps}>
-              <Title {...commonProps} />
-            </motion.div>
-          );
-        case "paragraph":
-          return (
-            <motion.div className="w-full h-full"
-            {...animationProps}>
-              <Paragraph {...commonProps} />
-            </motion.div>
-          );
-        //   case "column":
+        }
+        return null;
+
+        // Image
+        case "image" : 
+        return (
+          <motion.div className="w-full h-full" {...animationProps}>
+            <CustomImage 
+            src={content.content as string}
+            alt={content.alt || 'image'}
+            contentId={content.id}
+            onComponentChange={(newContent) =>
+              onContentChange(content.id, newContent)
+            }
+            isEditable={isEditable}
+            isPreview={isPreview}
+            className={content.className}
+            />
+          </motion.div>
+        )
+
+        case "blockquote" : 
+        return (
+          <motion.div className="w-full h-full" {...animationProps}>
+           
+          </motion.div>
+        )
+
+      // Paragraph
+      case "paragraph":
+        return (
+          <motion.div className="w-full h-full" {...animationProps}>
+            <Paragraph {...commonProps} />
+          </motion.div>
+        );
+
+      //   case "column":
       case "column":
         if (Array.isArray(content.content)) {
           return (

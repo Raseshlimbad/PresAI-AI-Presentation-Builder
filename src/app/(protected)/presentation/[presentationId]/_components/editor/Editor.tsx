@@ -273,9 +273,10 @@ const Editor = ({ isEditable }: Props) => {
             {isEditable && (
               <DropZone index={0} onDrop={handleDrop} isEditable={isEditable} />
             )}
-          </div>
+          {/* </div> */}
 
           {/* Draggable Slides */}
+          {/* <div className="space-y-6"> */}
           {orderedSlides.map((slide, index) => (
             <React.Fragment key={slide.id || index}>
               <DraggableSlide 
@@ -287,6 +288,7 @@ const Editor = ({ isEditable }: Props) => {
               />
             </React.Fragment>
           ))}
+          </div>
         </ScrollArea>
       )}
     </div>

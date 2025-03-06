@@ -1,0 +1,130 @@
+ImageComponent.tsx
+
+
+
+
+// Using Cloudinary as an alternative to Uploadcare
+// https://cloudinary.com/
+
+import Image from 'next/image';
+import React from 'react';
+import UploadImage from './UploadImage';
+
+interface ImageComponentProps {
+    src: string;
+    alt: string;
+    className?: string;
+    isPreview?: boolean;
+    isEditable?: boolean;
+    contentId: string;
+    onComponentChange: (
+        componentId: string,
+        newContent: string | string[] | string[][]
+    ) => void;
+}
+
+const CustomImage = ({
+    src,
+    alt,
+    className,
+    isPreview,
+    isEditable,
+    contentId,
+    onComponentChange
+}: ImageComponentProps) => {
+    return (
+        <div className="relative group w-full h-full rounded-lg">
+            {/* Display Image */}
+            <Image
+                src={src}
+                alt={alt}
+                width={isPreview ? 48 : 800}
+                height={isPreview ? 48 : 800}
+                className={`w-full h-full object-cover rounded-lg ${className}`}
+            />
+
+            {/* Show Upload Button if Editable */}
+            {isPreview && isEditable && (
+                <div className="absolute top-0 left-0 hidden group-hover:block bg-white p-2 rounded-lg">
+                    <UploadImage
+                        contentId={contentId}
+                        onComponentChange={onComponentChange}
+                    />
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default CustomImage;
+
+
+
+--------------------------------------------------------------------------------
+
+
+
+UploadImage.tsx
+
+
+
+// Using Cloudinary as an alternative to Uploadcare
+// https://cloudinary.com/
+'use client'
+
+import React, { useState } from 'react';
+
+interface UploadImageProps {
+    contentId: string;
+    onComponentChange: (
+        componentId: string,
+        newContent: string | string[] | string[][]
+    ) => void;
+}
+
+const UploadImage = ({ contentId, onComponentChange }: UploadImageProps) => {
+    const [loading, setLoading] = useState(false);
+
+    const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        setLoading(true);
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", process.env.CLOUDINARY_UPLOAD_PRESET!);
+
+        try {
+            const response = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME!}/image/upload`, {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+            if (data.secure_url) {
+                onComponentChange(contentId, data.secure_url);
+            }
+        } catch (error) {
+            console.error("Upload failed:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div>
+            <label className="cursor-pointer bg-gray-200 text-sm px-3 py-1 rounded-lg">
+                {loading ? "Uploading..." : "Upload Image"}
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleUpload}
+                    className="hidden"
+                />
+            </label>
+        </div>
+    );
+};
+
+export default UploadImage;
