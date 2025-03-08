@@ -27,7 +27,8 @@ const CodeBlock = ({ code, language, onChange, className }: CodeBlockProps) => {
           onChange={(e) => onChange(e.target.value)}
           className="w-full h-full bg-transparent outline-none font-mono"
           style={{ color: currentTheme.fontColor }}
-        ></textarea>
+        >
+        </textarea>
       </code>
     </pre>
   );

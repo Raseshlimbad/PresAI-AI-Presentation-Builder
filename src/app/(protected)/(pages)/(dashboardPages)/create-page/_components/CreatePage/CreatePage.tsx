@@ -74,7 +74,7 @@ const CreatePage = ({ onSelectOption }: Props) => {
                     {option.highlightedText}
                   </p>
                 </div>
-                <p className="text-secondary text-sm font-normal">
+                <p className="dark:text-secondary text-sm font-normal">
                   {option.description}
                 </p>
               </div>

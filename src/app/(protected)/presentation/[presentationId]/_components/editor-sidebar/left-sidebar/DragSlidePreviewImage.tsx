@@ -58,7 +58,11 @@ const DragSlidePreviewImage = ({slide, index, moveSlide}: DragSlidePreviewImageP
     onClick={() => setCurrentSlide(index)}
   >
     <div className="pl-2 mb-4 relative">
-      <ScaledPreview />
+      <ScaledPreview 
+        index={index}
+        isActive={index === currentSlide}
+        slide={slide}
+      />
     </div>
   </div>
   )

@@ -6,15 +6,12 @@ import DragSlidePreviewImage from './DragSlidePreviewImage';
 
 const LayoutPreview = () => {
     const [loading, setLoading] = useState(true);
-    const {getOrderedSlides} = useSlideStore();
+    const {getOrderedSlides, reorderSlides} = useSlideStore();
     const slides = getOrderedSlides();
 
 
-    // Self Added -------------------------------------------------------------------
     const moveSlide = (dragIndex: number, hoverIndex: number) => {
-        const newSlides = [...slides];
-        const [removed] = newSlides.splice(dragIndex, 1);
-        newSlides.splice(hoverIndex, 0, removed);
+        reorderSlides(dragIndex, hoverIndex);
     }
 
     useEffect(() => {
@@ -34,7 +31,7 @@ const LayoutPreview = () => {
         {loading? ( 
 
             // Loading state
-            <div className='w-full px-4 flex flex-col space-y-6'>
+            <div className='w-72 px-4 flex flex-col space-y-6'>
                 <Skeleton className="h-20 w-full"></Skeleton>
                 <Skeleton className="h-20 w-full"></Skeleton>
                 <Skeleton className="h-20 w-full"></Skeleton>

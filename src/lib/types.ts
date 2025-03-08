@@ -53,23 +53,24 @@ export interface ContentItem {
   callOutType?: "success" | "warning" | "info" | "question" | "caution";
   link?: string;
   code?: string;
+  codeBlock?: string;
   language?: string;
   bgColor?: string;
   divider? :string;
   isTransparent?: boolean;
 }
 
-export interface Theme{
-  name:string
-  fontFamily: string
-  fontColor: string
-  backgroundColor: string
-  slideBackgroundColor: string
-  accentColor: string 
-  gradientBackground? : string
-  slideColor?: string
-  navbarColor?: string
-  type: 'light' | 'dark'
+export interface Theme {
+  name: string;
+  fontFamily: string;
+  fontColor: string;
+  backgroundColor: string;
+  slideBackgroundColor: string;
+  accentColor: string;
+  gradientBackground?: string;
+  sidebarColor?: string;
+  navbarColor?: string;
+  type: 'light' | 'dark';
 }
 
 export interface OutlineCard{
@@ -83,4 +84,17 @@ export interface LayoutSlides {
   content: ContentItem
   className?: string
   type: string
+}
+
+export interface Layout{
+  name: string
+  icon: React.FC
+  type: string
+  component: LayoutSlides
+  layoutType: string
+}
+
+export interface LayoutGroup{
+  name: string
+  layouts: Layout[]
 }

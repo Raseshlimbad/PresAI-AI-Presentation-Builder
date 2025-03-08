@@ -3,13 +3,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { LayoutSlides, Slide } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useSlideStore } from "@/store/useSlideStore";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { v4 as uuidv4 } from "uuid";
 import { MasterRecursiveComponent } from "./MasterRecursiveComponent";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { EllipsisVertical, Trash } from "lucide-react";
+import { updateSlides } from "@/actions/project";
 
 // Props for the DropZone component
 interface DropZoneProps {
@@ -34,7 +35,7 @@ export const DropZone: React.FC<DropZoneProps> = ({
 }) => {
   // UseDrop hook to handle the drop zone
   const [{ isOver, canDrop }, dropRef] = useDrop({
-    accept: ["SLIDE", "layout"],
+    accept: ["SLIDE", "LAYOUT"],
     drop: (item: {
       type: string;
       layoutType: string;
@@ -56,6 +57,7 @@ export const DropZone: React.FC<DropZoneProps> = ({
   // Render the drop zone
   return (
     <div
+    ref={dropRef as unknown as React.RefObject<HTMLDivElement>}
       className={cn(
         "h-4 my-2 rounded-md transition-all duration-200",
         // If the drop zone is over and can drop, render a green border
@@ -94,6 +96,8 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
   const ref = useRef(null);
   const { currentSlide, setCurrentSlide, currentTheme, updateContentItem } =
     useSlideStore();
+
+  // UseDrag hook to handle the draggable slide
   const [{ isDragging }, drag] = useDrag({
     type: "SLIDE",
     item: {
@@ -106,9 +110,32 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
     canDrag: () => isEditable,
   });
 
+
+  // UseDrop hook to handle the drop zone
+  const [_,drop] = useDrop({
+    accept: ["SLIDE", "LAYOUT"],
+    hover(item: {index: number, type: string}) {
+      if(!ref.current || !isEditable) return;
+
+      const dragIndex = item.index;
+      const hoverIndex = index;
+
+      if(item.type === 'SLIDE'){
+        if(dragIndex === hoverIndex) return;
+
+        moveSlide(dragIndex, hoverIndex);
+        item.index = hoverIndex;
+      }
+    }
+  })
+
+  // Use the drop hook to handle the drop zone
+  drag(drop(ref))
+
   // Handle the content change
   const handleContentChange = (contentId: string, newContent: string | string[] | string[][]) => {
     console.log("Content changed:", slide, contentId, newContent);
+    // If the editor is editable, update the content item
     if (isEditable) {
       updateContentItem(slide.id, contentId, newContent);
     }
@@ -145,26 +172,33 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
         />
       </div>
 
+      {/* If the editor is editable, render the popover */}
       {isEditable && (
         <Popover>
           <PopoverTrigger 
             asChild
             className="absolute top-2 left-2"
           >
+            {/* Button - Slide options */}
             <Button
             size={"sm"}
             variant={"outline"}>
+              {/* EllipsisVertical icon */}
               <EllipsisVertical className="w-5 h-5" />
+              {/* Screen reader only */}
               <span className="sr-only">Slide options</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-fit p-0">
             <div className="flex space-x-2">
+              {/* Button - Delete slide */}
               <Button 
               variant={"ghost"}
               onClick={() => handleDelete(slide.id)}
               >
+                {/* Trash icon */}
                 <Trash className="w-5 h-5 text-red-500"/>
+                {/* Screen reader only */}
                 <span className="sr-only">Delete slide</span>
               </Button>
             </div>
@@ -196,6 +230,7 @@ const Editor = ({ isEditable }: Props) => {
   const [loading, setLoading] = useState(true);
 
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const autosaveTimerRef = useRef<NodeJS.Timeout | null>(null);
   const orderedSlides = getOrderedSlides();
 
   // Move the slide
@@ -216,11 +251,11 @@ const Editor = ({ isEditable }: Props) => {
     },
     dropIndex: number
   ) => {
-    // If the editor is not editable, return
     if (!isEditable) return;
 
     // If the item is a layout, add the layout to the project
-    if (item.type === "layout") {
+    if (item.type === "LAYOUT") {
+      console.log("Dropping layout:", item);
       addSlideAtIndex(
         {
           ...item.component,
@@ -229,12 +264,16 @@ const Editor = ({ isEditable }: Props) => {
         },
         dropIndex
       );
-    } else if (item.type === "SLIDE" && item.index !== undefined) {
+    }
+    // If the item is a slide, move the slide
+    else if (item.type === "SLIDE" && item.index !== undefined) {
       moveSlide(item.index, dropIndex);
     }
   };
 
+  // Handle the delete event
   const handleDelete = (id: string) => {
+    // If the editor is editable, delete the slide
     if (isEditable) {
       console.log('Deleting', id);
       removeSlide(id);
@@ -243,6 +282,7 @@ const Editor = ({ isEditable }: Props) => {
 
   // Scroll to the current slide
   useEffect(() => {
+    // If the current slide is in the slideRefs, scroll to it
     if (slideRefs.current[currentSlide]) {
       slideRefs.current[currentSlide]?.scrollIntoView({
         behavior: "smooth",
@@ -251,11 +291,48 @@ const Editor = ({ isEditable }: Props) => {
     }
   }, [currentSlide]);
 
+  // Set the loading state
   useEffect(() => {
+    // If the window is defined, set the loading state to false
     if(typeof window !== 'undefined') {
       setLoading(false);
     }
   }, []);
+
+  // Save the slides
+  const saveSlides = useCallback(() => {
+    // If the editor is editable and the project is defined, save the slides
+    if(isEditable && project){
+      // Save the slides
+      (async () => {
+        await updateSlides(project.id, JSON.parse(JSON.stringify(slides)));
+      })()
+    }
+  },[isEditable, slides, project])
+
+  // Autosave the presentation
+  useEffect(() => {
+    // TODO: (Optional) auto-save resizeHandle state 
+
+    // if() already ahve a time? cancel the timer and then create a new one
+    if(autosaveTimerRef.current){
+      clearTimeout(autosaveTimerRef.current);
+    }
+
+    // inside the timer make the save request
+    if(isEditable){
+      autosaveTimerRef.current = setTimeout(() => {
+        saveSlides();
+      }, 2000);
+    }
+
+    return () => {
+      // If the timer is defined, clear the timer
+      if(autosaveTimerRef.current){
+        clearTimeout(autosaveTimerRef.current)
+      }
+    }
+  },[slides, isEditable, project])
 
   return (
     <div className="flex flex-1 flex-col h-full max-w-3xl mx-auto px-4 mb-20">
@@ -286,6 +363,9 @@ const Editor = ({ isEditable }: Props) => {
                 handleDelete={handleDelete}
                 isEditable={isEditable}
               />
+               {isEditable && (
+              <DropZone index={index + 1} onDrop={handleDrop} isEditable={isEditable} />
+            )}
             </React.Fragment>
           ))}
           </div>

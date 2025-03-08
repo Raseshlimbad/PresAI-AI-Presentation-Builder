@@ -13,6 +13,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import Navbar from "./_components/Navbar";
 import LayoutPreview from "./_components/editor-sidebar/left-sidebar/LayoutPreview";
 import Editor from "./_components/editor/Editor";
+import EditorSidebar from "./_components/editor-sidebar/right-sidebar";
 
 const Page = () => {
   // WIP: Create the presentation view
@@ -23,10 +24,13 @@ const Page = () => {
   const { setSlides, currentTheme, setCurrentTheme, setProject } =
     useSlideStore();
 
+  // Fetch the project
   useEffect(() => {
     (async () => {
       try {
+        // Get the project
         const res = await getProjectById(params.presentationId as string);
+        // If the project is not found, redirect to the dashboard
         if (res.status !== 200 || !res.data) {
           toast.error("Error", {
             description: "Uable to fetch project",
@@ -34,10 +38,12 @@ const Page = () => {
           redirect("/dashboard");
         }
 
+        // Find the theme
         const findTheme = themes.find(
           (theme) => theme.name === res.data?.themeName
         );
 
+        // Set the Data
         setCurrentTheme(findTheme || themes[0]);
         setTheme(findTheme?.type === "dark" ? "dark" : "light");
         setProject(res.data);
@@ -48,11 +54,13 @@ const Page = () => {
           description: "Unexpected error occured",
         });
       } finally {
+        // Set the loading to false
         setIsLoading(false);
       }
     })();
   }, []);
 
+  // If the project is loading, show a loading indicator
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -61,10 +69,15 @@ const Page = () => {
     );
   }
 
+  // If the project is not loading, show the presentation
   return (
+    // Wrap the presentation in a DndProvider
     <DndProvider backend={HTML5Backend}>
       <div className="min-h-screen flex flex-col">
+        {/* Navbar */}
         <Navbar presentationId={params.presentationId as string} />
+
+        {/* Main Content */}
         <div
           className="flex-1 flex overflow-hidden pt-16"
           style={{
@@ -73,12 +86,18 @@ const Page = () => {
             fontFamily: currentTheme.fontFamily,
           }}
         >
-          <LayoutPreview />
+          {/* Layout Preview - Left Sidebar*/}
+          <LayoutPreview /> 
+
+          {/* Editor */}
           <div className="flex-1 ml-64 pr-16">
             <Editor 
             isEditable={true}
             />
           </div>
+
+          {/* Editor Sidebar - Right Sidebar*/}
+          <EditorSidebar />
         </div>
       </div>
     </DndProvider>

@@ -243,7 +243,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
             language={content.language}
             className={content.className}
             onChange={() => {}}
-            code={content.code}
+            code={content.codeBlock || content.code}
             />
           </motion.div>
         );
