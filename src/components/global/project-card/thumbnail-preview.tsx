@@ -1,3 +1,4 @@
+import { MasterRecursiveComponent } from "@/app/(protected)/presentation/[presentationId]/_components/editor/MasterRecursiveComponent";
 import { Slide, Theme } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Image } from "lucide-react";
@@ -23,9 +24,15 @@ const ThumbnailPreview = ({ slide, theme }: Props) => {
     >
         {slide? (
             <div className="scale-[0.5] origin-top-left w-[200%] h-[200%] overflow-hidden">
-                This are slide previews
+                <MasterRecursiveComponent
+                slideId={slide.id}
+                content={slide.content}
+                onContentChange={() => {}}
+                isPreview={true}
+                />
             </div>
         ): (
+            // eslint-disable-next-line react/jsx-no-comment-textnodes
             <div className="w-full h-full bg-gray-400 flex justify-center items-center">
                 <Image
                  className="w-6 h-6 text-gray-500" 

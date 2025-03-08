@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Navbar from "./_components/Navbar";
+import Navbar from "./_components/editor-sidebar/Navbar/Navbar";
 import LayoutPreview from "./_components/editor-sidebar/left-sidebar/LayoutPreview";
 import Editor from "./_components/editor/Editor";
 import EditorSidebar from "./_components/editor-sidebar/right-sidebar";

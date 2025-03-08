@@ -112,7 +112,7 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
 
 
   // UseDrop hook to handle the drop zone
-  const [_,drop] = useDrop({
+  const [,drop] = useDrop({
     accept: ["SLIDE", "LAYOUT"],
     hover(item: {index: number, type: string}) {
       if(!ref.current || !isEditable) return;
