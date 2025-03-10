@@ -206,10 +206,26 @@ export const useSlideStore = create(
         return [...state.slides].sort((a, b) => a.slideOrder - b.slideOrder);
       },
 
+      // removeSlide: (id) =>
+      //   set((state) => ({
+      //     slides: state.slides.filter((slide) => slide.id !== id),
+      //   })),
+
       removeSlide: (id) =>
-        set((state) => ({
-          slides: state.slides.filter((slide) => slide.id !== id),
-        })),
+        set((state) => {
+          const filteredSlides = state.slides.filter((slide) => slide.id !== id);
+      
+          // Reorder the slides to reset the index
+          const reorderedSlides = filteredSlides.map((slide, index) => ({
+            ...slide,
+            slideOrder: index, // Reset the slide order
+          }));
+      
+          return {
+            slides: reorderedSlides,
+            currentSlide: Math.max(state.currentSlide - 1, 0),
+          };
+        }),
 
       addSlideAtIndex: (slide: Slide, index: number) =>
         set((state) => {

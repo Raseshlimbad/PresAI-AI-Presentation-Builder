@@ -72,7 +72,7 @@ const AppSidebar = ({
         </span> */}
         </SidebarMenuButton>
       </SidebarHeader>
-      <SidebarContent className="px-3 mt-10 gap-y-6">
+      <SidebarContent className="mt-10 gap-y-6">
         <NavMain items={data.navItems} />
         <RecentOpen recentProjects={recentProjects} />
       </SidebarContent>

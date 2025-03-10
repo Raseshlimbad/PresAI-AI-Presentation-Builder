@@ -6,7 +6,7 @@ import React from 'react'
 const DashboardPage = async ({searchParams}: {searchParams: {search?: string}}) => {
   // const allProjects = await getAllProjects();
 
-  const searchTerm = searchParams.search;
+  const searchTerm = await searchParams.search;
 
   const projectsResponse = searchTerm
   ? await filterProjects(searchTerm)

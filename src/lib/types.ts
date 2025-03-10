@@ -112,4 +112,11 @@ export interface ComponentGroup {
   components: Component[];
 }
 
+export interface Template {
+  id: string;
+  name: string;
+  theme: string;
+  slides: Slide[];
+}
+
 

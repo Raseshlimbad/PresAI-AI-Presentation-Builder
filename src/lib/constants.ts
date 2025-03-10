@@ -42,6 +42,7 @@ import {
   Title,
   TodoListComponent,
 } from "./slideCompoennts";
+import { v4 as uuidv4 } from "uuid";
 
 export const data = {
   user: {
@@ -109,7 +110,6 @@ export const itemVariants = {
 //     type: 'dark',
 // }
 // ]
-
 
 // Themes data 2
 // export const themes: Theme[] = [
@@ -461,7 +461,6 @@ export const CreatePageCard = [
   },
 ];
 
-
 export const layouts: LayoutGroup[] = [
   {
     name: "Basic",
@@ -739,8 +738,6 @@ export const component: ComponentGroup[] = [
   },
 ];
 
-
-
 export const themes: Theme[] = [
   {
     name: "Default",
@@ -1005,7 +1002,8 @@ export const themes: Theme[] = [
     type: "light",
   },
   {
-    name: "Urban Jungle",fontFamily: "'Karla', sans-serif",
+    name: "Urban Jungle",
+    fontFamily: "'Karla', sans-serif",
     fontColor: "#2d3748",
     backgroundColor: "#e6fffa",
     slideBackgroundColor: "#ffffff",
@@ -1038,5 +1036,1477 @@ export const themes: Theme[] = [
     navbarColor: "#18181b",
     sidebarColor: "#09090b",
     type: "dark",
+  },
+];
+
+export const templates = [
+  // ===========================
+  //  Modern Business
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Modern Business",
+    theme: "Professional",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Title Slide",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Modern Business Presentation",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Presented by [Your Name]",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Introduction",
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading1",
+              content: "Introduction",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content:
+                "This presentation covers the key aspects of our business model.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Key Services",
+        type: "threeColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Our Services",
+            },
+            {
+              id: uuidv4(),
+              type: "resizable-column",
+              content: [
+                {
+                  id: uuidv4(),
+                  type: "heading3",
+                  content: "Consulting",
+                },
+                {
+                  id: uuidv4(),
+                  type: "paragraph",
+                  content: "We provide expert business consulting services.",
+                },
+              ],
+            },
+            {
+              id: uuidv4(),
+              type: "resizable-column",
+              content: [
+                {
+                  id: uuidv4(),
+                  type: "heading3",
+                  content: "Marketing",
+                },
+                {
+                  id: uuidv4(),
+                  type: "paragraph",
+                  content: "Tailored marketing strategies for your business.",
+                },
+              ],
+            },
+            {
+              id: uuidv4(),
+              type: "resizable-column",
+              content: [
+                {
+                  id: uuidv4(),
+                  type: "heading3",
+                  content: "Development",
+                },
+                {
+                  id: uuidv4(),
+                  type: "paragraph",
+                  content: "High-quality software development solutions.",
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Closing Slide",
+        type: "accentLeft",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Thank You",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "We appreciate your time and attention.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  // ===========================
+  //  Modern Business
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "C  ",
+    theme: "Dark Theme",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Cover Page",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Creative Portfolio",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Designed by [Your Name]",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "About Me",
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading1",
+              content: "About Me",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content:
+                "I am a creative designer specializing in web and branding.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Portfolio Showcase",
+        type: "threeImageColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "image",
+              content: "https://source.unsplash.com/random/300x300",
+              alt: "Project 1",
+            },
+            {
+              id: uuidv4(),
+              type: "image",
+              content: "https://source.unsplash.com/random/301x301",
+              alt: "Project 2",
+            },
+            {
+              id: uuidv4(),
+              type: "image",
+              content: "https://source.unsplash.com/random/302x302",
+              alt: "Project 3",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Contact",
+        type: "accentRight",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading1",
+              content: "Get In Touch",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Email: your@email.com",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  // ===========================
+  //  Minimalist Presentation
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Minimalist Presentation",
+    theme: "Minimal Theme",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Welcome Slide",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Welcome",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "A minimalist approach to presentations.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Agenda",
+        type: "twoColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Agenda",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Introduction",
+                "Project Overview",
+                "Future Goals",
+                "Conclusion",
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Conclusion",
+        type: "accentLeft",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Thank You",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "We appreciate your time.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  // ===========================
+  //  Startup Pitch Deck
+  // ===========================
+
+  {
+    id: uuidv4(),
+    name: "Startup Pitch Deck",
+    theme: "Professional",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Welcome Slide",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Startup Pitch Deck",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Revolutionizing the future of technology.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Problem Statement",
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading1",
+              content: "The Problem",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content:
+                "Businesses struggle with inefficient operations and high costs.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Our Solution",
+        type: "imageAndText",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading1",
+              content: "Our Solution",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content:
+                "We provide an AI-powered platform to streamline operations.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Market Opportunity",
+        type: "threeColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Market Size",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "$500 Billion Industry",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Growing 20% year-over-year",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Business Model",
+        type: "twoColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Revenue Streams",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Subscription-based model",
+                "One-time software license",
+                "Enterprise customization",
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Closing Slide",
+        type: "accentLeft",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Thank You!",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Let's revolutionize the future together.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ===========================
+  //  Product Launch Presentation
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Product Launch Presentation",
+    theme: "Creative",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Launch Slide",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Introducing Our New Product",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "The future of technology begins now.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Product Features",
+        type: "threeColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Feature 1",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "AI-powered automation.",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Feature 2",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Cloud-based infrastructure.",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Feature 3",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Highly customizable.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Product Showcase",
+        type: "threeImageColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "image",
+              content: "https://source.unsplash.com/random/300x300",
+              alt: "Feature Image 1",
+            },
+            {
+              id: uuidv4(),
+              type: "image",
+              content: "https://source.unsplash.com/random/301x301",
+              alt: "Feature Image 2",
+            },
+            {
+              id: uuidv4(),
+              type: "image",
+              content: "https://source.unsplash.com/random/302x302",
+              alt: "Feature Image 3",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Pricing",
+        type: "twoColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Pricing Plans",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Basic - $10/month",
+                "Pro - $25/month",
+                "Enterprise - $50/month",
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Closing Slide",
+        type: "accentRight",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Thank You for Joining Us!",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Experience the future of technology.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ===========================
+  //  Company Profile Presentation
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Company Profile",
+    theme: "Corporate",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Company Overview",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Company Profile",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Your trusted technology partner.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Our Mission",
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Our Mission",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "To drive innovation through technology.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Our Services",
+        type: "threeColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Consulting",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "We provide expert technology consultation.",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Development",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "We build scalable solutions.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  // ===========================
+  //  Educational Presentation
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Educational Presentation",
+    theme: "Minimal",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Welcome Slide",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Welcome to the Course",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Let's dive into today's lesson.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Course Overview",
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading1",
+              content: "Course Overview",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "In this course, you will learn:",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "The basics of programming",
+                "How to build a web app",
+                "Understanding APIs and Databases",
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Key Topics",
+        type: "threeColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Topic 1",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Understanding HTML, CSS, JS",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Topic 2",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Backend Development with Node.js",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Topic 3",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Building Full-Stack Apps",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Q&A Session",
+        type: "question",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Any Questions?",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Feel free to ask your questions.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ===========================
+  //  Marketing Strategy Deck
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Marketing Strategy Deck",
+    theme: "Creative",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Introduction",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Marketing Strategy 2025",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Our plan to scale revenue by 50%.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Target Audience",
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Who is our target?",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Small to Medium Businesses",
+                "E-commerce Owners",
+                "Freelancers & Creators",
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Marketing Channels",
+        type: "twoColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Primary Channels",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Google Ads",
+                "Social Media Marketing",
+                "Influencer Partnerships",
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Revenue Forecast",
+        type: "twoColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "2025 Revenue",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "$10 Million Projected Revenue",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Profit Margin",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "30% Profit Margin Target",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Thank You Slide",
+        type: "accentRight",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Thank You!",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Let's make this strategy a success.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ===========================
+  //  Annual Business Report
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Annual Business Report",
+    theme: "Professional",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Annual Report Cover",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Annual Business Report 2025",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "A look at our performance in the past year.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Financial Overview",
+        type: "twoColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Revenue & Expenses",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Revenue: $50 Million",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Expenses: $30 Million",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Growth Metrics",
+        type: "threeColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "User Growth",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "50% increase in users.",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Revenue Growth",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "20% increase in revenue.",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Profit Margin",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "30% profit margin achieved.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Future Roadmap",
+        type: "todoList",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Goals for 2026",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Expand to 10 new countries",
+                "Achieve $100 Million Revenue",
+                "Increase customer retention by 20%",
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+  // ===========================
+  //  Product Launch Presentation
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Product Launch Presentation",
+    theme: "Modern",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Product Introduction",
+        type: "imageAndText",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Introducing Our New Product",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "A game-changing product designed for you.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Product Features",
+        type: "threeColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Feature 1",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Description of Feature 1.",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Feature 2",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Description of Feature 2.",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Feature 3",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Description of Feature 3.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Product Benefits",
+        type: "bulletList",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Why Choose This Product?",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Solves a major problem",
+                "User-friendly and innovative",
+                "Affordable pricing",
+                "High customer satisfaction",
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Pricing Plans",
+        type: "twoColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Basic Plan",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "$99/month",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Pro Plan",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "$199/month",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Thank You",
+        type: "accentRight",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Thank You!",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "We can't wait for you to try our product.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ===========================
+  //  Startup Pitch Deck
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Startup Pitch Deck",
+    theme: "Creative",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Company Overview",
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Our Startup Vision",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Building innovative solutions for the future.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Problem Statement",
+        type: "twoColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "The Problem",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Current market gaps causing inefficiencies.",
+            },
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Our Solution",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "We solve it through innovative technology.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Market Opportunity",
+        type: "twoColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Market Size",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "$50 Billion Opportunity",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Potential Growth",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "20% CAGR growth annually.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Business Model",
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "How We Make Money",
+            },
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Subscription-based revenue",
+                "One-time licensing fee",
+                "Enterprise packages",
+              ],
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Thank You",
+        type: "accentLeft",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Thank You for Your Time",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "We hope you join our journey.",
+            },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ===========================
+  //  Social Media Report
+  // ===========================
+  {
+    id: uuidv4(),
+    name: "Social Media Report",
+    theme: "Minimal",
+    slides: [
+      {
+        id: uuidv4(),
+        slideName: "Report Overview",
+        type: "blank-card",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "title",
+              content: "Social Media Performance Report",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "A complete analysis of our social growth.",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Audience Growth",
+        type: "twoColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Instagram",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Growth: 20% this month",
+            },
+            {
+              id: uuidv4(),
+              type: "heading3",
+              content: "Twitter",
+            },
+            {
+              id: uuidv4(),
+              type: "paragraph",
+              content: "Growth: 15% this month",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Top Performing Content",
+        type: "twoImageColumns",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "heading2",
+              content: "Best Performing Posts",
+            },
+          ],
+        },
+      },
+      {
+        id: uuidv4(),
+        slideName: "Future Strategies",
+        type: "todoList",
+        content: {
+          id: uuidv4(),
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              type: "bulletList",
+              content: [
+                "Increase video content",
+                "Collaborate with influencers",
+                "Boost social ad budget",
+              ],
+            },
+          ],
+        },
+      },
+    ],
   },
 ];

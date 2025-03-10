@@ -351,6 +351,7 @@ The output must be an array of JSON objects.
 7. First create LAYOUTS TYPES at the top most level of the JSON output as follows ${JSON.stringify(
     [
       {
+        id: uuidv4(),
         slideName: "Blank card",
         type: "blank-card",
         className: "p-8 mx-auto flex justify-center items-center min-h-[200px]",
@@ -362,6 +363,7 @@ The output must be an array of JSON objects.
   8. The content property of each LAYOUTS TYPE should start with "column" and within the columns content property you can use any of the CONTENT TYPES I provided above. Resizable-column, column and other multi element contents should be an array because you can have more elements inside them nested. Static elements like title and paragraph should have content set to a string. Here is an example of what 1 layout with 1 column with 1 title inside would look like:
   ${JSON.stringify([
     {
+      id: uuidv4(),
       slideName: "Blank card",
       type: "blank-card",
       className: "p-8 mx-auto flex justify-center items-center min-h-[200px]",
@@ -496,7 +498,7 @@ Output the layouts in JSON format. Ensure there are no duplicate layouts across 
         // console.log(jsonResponse)
 
         await Promise.all(jsonResponse.map(replaceImagePlaceholders));
-        console.log("jsonResponse", jsonResponse);
+        // console.log("jsonResponse", jsonResponse);
         return { status: 200, data: jsonResponse };
       } catch (error) {
         console.error(
