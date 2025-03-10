@@ -16,6 +16,7 @@ import { data } from "@/lib/constants";
 import RecentOpen from "./recent-open";
 import NavFooter from "./nav-footer";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 const AppSidebar = ({
   recentProjects,
@@ -47,7 +48,7 @@ const AppSidebar = ({
                 <AvatarFallback className="">PresAI</AvatarFallback>
             </Avatar>
         </div> */}
-
+          <Link href="/dashboard">
           {theme === "light" ? (
             <Image
               className="text-sidebar-primary-foreground"
@@ -65,6 +66,7 @@ const AppSidebar = ({
               alt="PresAI"
             />
           )}
+          </Link>
           {/* <span className="truncate text-primary text-3xl font-semibold pl-2">
             PresAI
         </span> */}

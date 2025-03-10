@@ -308,3 +308,37 @@ export const getDeletedProjects = async () => {
     return { status: 500, message: "Internal Server Error" };
   }
 }
+
+
+export const filterProjects = async (searchTerm: string) => {
+  try {
+    if (!searchTerm) return getAllProjects();
+
+    const checkUser = await onAuthenticateUser();
+      if(checkUser.status !== 200 || !checkUser.user){
+        return { status: 403, error: "User Not Authanticated" };
+      }
+  
+    const filteredProjects = await client.project.findMany({
+      where: {
+        title: {
+          contains: searchTerm,
+          mode: 'insensitive',
+        },
+        isDeleted: false,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      }
+    });
+  
+    if(filteredProjects.length === 0){
+      return { status: 404, error: "No projects found"};
+    }
+  
+    return { status: 200, data: filteredProjects };
+  } catch (error) {
+    console.log("Error: ", error);
+    return { status: 500, message: "Internal Server Error" };
+  }
+};

@@ -13,7 +13,7 @@ const Layout = async ({children}: Props) => {
 
     const checkUser = await onAuthenticateUser();
     if(!checkUser.user) redirect('/sign-in');
-  return (
+  return ( 
     <div className='w-full min-h-screen'>
       <SidebarProvider>
         <AppSidebar recentProjects={recentprojects.data || []}

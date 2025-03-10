@@ -2,26 +2,24 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useSlideStore } from "@/store/useSlideStore";
 import { Search } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
 
 const SearchBar = () => {
-  const { projects, setFilteredProjects } = useSlideStore();
-  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  // Handle input change and filter projects in real-time
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState<string>(searchParams.get('search') || '');
+
+  // Handle Search Input
+  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    // Update URL with search term
+    router.push(`?search=${value}`, { scroll: false });
   };
-
-  // Filter projects whenever search term or projects change
-  useEffect(() => {
-    const filtered = projects.filter((project) =>
-      project.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProjects(filtered);
-  }, [searchTerm, projects, setFilteredProjects]);
 
   return (
     <div className="min-w-[60%] relative flex items-center border rounded-full bg-primary-90">
@@ -36,6 +34,8 @@ const SearchBar = () => {
       </Button>
       <Input
         type="text"
+        value={searchTerm}
+        onChange={handleSearch}
         placeholder="Search by title"
         className="flex-grow bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 ml-6"
       />
