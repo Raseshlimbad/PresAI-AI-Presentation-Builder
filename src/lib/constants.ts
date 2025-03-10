@@ -684,7 +684,7 @@ export const component: ComponentGroup[] = [
         componentType: "note",
         name: "Note box",
         type: "component",
-        component: { ...CalloutBoxComponent, callOutType: "info" },
+        component: { ...CalloutBoxComponent, callOutType: "note" },
         icon: "📝",
       },
       {
@@ -706,7 +706,7 @@ export const component: ComponentGroup[] = [
         name: "Caution box",
         type: "component",
         component: { ...CalloutBoxComponent, callOutType: "caution" },
-        icon: "⚠",
+        icon: "!",
       },
       {
         componentType: "success",

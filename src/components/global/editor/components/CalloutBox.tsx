@@ -1,17 +1,17 @@
 import { cn } from '@/lib/utils'
-import { Icon } from '@radix-ui/react-select'
-import { AlertCircle, AlertTriangle, CheckCircle, HelpCircle, Info } from 'lucide-react'
+import { AlertCircle, AlertTriangle, CheckCircle, HelpCircle, Info, StickyNote } from 'lucide-react'
 import React from 'react'
 
 // Types for the callout box
 interface CalloutBoxProps {
-    type: 'success' | 'warning' | 'info' | 'question' | 'caution'
+    type: 'success' | 'warning' | 'info' | 'question' | 'caution' | 'note'
     children: React.ReactNode
     className?: string
 }
 
 // Icons for the callout box
 const icons = {
+    note: StickyNote,
     success: CheckCircle,
     warning: AlertTriangle,
     info: Info,
@@ -21,10 +21,15 @@ const icons = {
 
 // Callout box component
 const CalloutBox = ({ type, children, className }: CalloutBoxProps) => {
-    const icon = icons[type];
+    const Icon = icons[type];
 
     // Colors for the callout box
     const colors = {
+        note: {
+          bg: 'bg-teal-100',
+          border: 'border-teal-500',
+          text: 'text-teal-700',
+        },
         success: {
           bg: 'bg-green-100',
           border: 'border-green-500',

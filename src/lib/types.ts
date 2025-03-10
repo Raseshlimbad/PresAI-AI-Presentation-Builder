@@ -50,7 +50,7 @@ export interface ContentItem {
   placeholder?: string;
   className?: string;
   alt?: string;
-  callOutType?: "success" | "warning" | "info" | "question" | "caution";
+  callOutType?: "success" | "warning" | "info" | "question" | "caution" | "note";
   link?: string;
   code?: string;
   codeBlock?: string;

@@ -13,6 +13,10 @@ interface SlideState {
   removeSlide: (id: string) => void;
   project: Project | null;
   setProject: (project: Project) => void;
+  projects: Project[];
+  setProjects: (projects: Project[]) => void;
+  filteredProjects: Project[];
+  setFilteredProjects: (projects: Project[]) => void;
   currentTheme: Theme;
   setCurrentTheme: (theme: Theme) => void;
   getOrderedSlides: () => Slide[];
@@ -44,8 +48,10 @@ export const useSlideStore = create(
   persist<SlideState>(
     (set, get) => ({
       slides: [],
-      project: null,
       currentSlide: 0,
+      project: null,
+      projects: [],
+      filteredProjects: [],
 
       setSlides: (slides: Slide[]) => set({ slides }),
 
@@ -104,6 +110,9 @@ export const useSlideStore = create(
       },
 
       setProject: (project: Project) => set({ project }),
+
+      setProjects: (projects) => set({ projects, filteredProjects: projects }),
+      setFilteredProjects: (projects) => set({ filteredProjects: projects }),
 
       currentTheme: defaultTheme,
 

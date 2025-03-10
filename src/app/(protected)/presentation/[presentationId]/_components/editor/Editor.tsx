@@ -332,7 +332,7 @@ const Editor = ({ isEditable }: Props) => {
         clearTimeout(autosaveTimerRef.current)
       }
     }
-  },[slides, isEditable, project])
+  },[slides, isEditable, project, saveSlides])
 
   return (
     <div className="flex flex-1 flex-col h-full max-w-3xl mx-auto px-4 mb-20">
