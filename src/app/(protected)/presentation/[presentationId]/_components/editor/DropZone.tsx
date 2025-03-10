@@ -15,7 +15,7 @@ const DropZone = ({ index, slideId, parentId }: DropZoneProps) => {
   const { addComponentInSlide } = useSlideStore();
 
   const [{ isOver, canDrop }, drop] = useDrop({
-    accept: ["CONTENT-ITEM"],
+    accept: ["CONTENT_ITEM"],
     drop: (item: {
       type: string;
       componentType: string;
@@ -36,13 +36,14 @@ const DropZone = ({ index, slideId, parentId }: DropZoneProps) => {
       canDrop: !!monitor.canDrop(),
     }),
   });
+
   return (
     <div
       ref={drop as unknown as React.RefObject<HTMLDivElement>}
       className={cn(
         'h-3 w-full transition-all duration-200',
-        isOver && canDrop ? 'border-blue-500 bg-blue-100' : 'border-gray-300',
-        'hover:border-blue-300'
+        isOver && canDrop ? 'border-green-500 bg-green-100' : 'border-gray-300',
+        'hover:border-green-300'
       )}
     >
      {isOver && canDrop && (

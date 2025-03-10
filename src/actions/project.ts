@@ -235,3 +235,76 @@ export const updateTheme = async (projectId: string, theme: string) => {
     return { status: 500, message: "Internal Server Error" };
   }
 }
+
+export const deleteAllProjects = async (projectIds: string[]) => {
+  try {
+    if(!Array.isArray(projectIds) || projectIds.length === 0){
+      return { status: 400, error: "Project IDs are required" };
+    }
+
+    const checkUser = await onAuthenticateUser();
+    if(checkUser.status !== 200 || !checkUser.user){
+      return { status: 403, error: "User Not Authanticated" };
+    }
+
+    const userId = checkUser.user.id;
+
+    const projectsToDelete = await client.project.findMany({
+      where: {
+        id: { in: projectIds },
+        userId: userId,
+      },
+    });
+
+    if(projectsToDelete.length === 0){
+      return { status: 404, error: "No projects found to delete" };
+    }
+
+    const deletedProjects = await client.project.deleteMany({
+      where: {
+        id: { in: projectsToDelete.map((project) => project.id) },
+        userId: userId,
+      },
+    });
+
+    if(deletedProjects.count !== projectsToDelete.length){
+      return { status: 500, error: "Failed to delete all projects" };
+    }
+
+    return { status: 200, message: `${deletedProjects.count} projects successfully deleted.` };
+    
+  } catch (error) {
+    console.log("Error: ", error);
+    return { status: 500, message: "Internal Server Error" };
+  }
+}
+
+export const getDeletedProjects = async () => {
+  try {
+
+    const checkUser = await onAuthenticateUser();
+    if(checkUser.status !== 200 || !checkUser.user){
+      return { status: 403, error: "User Not Authanticated" };
+    }
+
+    const projects = await client.project.findMany({
+      where: {
+        userId: checkUser.user.id,
+        isDeleted: true,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+    })
+
+    if(projects.length === 0){
+      return { status: 404, error: "No deleted projects found" , data: []};
+    }
+
+    return { status: 200, data: projects };
+    
+  } catch (error) {
+    console.log("Error: ", error);
+    return { status: 500, message: "Internal Server Error" };
+  }
+}

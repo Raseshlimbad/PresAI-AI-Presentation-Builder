@@ -1,5 +1,6 @@
 'use client'
 
+import { buySubscription } from "@/actions/lemonSqueezy";
 import { Button } from "@/components/ui/button";
 import {
   SidebarMenu,
@@ -18,7 +19,14 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
     return null;
   }
 
-  const handleUpgrading = () => {};
+  const handleUpgrading = async () => {
+    setLoading(true);
+    try {
+      const res = await buySubscription(prismaUser.id);
+    } catch (error) {
+      
+    }
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem className="flex flex-col items-start group-data-[collapsible=icon]:hidden">

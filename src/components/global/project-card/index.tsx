@@ -135,6 +135,7 @@ const ProjectCard = ({
             </p>
 
             {/* Alert Dilogue Box */}
+            <div onClick={(e) => e.stopPropagation()}>
             {isDelete ? (
               <AlertDialogBox
                 description="This will recover your project and your data."
@@ -149,6 +150,7 @@ const ProjectCard = ({
                   variant={"ghost"}
                   disabled={loading}
                   className="bg-background-80 dark:bg-background-90"
+                  // onClick={(e: React.MouseEvent<HTMLButtonElement>) => e.stopPropagation()}
                 >
                   Recover
                 </Button>
@@ -166,12 +168,13 @@ const ProjectCard = ({
                   size={"sm"}
                   variant={"ghost"}
                   disabled={loading}
-                  className="bg-background-80 dark:bg-background-90"
+                  className="bg-background-80 dark:bg-background-90 z-10"
                 >
                   Delete
                 </Button>
               </AlertDialogBox>
             )}
+            </div>
           </div>
         </div>
       </div>
