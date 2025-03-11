@@ -4,15 +4,18 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// Generator #########################################################################################################################################
 generator client {
   provider = "prisma-client-js"
 }
 
+// Datasource #########################################################################################################################################
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+// User #########################################################################################################################################
 model User {
   id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   clerkId            String   @unique
@@ -26,10 +29,11 @@ model User {
   storeID            String?
   webhookSecret      String?
 
-  Projects Project[] @relation("OwnedProjects") 
+  Projects          Project[] @relation("OwnedProjects")
   PurchasedProjects Project[] @relation("PurchasedProjects")
 }
 
+// Project #########################################################################################################################################
 model Project {
   id         String   @id @default(cuid())
   title      String
@@ -44,6 +48,6 @@ model Project {
   thumbnail  String?
   themeName  String   @default("light")
 
-  User User @relation("OwnedProjects", fields: [userId] , references: [id] )
+  User       User   @relation("OwnedProjects", fields: [userId], references: [id])
   Purchasers User[] @relation("PurchasedProjects")
 }

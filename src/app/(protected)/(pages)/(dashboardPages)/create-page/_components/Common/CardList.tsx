@@ -6,6 +6,7 @@ import React, { useRef, useState } from "react";
 import Card from "./Card";
 import AddCardButton from "./AddCardButton";
 
+// Card List Props Type
 type Props = {
   outlines: OutlineCard[];
   editingCard: string | null;
@@ -21,6 +22,7 @@ type Props = {
   addMultipleOutlines?: (cards: OutlineCard[]) => void;
 };
 
+// Card List Component
 const CardList = ({
   editText,
   editingCard,
@@ -39,38 +41,48 @@ const CardList = ({
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const dragOffsetY = useRef<number>(0);
 
+  // On Drag Over
   const onDragOver = (e: React.DragEvent, index: number) => {
     e.preventDefault();
+    // If the dragged item is not set, return
     if (!draggedItem) return;
-
+    // Get the bounding client rect
     const rect = e.currentTarget.getBoundingClientRect();
+    // Get the y position
     const y = e.clientY - rect.top;
+    // Get the threshold
     const threshold = rect.height / 2;
-
+    // If the y position is less than the threshold, set the drag over index to the index
     if (y < threshold) {
       setDragOverIndex(index);
     } else {
+      // Otherwise, set the drag over index to the index + 1
       setDragOverIndex(index + 1);
     }
   };
 
+  // On Drop
   const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
+    // If the dragged item is not set, return
     if (!draggedItem || !dragOverIndex) return;
-
+    // Get the updated cards
     const updatedCards = [...outlines];
+    // Get the dragged index
     const draggedIndex = updatedCards.findIndex(
       (card) => card.id === draggedItem.id
     );
-
+    // If the dragged index is -1 or the dragged index is the same as the drag over index, return
     if (draggedIndex === -1 || draggedIndex === dragOverIndex) return;
-
+    // Get the removed card from the updated cards
     const [removedCard] = updatedCards.splice(draggedIndex, 1);
+    // Add the removed card to the updated cards
     updatedCards.splice(
       dragOverIndex > draggedIndex ? dragOverIndex - 1 : dragOverIndex,
       0,
       removedCard
     );
+    // Add the updated cards to the add multiple outlines
     addMultipleOutlines?.(
       updatedCards.map((card, index) => ({ ...card, order: index + 1 }))
     );
@@ -78,135 +90,175 @@ const CardList = ({
     setDragOverIndex(null);
   };
 
+  // On Card Update
   const onCardUpdate = (id: string, newTitle: string) => {
+    // Add the updated cards to the add multiple outlines
     addMultipleOutlines?.(
-        outlines.map((card) => 
-            card.id === id ? { ...card, title: newTitle } : card
-        )
+      outlines.map((card) =>
+        card.id === id ? { ...card, title: newTitle } : card
+      )
     );
     setEditingCard(null);
     setEditText("");
     setSelectedCard(null);
-  }
+  };
 
+  // On Card Delete
   const onCardDelete = (id: string) => {
-        addMultipleOutlines?.(outlines.filter((card) => card.id !== id).map((card,index) => ({...card, order:index + 1})));
-  }
+    // Add the updated cards to the add multiple outlines
+    addMultipleOutlines?.(
+      outlines
+        .filter((card) => card.id !== id)
+        .map((card, index) => ({ ...card, order: index + 1 }))
+    );
+  };
 
+  // On Drag Start
   const onDragStart = (e: React.DragEvent, card: OutlineCard) => {
+    // Set the dragged item
     setDraggedItem(card);
-    e.dataTransfer.effectAllowed = 'move';
-  
+    // Set the effect allowed
+    e.dataTransfer.effectAllowed = "move";
+    // Get the bounding client rect of the dragged element
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    // Set the drag offset y
     dragOffsetY.current = e.clientY - rect.top;
-  
+    // Clone the dragged element
     const draggedEl = e.currentTarget.cloneNode(true) as HTMLElement;
-    draggedEl.style.position = 'absolute';
-    draggedEl.style.top = '-1000px';
-    draggedEl.style.opacity = '0.8';
+    // Set the position of the cloned element to absolute
+    draggedEl.style.position = "absolute";
+    draggedEl.style.top = "-1000px";
+    draggedEl.style.opacity = "0.8";
     draggedEl.style.width = `${(e.currentTarget as HTMLElement).offsetWidth}px`;
-    
+    // Set the z index of the cloned element to 1000
+    draggedEl.style.zIndex = "1000";
+    // Append the cloned element to the body
     document.body.appendChild(draggedEl);
+    // Set the drag image to the cloned element
     e.dataTransfer.setDragImage(draggedEl, 0, dragOffsetY.current);
-  
+    // Set the drag over index to the index of the card
     setTimeout(() => {
       setDragOverIndex(outlines.findIndex((c) => c.id === card.id));
+      // Remove the cloned element from the body
       document.body.removeChild(draggedEl);
     }, 0);
   };
 
+  // On Drag End
   const onDragEnd = () => {
+    // Set the dragged item to null
     setDraggedItem(null);
+    // Set the drag over index to null
     setDragOverIndex(null);
-  }
-  
+  };
+
+  // Get Drag Over Styles
   const getDragOverStyles = (cardIndex: number) => {
-    if (dragOverIndex === null || draggedItem === null) return {}
-  
+    // If the drag over index is null or the dragged item is null, return an empty object
+    if (dragOverIndex === null || draggedItem === null) return {};
+    // If the card index is the same as the drag over index, return the styles
     if (cardIndex === dragOverIndex) {
       return {
-        borderTop: '2px solid #000',
-        marginTop: '0.5rem',
-        transition: 'margin 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)',
-      }
+        borderTop: "2px solid #000",
+        marginTop: "0.5rem",
+        transition: "margin 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
+      };
     } else if (cardIndex === dragOverIndex - 1) {
+      // If the card index is the same as the drag over index - 1, return the styles
       return {
-        borderBottom: '2px solid #000',
-        marginBottom: '0.5rem',
-        transition: 'margin 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)',
-      }
+        borderBottom: "2px solid #000",
+        marginBottom: "0.5rem",
+        transition: "margin 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
+      };
     }
-  
-    return {}
-  }
-  
+    // Otherwise, return an empty object
+    return {};
+  };
+
+  // On Add Card
   const onAddCard = (index?: number) => {
     const newCard: OutlineCard = {
       id: Math.random().toString(36).substring(2, 9),
-      title: editText || 'New Card',
-      order: (index !==undefined ? index + 1 : outlines.length) + 1,
-    }
-    const updatedCards = index !== undefined ? [
-      ...outlines.slice(0, index + 1),
-      newCard,
-      ...outlines.slice(index + 1)
-      .map((card) => ({...card, order: card.order + 1}))
-    ]
-    : [...outlines, newCard]
+      title: editText || "New Card",
+      order: (index !== undefined ? index + 1 : outlines.length) + 1,
+    };
 
+    // If the index is not undefined, update the cards
+    const updatedCards =
+      index !== undefined
+        ? [
+            ...outlines.slice(0, index + 1),
+            newCard,
+            ...outlines
+              .slice(index + 1)
+              .map((card) => ({ ...card, order: card.order + 1 })),
+          ]
+        : [...outlines, newCard];
+
+    // Add the updated cards to the add multiple outlines
     addMultipleOutlines?.(updatedCards);
-    setEditText('');
-  }
+    // Set the edit text to an empty string
+    setEditText("");
+  };
 
+  // Render the Card List
   return (
+    // Motion.div for the container
     <motion.div
       className="space-y-2 -my-2"
       layout
       onDragOver={(e) => {
         e.preventDefault();
+        // If the outlines are empty or the bottom of the current target is less than 20, call the onDragOver function
         if (
           outlines.length === 0 ||
           e.currentTarget.getBoundingClientRect().bottom - 20
         ) {
+          // Call the onDragOver function
           onDragOver(e, outlines.length);
         }
       }}
+      // On Drop
       onDrop={(e) => {
         e.preventDefault();
+        // Call the onDrop function
         onDrop(e);
       }}
     >
-        <AnimatePresence>
-            {outlines.map((card, index) => (
-                <React.Fragment key={card.id}>
-                    <Card 
-                    card={card}
-                    isEditing={editingCard === card.id}
-                    isSelected={selectedCard === card.id}   
-                    editText={editText}
-                    onEditChange={onEditChange}
-                    onEditBlur={() => onCardUpdate(card.id, editText)}
-                    onEditKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                            onCardUpdate(card.id, editText);
-                        }
-                    }}
-                    onCardClick={() => onCardSelect(card.id)}
-                    onCardDoubleClick={() => onCardDoubleClick(card.id, card.title)}
-                    onDeleteClick={() => onCardDelete(card.id)}
-                    dragHandlers={{
-                        onDragStart: (e) => onDragStart(e,card),
-                        onDragEnd: onDragEnd,
-                    }}
-                    dragOverStyles={getDragOverStyles(index)}
+      {/* Animate Presence */}
+      <AnimatePresence>
+        {/* Map through the outlines and render a card */}
+        {outlines.map((card, index) => (
+          <React.Fragment key={card.id}>
+            {/* Card */}
+            <Card
+              card={card}
+              isEditing={editingCard === card.id}
+              isSelected={selectedCard === card.id}
+              editText={editText}
+              onEditChange={onEditChange}
+              onEditBlur={() => onCardUpdate(card.id, editText)}
+              onEditKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  onCardUpdate(card.id, editText);
+                }
+              }}
+              onCardClick={() => onCardSelect(card.id)}
+              onCardDoubleClick={() => onCardDoubleClick(card.id, card.title)}
+              onDeleteClick={() => onCardDelete(card.id)}
+              dragHandlers={{
+                onDragStart: (e) => onDragStart(e, card),
+                onDragEnd: onDragEnd,
+              }}
+              dragOverStyles={getDragOverStyles(index)}
+              onDragOver={(e) => onDragOver(e, index)}
+            />
 
-                    onDragOver={(e) => onDragOver(e, index)}
-                     />
-
-                     <AddCardButton onAddCard={() => onAddCard(index)}/>
-                </React.Fragment>
-            ))}
-        </AnimatePresence>
+            {/* Add Card Button */}
+            <AddCardButton onAddCard={() => onAddCard(index)} />
+          </React.Fragment>
+        ))}
+      </AnimatePresence>
     </motion.div>
   );
 };

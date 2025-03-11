@@ -15,12 +15,18 @@ const TableOfContents = ({
 }: TableOfContentsProps) => {
   const { currentTheme } = useSlideStore();
   return (
+    // Nav
     <nav
       className={cn("space-y-2", className)}
       style={{ color: currentTheme.fontColor }}
     >
+      {/* Map through the items */}
       {items.map((item, index) => (
-        <div key={index} className={cn('cursor-pointer hover:underline')}>
+        <div
+          key={index}
+          className={cn("cursor-pointer hover:underline")}
+          onClick={() => onItemClick(item)}
+        >
           {item}
         </div>
       ))}

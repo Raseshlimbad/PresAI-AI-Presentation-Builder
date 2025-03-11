@@ -9,11 +9,14 @@ import React from 'react'
 const NewProjectButton = ({user}: {user: User}) => {
   const router = useRouter();
   return (
+    // New Project Button
     <Button
     className='rounded-lg font-semibold'
     disabled= {!user.subscription}
     onClick={() => router.push('/create-page')}>
+        {/* Plus Icon */}
         <Plus />
+        {/* New Project */}
         New Project
     </Button>
   )

@@ -4,6 +4,7 @@ import { AnimationControls, motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
 
+// ThemeCard Component Props
 type Props = {
   title: string;
   description: string;
@@ -13,6 +14,7 @@ type Props = {
   controls: AnimationControls;
 };
 
+// ThemeCard Component
 const ThemeCard = ({
   title,
   description,
@@ -21,7 +23,7 @@ const ThemeCard = ({
   theme,
   controls,
 }: Props) => {
-  // to create custom animation for each of these cards
+    // to create custom animation for each of these cards
   const variants = {
     left: {
       hidden: { opacity: 0, x: "-50%", y: "-50%", scale: 0.9, rotate: 0 },
@@ -70,6 +72,7 @@ const ThemeCard = ({
     },
   };
 
+  // Render the ThemeCard
   return (
     <motion.div
       initial="hidden"
@@ -78,22 +81,26 @@ const ThemeCard = ({
       className="absolute w-full max-w-3xl"
       style={{ zIndex: variant === "main" ? 10 : 0 }}
     >
+      {/* ThemeCard Container */}
       <Card
         className="h-full shadow-2xl backdrop-blur-sm  "
         style={{
           backgroundColor: theme.slideBackgroundColor,
           border: `1px solid ${theme.accentColor}20`,
         }}
-      >
+        >
+        {/* ThemeCard Content */}
         <div className="flex flex-col md:flex-row">
           <CardContent className="flex-1 p-8 space-y-6">
             <div className="space-y-3">
+              {/* ThemeCard Title */}
               <h2
                 className="text-3xl font-bold tracking-tight"
                 style={{ color: theme.accentColor }}
               >
                 {title}
               </h2>
+              {/* ThemeCard Description */}
               <p
                 className="text-lg"
                 style={{ color: `${theme.accentColor}90` }}
@@ -101,8 +108,10 @@ const ThemeCard = ({
                 {description}
               </p>
             </div>
+            {/* ThemeCard Content */}
             {content}
           </CardContent>
+          {/* ThemeCard Image */}
           <div className="relative w-full md:w-1/2 h-80 md:h-auto overflow-hidden rounded-r-lg">
             <Image
               src="https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYdlfHx8fGVufDB8fHx8fA%3D%3D"

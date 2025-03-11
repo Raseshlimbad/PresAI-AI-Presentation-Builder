@@ -44,6 +44,7 @@ import {
 } from "./slideCompoennts";
 import { v4 as uuidv4 } from "uuid";
 
+// Data for the dashboard
 export const data = {
   user: {
     name: "Shadcn",
@@ -74,6 +75,7 @@ export const data = {
   ],
 };
 
+// Container Variants
 export const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -84,6 +86,7 @@ export const containerVariants = {
   },
 };
 
+// Item Variants
 export const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
@@ -439,6 +442,7 @@ export const itemVariants = {
 //   },
 // ];
 
+// Create Page Card
 export const CreatePageCard = [
   {
     title: "Use a",
@@ -738,6 +742,7 @@ export const component: ComponentGroup[] = [
   },
 ];
 
+// Themes
 export const themes: Theme[] = [
   {
     name: "Default",
@@ -1039,6 +1044,7 @@ export const themes: Theme[] = [
   },
 ];
 
+// Templates
 export const templates = [
   // ===========================
   //  Modern Business

@@ -1,3 +1,4 @@
+// Slide
 export interface Slide {
   id: string;
   slideName: string;
@@ -7,6 +8,7 @@ export interface Slide {
   className?: string;
 }
 
+// Content Type
 export type ContentType =
   | "column"
   | "resizable-column"
@@ -38,6 +40,7 @@ export type ContentType =
   | "divider"
   ;
 
+// Content Item
 export interface ContentItem {
   id: string;
   type: ContentType;
@@ -60,6 +63,7 @@ export interface ContentItem {
   isTransparent?: boolean;
 }
 
+// Theme
 export interface Theme {
   name: string;
   fontFamily: string;
@@ -73,12 +77,14 @@ export interface Theme {
   type: 'light' | 'dark';
 }
 
+// Outline Card
 export interface OutlineCard{
   title: string
   id: string
   order: number
 }
 
+// Layout Slides
 export interface LayoutSlides {
   slideName: string
   content: ContentItem
@@ -86,6 +92,7 @@ export interface LayoutSlides {
   type: string
 }
 
+// Layout
 export interface Layout{
   name: string
   icon: React.FC
@@ -94,11 +101,13 @@ export interface Layout{
   layoutType: string
 }
 
+// Layout Group
 export interface LayoutGroup{
   name: string
   layouts: Layout[]
 }
 
+// Component
 interface Component {
   name: string;
   icon: string;
@@ -107,11 +116,13 @@ interface Component {
   componentType: string;
 }
 
+// Component Group    
 export interface ComponentGroup {
   name: string;
   components: Component[];
 }
 
+// Template
 export interface Template {
   id: string;
   name: string;

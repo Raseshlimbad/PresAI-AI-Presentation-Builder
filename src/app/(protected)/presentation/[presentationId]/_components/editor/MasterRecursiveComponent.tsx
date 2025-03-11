@@ -35,7 +35,7 @@ type MasterRecursiveComponentProps = {
   slideId: string;
 };
 
-// Memoized component to render the content
+// Memoized component to render the content ------------------------------------------------------------------------------------------------
 const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
   ({ content, onContentChange, slideId, isEditable, isPreview }) => {
     // Handle change event for the content
@@ -62,7 +62,6 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
     };
 
     // Render the component based on the content type
-    // WIP: Complete types
     switch (content.type) {
       // Heading 1
       case "heading1":
@@ -283,7 +282,9 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
             >
               {/* If the content is not empty, map through the content items */}
               {content.content.length > 0 ? (
+                // Map through the content items
                 (content.content as ContentItem[]).map(
+                  // Render the content sub items
                   (subItem: ContentItem, subIndex: number) => (
                     <React.Fragment key={subItem.id || `item-${subIndex}`}>
                       {/* DropZone before first item */}
@@ -291,6 +292,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
                         !subItem.restrictToDrop &&
                         subIndex === 0 &&
                         isEditable && (
+                          // DropZone before first item
                           <DropZone
                             index={subIndex + 1}
                             slideId={slideId}
@@ -319,19 +321,23 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
                     </React.Fragment>
                   )
                 )
+                // If the content is empty, render a drop zone
               ) : isEditable ? (
                 <DropZone index={0} slideId={slideId} parentId={content.id} />
               ) : null}
             </motion.div>
           );
         }
+        // If the content is not an array, return null
         return null;
+        // If the content is not a valid type, return null as default
       default:
         return null;
     }
   }
 );
 
+// Display name for the ContentRenderer component
 ContentRenderer.displayName = "ContentRenderer";
 
 // Memoized component to render the master recursive component

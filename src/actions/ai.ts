@@ -10,10 +10,13 @@ if (!process.env.GEMINI_API_KEY) {
   throw new Error("GEMINI_API_KEY is missing in environment variables.");
 }
 
+// Initialize Google Generative AI
 const google = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+// Generate Creative Prompt #########################################################################################################################################
 export const generateCreativePrompt = async (userPrompt: string) => {
   try {
+    // Get Model
     const model = google.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const finalPrompt = `
@@ -67,7 +70,7 @@ export const generateCreativePrompt = async (userPrompt: string) => {
   }
 };
 
-
+// Find Image Components #########################################################################################################################################
 const findImageComponents = (layout: ContentItem): ContentItem[] => {
   const images = [];
   if (layout.type === "image") {
@@ -85,7 +88,7 @@ const findImageComponents = (layout: ContentItem): ContentItem[] => {
   return images;
 };
 
-
+// Generate Image URL #########################################################################################################################################
 const generateImageUrl = async (prompt: string): Promise<string> => {
   try {
     const improvedPrompt = `
@@ -126,163 +129,163 @@ const generateImageUrl = async (prompt: string): Promise<string> => {
   }
 };
 
-const existingLayouts = [
-  {
-    id: uuidv4(),
-    slideName: "Two Column with Header",
-    type: "twoColumns",
-    className: "p-6 mx-auto flex flex-col items-center",
-    content: {
-      id: uuidv4(),
-      type: "row" as ContentType,
-      name: "Header Row",
-      content: [
-        {
-          id: uuidv4(),
-          type: "title" as ContentType,
-          name: "Main Header",
-          content: "",
-          placeholder: "Enter Slide Title...",
-        },
-      ],
-    },
-    body: {
-      id: uuidv4(),
-      type: "row" as ContentType,
-      name: "Two Columns",
-      content: [
-        {
-          id: uuidv4(),
-          type: "column" as ContentType,
-          name: "Left Column",
-          className: "p-4 border-r",
-          content: [
-            {
-              id: uuidv4(),
-              type: "paragraph" as ContentType,
-              name: "",
-              content: "",
-              placeholder: "Write something here...",
-            },
-          ],
-        },
-        {
-          id: uuidv4(),
-          type: "column" as ContentType,
-          name: "Right Column",
-          className: "p-4",
-          content: [
-            {
-              id: uuidv4(),
-              type: "image" as ContentType,
-              name: "Image Block",
-              content: "",
-              placeholder: "Upload an image...",
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    id: uuidv4(),
-    slideName: "Single Column Text",
-    type: "singleColumn",
-    className: "p-6 mx-auto flex flex-col items-center",
-    content: {
-      id: uuidv4(),
-      type: "column" as ContentType,
-      name: "Main Column",
-      content: [
-        {
-          id: uuidv4(),
-          type: "title" as ContentType,
-          name: "Slide Title",
-          content: "",
-          placeholder: "Enter your title...",
-        },
-        {
-          id: uuidv4(),
-          type: "paragraph" as ContentType,
-          name: "",
-          content: "",
-          placeholder: "Write detailed content here...",
-        },
-        {
-          id: uuidv4(),
-          type: "paragraph" as ContentType,
-          name: "",
-          content: "",
-          placeholder: "Add more details...",
-        },
-      ],
-    },
-  },
-  {
-    id: uuidv4(),
-    slideName: "Grid Layout",
-    type: "grid",
-    className: "p-6 mx-auto grid grid-cols-2 gap-4",
-    content: [
-      {
-        id: uuidv4(),
-        type: "column" as ContentType,
-        name: "Top Left",
-        content: [
-          {
-            id: uuidv4(),
-            type: "title" as ContentType,
-            name: "Subtitle",
-            content: "",
-            placeholder: "Enter subtitle...",
-          },
-        ],
-      },
-      {
-        id: uuidv4(),
-        type: "column" as ContentType,
-        name: "Top Right",
-        content: [
-          {
-            id: uuidv4(),
-            type: "image" as ContentType,
-            name: "Picture Block",
-            content: "",
-            placeholder: "Upload an image...",
-          },
-        ],
-      },
-      {
-        id: uuidv4(),
-        type: "column" as ContentType,
-        name: "Bottom Left",
-        content: [
-          {
-            id: uuidv4(),
-            type: "paragraph" as ContentType,
-            name: "",
-            content: "",
-            placeholder: "Write additional text...",
-          },
-        ],
-      },
-      {
-        id: uuidv4(),
-        type: "column" as ContentType,
-        name: "Bottom Right",
-        content: [
-          {
-            id: uuidv4(),
-            type: "list" as ContentType,
-            name: "Bullet Points",
-            content: "",
-            placeholder: "Add bullet points...",
-          },
-        ],
-      },
-    ],
-  },
-];
+// const existingLayouts = [
+//   {
+//     id: uuidv4(),
+//     slideName: "Two Column with Header",
+//     type: "twoColumns",
+//     className: "p-6 mx-auto flex flex-col items-center",
+//     content: {
+//       id: uuidv4(),
+//       type: "row" as ContentType,
+//       name: "Header Row",
+//       content: [
+//         {
+//           id: uuidv4(),
+//           type: "title" as ContentType,
+//           name: "Main Header",
+//           content: "",
+//           placeholder: "Enter Slide Title...",
+//         },
+//       ],
+//     },
+//     body: {
+//       id: uuidv4(),
+//       type: "row" as ContentType,
+//       name: "Two Columns",
+//       content: [
+//         {
+//           id: uuidv4(),
+//           type: "column" as ContentType,
+//           name: "Left Column",
+//           className: "p-4 border-r",
+//           content: [
+//             {
+//               id: uuidv4(),
+//               type: "paragraph" as ContentType,
+//               name: "",
+//               content: "",
+//               placeholder: "Write something here...",
+//             },
+//           ],
+//         },
+//         {
+//           id: uuidv4(),
+//           type: "column" as ContentType,
+//           name: "Right Column",
+//           className: "p-4",
+//           content: [
+//             {
+//               id: uuidv4(),
+//               type: "image" as ContentType,
+//               name: "Image Block",
+//               content: "",
+//               placeholder: "Upload an image...",
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: uuidv4(),
+//     slideName: "Single Column Text",
+//     type: "singleColumn",
+//     className: "p-6 mx-auto flex flex-col items-center",
+//     content: {
+//       id: uuidv4(),
+//       type: "column" as ContentType,
+//       name: "Main Column",
+//       content: [
+//         {
+//           id: uuidv4(),
+//           type: "title" as ContentType,
+//           name: "Slide Title",
+//           content: "",
+//           placeholder: "Enter your title...",
+//         },
+//         {
+//           id: uuidv4(),
+//           type: "paragraph" as ContentType,
+//           name: "",
+//           content: "",
+//           placeholder: "Write detailed content here...",
+//         },
+//         {
+//           id: uuidv4(),
+//           type: "paragraph" as ContentType,
+//           name: "",
+//           content: "",
+//           placeholder: "Add more details...",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: uuidv4(),
+//     slideName: "Grid Layout",
+//     type: "grid",
+//     className: "p-6 mx-auto grid grid-cols-2 gap-4",
+//     content: [
+//       {
+//         id: uuidv4(),
+//         type: "column" as ContentType,
+//         name: "Top Left",
+//         content: [
+//           {
+//             id: uuidv4(),
+//             type: "title" as ContentType,
+//             name: "Subtitle",
+//             content: "",
+//             placeholder: "Enter subtitle...",
+//           },
+//         ],
+//       },
+//       {
+//         id: uuidv4(),
+//         type: "column" as ContentType,
+//         name: "Top Right",
+//         content: [
+//           {
+//             id: uuidv4(),
+//             type: "image" as ContentType,
+//             name: "Picture Block",
+//             content: "",
+//             placeholder: "Upload an image...",
+//           },
+//         ],
+//       },
+//       {
+//         id: uuidv4(),
+//         type: "column" as ContentType,
+//         name: "Bottom Left",
+//         content: [
+//           {
+//             id: uuidv4(),
+//             type: "paragraph" as ContentType,
+//             name: "",
+//             content: "",
+//             placeholder: "Write additional text...",
+//           },
+//         ],
+//       },
+//       {
+//         id: uuidv4(),
+//         type: "column" as ContentType,
+//         name: "Bottom Right",
+//         content: [
+//           {
+//             id: uuidv4(),
+//             type: "list" as ContentType,
+//             name: "Bullet Points",
+//             content: "",
+//             placeholder: "Add bullet points...",
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ];
 
 const replaceImagePlaceholders = async (layout: Slide) => {
   console.log("layout", layout);
@@ -297,7 +300,7 @@ const replaceImagePlaceholders = async (layout: Slide) => {
   }
 };
 
-// Generate layouts in Json format for the project
+// Generate Layouts in Json Format for the Project #########################################################################################################################################
 export const generateLayoutsJson = async (outlineArray: string[]) => {
   // const prompt = `
   // You are highly creative AI that generates JSON-based layouts for presentations.I will provide you with an array of outlines, and for each outline, you must generate a unique and creative layout. Use the existing layouts as examples for structure and design, and generate unique designs bases on the provided outlines.
@@ -520,7 +523,7 @@ Output the layouts in JSON format. Ensure there are no duplicate layouts across 
   }
 };
 
-// Generate layouts for the project
+// Generate Layouts for the Project #########################################################################################################################################
 export const generateLayouts = async (ProjectId: string, theme: string) => {
   try {
     if (!ProjectId) {

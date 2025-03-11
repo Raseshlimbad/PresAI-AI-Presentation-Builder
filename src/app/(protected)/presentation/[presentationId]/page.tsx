@@ -50,6 +50,7 @@ const Page = () => {
         setSlides(JSON.parse(JSON.stringify(res.data?.slides)));
       } catch (error) {
         console.log(error);
+        // If the error is an instance of Error, show the error message
         toast.error("Error", {
           description: "Unexpected error occured",
         });

@@ -42,7 +42,9 @@ const Navbar = ({ presentationId }: Props) => {
             backgroundColor: currentTheme.backgroundColor,
           }}
         >
+          {/* Return Home Button Icon */}
           <Home />
+          {/* Return Home Button Text */}
           <span className="hidden sm:inline">Return Home</span>
         </Button>
       </Link>

@@ -19,28 +19,33 @@ const ThemePreview = () => {
   const { currentTheme, setCurrentTheme, project } = useSlideStore();
   const [selectedTheme, setSelectedTheme] = useState<Theme>(currentTheme);
 
+  // If the project is created, redirect to the presentation page
   useEffect(() => {
     if (project?.slides) {
       redirect(`/presentation/${params.presentationId}`);
     }
-  }, [project]);
+  }, [project, params.presentationId]);
 
+  // If the selected theme changes, start the animation
   useEffect(() => {
     controls.start("visible");
   }, [controls, selectedTheme]);
 
+  // Left Card Content
   const leftCardContent = (
     <div className="space-y-4">
       <div
         className="rounded-xl p-6"
         style={{ backgroundColor: selectedTheme.accentColor + "10" }}
       >
+        {/* Left Card Content Header */}
         <h3
           className="text-xl font-semibold mb-4"
           style={{ color: selectedTheme.accentColor }}
         >
           Quick Start Guide
         </h3>
+        {/* Left Card Content List */}
         <ol
           className="list-decimal list-inside space-y-2"
           style={{ color: selectedTheme.accentColor }}
@@ -50,6 +55,7 @@ const ThemePreview = () => {
           <li>Add your content</li>
           <li>Preview and publish</li>
         </ol>
+        {/* Left Card Content Button */}
         <Button
           className="w-full h-12 text-lg font-medium"
           style={{
@@ -63,6 +69,7 @@ const ThemePreview = () => {
     </div>
   );
 
+  // Main Card Content
   const mainCardContent = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -70,6 +77,7 @@ const ThemePreview = () => {
           className="rounded-xl p-6"
           style={{ backgroundColor: selectedTheme.accentColor + "10" }}
         >
+          {/* Main Card Content Text */}
           <p style={{ color: selectedTheme.accentColor }}>
             This is a smart layout: it acts as a text box.
           </p>
@@ -78,12 +86,14 @@ const ThemePreview = () => {
           className="rounded-xl p-6"
           style={{ backgroundColor: selectedTheme.accentColor + "10" }}
         >
+          {/* Main Card Content Text */}
           <p style={{ color: selectedTheme.accentColor }}>
             You can get these by typing /smart
           </p>
         </div>
       </div>
       <div className="flex flex-wrap gap-4">
+        {/* Main Card Content Button */}
         <Button
           className="h-12 px-6 text-lg font-medium"
           style={{
@@ -93,6 +103,7 @@ const ThemePreview = () => {
         >
           Primary button
         </Button>
+        {/* Secondary Button */}
         <Button
           variant={"outline"}
           className="h-12 px-6 text-lg font-medium"
@@ -107,18 +118,21 @@ const ThemePreview = () => {
     </div>
   );
 
+  // Right Card Content
   const rightCardContent = (
     <div className="space-y-4">
       <div
         className="rounded-xl p-4"
         style={{ backgroundColor: selectedTheme.accentColor + "10" }}
       >
+        {/* Right Card Content Header */}
         <h3
           className="text-xl font-semibold mb-4"
           style={{ color: selectedTheme.accentColor }}
         >
           ThemeFeatures
         </h3>
+        {/* Right Card Content List */}
         <ul
           className="list-disc list-inside space-y-2"
           style={{ color: selectedTheme.accentColor }}
@@ -128,6 +142,7 @@ const ThemePreview = () => {
           <li>Custom color schemes</li>
           <li>Accessibility optimized</li>
         </ul>
+        {/* Right Card Content Button */}
         <Button
           variant={"outline"}
           className="h-12 px-6 text-lg font-medium"
@@ -142,12 +157,15 @@ const ThemePreview = () => {
     </div>
   );
 
+  // Apply Theme
   const applyTheme = (theme: Theme) => {
     setSelectedTheme(theme);
     setCurrentTheme(theme);
   }
+
+  // Render the Theme Preview
   return (
-    //To overwrite tailwind class styles any apply which styles are required
+      //To overwrite tailwind class styles any apply which styles are required
     <div
       className="h-screen w-full flex"
       style={{
@@ -156,8 +174,10 @@ const ThemePreview = () => {
         fontFamily: selectedTheme.fontFamily,
       }}
     >
+      {/* Theme Preview Container */}
       <div className="flex-grow overflow-y-auto">
         <div className="p-12 flex flex-col items-center min-h-screen">
+          {/* Back Button */}
           <Button
             variant="outline"
             className="mb-12 self-start"
@@ -169,10 +189,14 @@ const ThemePreview = () => {
             }}
             onClick={() => router.push("/create-page")}
           >
+            {/* Back Button Icon */}
             <ArrowLeft className="mr-2 h-5 w-5" />
+            {/* Back Button Text */}
             Back
           </Button>
-          <div className="w-full flex justify-center items-center relative flex-grow">
+          {/* Theme Preview Cards */}
+            <div className="w-full flex justify-center items-center relative flex-grow">
+            {/* Quick Start Card */}
             <ThemeCard 
             title="Quick Start"
             description="Get started with our platform"
@@ -200,7 +224,7 @@ const ThemePreview = () => {
           </div>
         </div>
       </div>
-
+      {/* ThemePicker */}
       <ThemePicker
       selectedTheme={selectedTheme}
       themes={themes}

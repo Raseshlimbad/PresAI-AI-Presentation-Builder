@@ -7,5 +7,6 @@ export function ThemeProvider({
   children,
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
+  // Return the Theme Provider
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }

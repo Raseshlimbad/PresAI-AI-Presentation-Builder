@@ -23,7 +23,7 @@ const EditorSidebar = () => {
     // <div className="fixed top-1/2 right-0 transform translate-y-1/2 z-10">
     <div className="fixed inset-y-0 right-0 flex items-center z-10">
       <div className="rounded-xl border-r-0 border border-background-70 shadow-lg p-2 flex flex-col items-center space-y-4">
-        {/* Popover - Layout Chooser */}
+      {/* Popover - Layout Chooser ############################################################################################*/}
         <Popover>
           <PopoverTrigger asChild>
             {/* Button - Layout Chooser */}
@@ -43,7 +43,7 @@ const EditorSidebar = () => {
           </PopoverContent>
         </Popover>
 
-        {/* Popover - Components Chooser */}
+        {/* Popover - Components Chooser ############################################################################################*/}
         <Popover>
           <PopoverTrigger asChild>
             {/* Button - Components Chooser */}
@@ -97,7 +97,7 @@ const EditorSidebar = () => {
           </PopoverContent>
         </Popover>
 
-        {/* Popover - Theme Chooser */}
+        {/* Popover - Theme Chooser ############################################################################################*/}
         <Popover>
           <PopoverTrigger asChild>
             {/* Button - Theme Chooser */}

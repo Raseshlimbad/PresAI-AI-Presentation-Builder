@@ -2,11 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card as UICard } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { OutlineCard } from "@/lib/types";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
 
 import React, { useRef } from "react";
 
+// Card Props Type
 type Props = {
   card: OutlineCard;
   isEditing: boolean;
@@ -26,6 +27,7 @@ type Props = {
   dragOverStyles: React.CSSProperties;
 };
 
+// Card Component
 const Card = ({
   card,
   isEditing,
@@ -42,7 +44,10 @@ const Card = ({
   dragOverStyles,
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Render the Card
   return (
+    // Motion.div for the container
     <motion.div
       layout
       initial={{ opacity: 0, y: 20 }}
@@ -51,12 +56,14 @@ const Card = ({
       transition={{ type: "spring", stiffness: 500, damping: 30, mass: 1 }}
       className="relative"
     >
+      {/* Div for the card */}
       <div
         draggable
         onDragOver={onDragOver}
         style={dragOverStyles}
         {...dragHandlers}
       >
+        {/* UICard for the card */}
         <UICard
           className={`p-4 cursor-grab active:cursor-grabbing bg-primary-90 ${
             isEditing || isSelected ? "border-primary bg-transparent" : ""
@@ -64,9 +71,11 @@ const Card = ({
           onClick={onCardClick}
           onDoubleClick={onCardDoubleClick}
         >
+          {/* Div for the card content */}
           <div className="flex items-center justify-between">
+            {/* If the card is editing, render the input */}
             {isEditing ? (
-              <Input 
+              <Input
                 ref={inputRef}
                 value={editText}
                 onChange={(e) => onEditChange(e.target.value)}
@@ -75,7 +84,9 @@ const Card = ({
                 className="text-base sm:text-lg"
               />
             ) : (
+              // Div for the card order and title
               <div className="flex items-center gap-2">
+                {/* Span for the card order */}
                 <span
                   className={`text-base sm:text-lg py-1 px-4 rounded-xl bg-primary-20 ${
                     isEditing || isSelected
@@ -83,12 +94,14 @@ const Card = ({
                       : ""
                   }`}
                 >
+                  {/* Card Order */}
                   {card.order}
                 </span>
+                {/* Card Title */}
                 <span className="text-base sm:text-lg">{card.title}</span>
               </div>
             )}
-
+            {/* Button for the delete card */}
             <Button
               variant="ghost"
               size="icon"
@@ -98,6 +111,7 @@ const Card = ({
               }}
               aria-label={`Delete card ${card.order}`}
             >
+              {/* Trash2 Icon */}
               <Trash2 className="size-4" />
             </Button>
           </div>

@@ -86,6 +86,7 @@ const NumberedList: React.FC<ListProps> = ({
       e.key === "Backspace" &&
       items[index] === "" &&
       items.length > 1
+      // if the key is backspace and the item is empty and the list is not empty, remove the item from the list
     ) {
       e.preventDefault();
       const newItems = [...items];
@@ -94,6 +95,7 @@ const NumberedList: React.FC<ListProps> = ({
     }
   };
 
+  // Return the Numbered List Component
   return (
     // ol is the ordered list
     <ol
@@ -242,6 +244,7 @@ export const TodoList: React.FC<ListProps> = ({
       e.key === "Backspace" &&
       items[index] === "[ ] " &&
       items.length > 1
+      // if the key is backspace and the value is [x] and the list is not empty, remove the item from the list
     ) {
       e.preventDefault();
       const newItems = [...items];
@@ -287,7 +290,7 @@ export const TodoList: React.FC<ListProps> = ({
               // handlechange is the function for the list item
               handlechange(
                 index,
-                `${items[index].startsWith('[x] ') ? '[x] ' : '[ ] '}${value}`
+                `${items[index].startsWith("[x] ") ? "[x] " : "[ ] "}${value}`
               )
             }
             onKeyDown={handleKeyDown}

@@ -9,28 +9,27 @@ const LayoutPreview = () => {
     const {getOrderedSlides, reorderSlides} = useSlideStore();
     const slides = getOrderedSlides();
 
-
+    // Move the slide
     const moveSlide = (dragIndex: number, hoverIndex: number) => {
         reorderSlides(dragIndex, hoverIndex);
     }
 
+    // If the window is not undefined, set the loading to false
     useEffect(() => {
         if(typeof window !== 'undefined') {
             setLoading(false);
         }
     }, []);
 
-    
+    // Render the LayoutPreview
   return (
     <div className='w-64 h-full fixed left-0 top-20 border-r overflow-y-auto'>
       <ScrollArea
       className='w-full h-full'
       suppressHydrationWarning
       >
-
+        {/* Loading state */}
         {loading? ( 
-
-            // Loading state
             <div className='w-72 px-4 flex flex-col space-y-6'>
                 <Skeleton className="h-20 w-full"></Skeleton>
                 <Skeleton className="h-20 w-full"></Skeleton>

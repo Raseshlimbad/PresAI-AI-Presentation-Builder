@@ -12,44 +12,68 @@ const RecentPrompts = () => {
   const { prompts, setPage } = usePromptStore();
   const { addMultipleOutlines, setCurrentAiPrompt } = useCreativeAIStore();
 
+  // Handle Edit
   const handleEdit = (id: string) => {
     const prompt = prompts.find((prompt) => prompt.id === id);
+    // If the prompt is found, set the page to creative ai, add the outlines to the store, and set the current ai prompt
     if (prompt) {
       setPage("creative-ai");
       addMultipleOutlines(prompt?.outlines);
       setCurrentAiPrompt(prompt?.title);
     } else {
+      // If the prompt is not found, show an error toast
       toast.error("Error", {
         description: "Prompt not found!",
       });
     }
   };
+  // Render the Recent Prompts
   return (
+    // Motion.div for the container
     <motion.div variants={containerVariants} className="space-y-4 !mt-20">
+      {/* Motion.h2 for the title */}
       <motion.h2
         variants={itemVariants}
         className="text-2xl font-semibold text-center"
       >
         Your Recent Prompts
       </motion.h2>
-
+      {/* Motion.div for the container */}
       <motion.div
         variants={containerVariants}
         className="space-y-2 w-full lg:max-w-[80%] mx-auto"
       >
+        {/* Map through the prompts and render a card */}
         {prompts.map((prompt, i) => (
           <motion.div key={i} variants={itemVariants}>
+            {/* Card */}
             <Card className="p-4 flex items-center justify-between hover:bg-accent/50 transition-colors duration-300">
+              {/* Div for the title and created at */}
               <div className="max-w-[70%]">
-                <h3 className="font-semibold text-xl line-clamp-1">
+                {/* Motion.h3 for the title */}
+                <motion.h3
+                  variants={itemVariants}
+                  className="font-semibold text-xl line-clamp-1"
+                >
                   {prompt?.title}
-                </h3>
-                <p className="font-semibold text-sm text-muted-foreground">
+                </motion.h3>
+                {/* Motion.p for the created at */}
+                <motion.p
+                  variants={itemVariants}
+                  className="font-semibold text-sm text-muted-foreground"
+                >
                   {timeAgo(prompt?.createdAt)}
-                </p>
+                </motion.p>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-sm text-vivid">Creative AI</span>
+                {/* Motion.span for the creative ai */}
+                  <motion.span
+                  variants={itemVariants}
+                  className="text-sm text-vivid"
+                >
+                  Creative AI
+                </motion.span>
+                {/* Button for the edit */}
                 <Button
                   variant="default"
                   size="sm"

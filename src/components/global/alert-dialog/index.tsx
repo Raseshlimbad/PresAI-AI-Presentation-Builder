@@ -35,17 +35,26 @@ const AlertDialogBox = ({
   onClick,
 }: Props) => {
   return (
+    // Alert Dialog
     <AlertDialog open={open} onOpenChange={handleOpen}>
+      {/* Alert Dialog Trigger */}
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+      {/* Alert Dialog Content */}
       <AlertDialogContent>
+        {/* Alert Dialog Header */}
         <AlertDialogHeader>
+          {/* Alert Dialog Title */}
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          {/* Alert Dialog Description */}
           <AlertDialogDescription>
             {description}
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        {/* Alert Dialog Footer */}
+          <AlertDialogFooter>
+          {/* Alert Dialog Cancel */}
           <AlertDialogCancel>Cancel</AlertDialogCancel>
+          {/* Alert Dialog Button */}
           <Button
           variant={'destructive'}
           onClick={onClick}

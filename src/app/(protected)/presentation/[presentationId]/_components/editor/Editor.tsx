@@ -31,7 +31,7 @@ interface DropZoneProps {
   isEditable: boolean;
 }
 
-// DropZone component
+// DropZone component ------------------------------------------------------------------------------------------------
 export const DropZone: React.FC<DropZoneProps> = ({
   index,
   onDrop,
@@ -89,7 +89,7 @@ interface DraggableSlideProps {
   isEditable: boolean;
 }
 
-// DraggableSlide component
+// DraggableSlide component ------------------------------------------------------------------------------------------------
 const DraggableSlide: React.FC<DraggableSlideProps> = ({
   slide,
   index,
@@ -117,15 +117,20 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
   // UseDrop hook to handle the drop zone
   const [, drop] = useDrop({
     accept: ["SLIDE", "LAYOUT"],
+    // If the item is a slide, move the slide
     hover(item: { index: number; type: string }) {
       if (!ref.current || !isEditable) return;
 
+      // Get the drag index and hover index
       const dragIndex = item.index;
       const hoverIndex = index;
 
+      // If the item is a slide, move the slide
       if (item.type === "SLIDE") {
+        // If the drag index is equal to the hover index, return
         if (dragIndex === hoverIndex) return;
 
+        // Move the slide
         moveSlide(dragIndex, hoverIndex);
         item.index = hoverIndex;
       }
@@ -176,7 +181,7 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
         />
       </div>
 
-      {/* If the editor is editable, render the popover */}
+      {/* If the editor is editable, render the popover for Delete Slide Button */}
       {isEditable && (
         <Popover>
           <PopoverTrigger asChild className="absolute top-2 left-2">
@@ -353,6 +358,7 @@ const Editor = ({ isEditable }: Props) => {
             {orderedSlides.map((slide, index) => (
               <React.Fragment key={slide.id || index}>
                 {/* <p>{slide.id}</p> */}
+                {/* DraggableSlide */}
                 <DraggableSlide
                   slide={slide}
                   index={index}
@@ -360,6 +366,7 @@ const Editor = ({ isEditable }: Props) => {
                   handleDelete={() => handleDelete(slide.id)}
                   isEditable={isEditable}
                 />
+                {/* DropZone */}
                 {isEditable && (
                   <DropZone
                     index={index + 1}

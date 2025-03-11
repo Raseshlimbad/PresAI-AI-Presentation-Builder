@@ -7,9 +7,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 const SearchBar = () => {
-
+  // Router     
   const router = useRouter();
+  // Search Params
   const searchParams = useSearchParams();
+  // Search Term
   const [searchTerm, setSearchTerm] = useState<string>(searchParams.get('search') || '');
 
   // Handle Search Input
@@ -23,6 +25,7 @@ const SearchBar = () => {
 
   return (
     <div className="min-w-[60%] relative flex items-center border rounded-full bg-primary-90">
+      {/* Search Button */}
       <Button
         type="submit"
         size="sm"
@@ -32,6 +35,7 @@ const SearchBar = () => {
         <Search className="h-4 w-4" />
         <span className="sr-only">Search</span>
       </Button>
+      {/* Search Input */}
       <Input
         type="text"
         value={searchTerm}

@@ -15,11 +15,14 @@ const Page = async () => {
   if(!checkUser.user?.subscription) redirect('/dashboard');
 
   return (
-   <main>
-    <Suspense fallback={<CreatePageSkeleton />}>
-    <RenderPage />
-    </Suspense>
-   </main>
+    // Main Container
+    <main>
+      {/* Suspense fallback for Create Page Skeleton */}
+      <Suspense fallback={<CreatePageSkeleton />}>
+        {/* Render the Create Page */}
+        <RenderPage />
+      </Suspense>
+    </main>
   )
 }
 

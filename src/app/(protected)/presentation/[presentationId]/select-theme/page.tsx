@@ -4,6 +4,7 @@ import ThemePreview from './_components/ThemePreview'
 const page = () => {
   return (
     <div>
+      {/* Theme Preview */}
       <ThemePreview />
     </div>
   )

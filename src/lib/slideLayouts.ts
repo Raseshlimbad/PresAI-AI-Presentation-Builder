@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { ContentType } from "./types";
 
+// Blank Card
 export const BlankCard = {
   slideName: "Blank card",
   type: "blank-card",
@@ -21,10 +22,11 @@ export const BlankCard = {
   },
 };
 
+// Accent Left
 export const AccentLeft = {
   slideName: "Accent left",
   type: "accentLeft",
-  className:"min-h-[300px]",
+  className: "min-h-[300px]",
   content: {
     id: uuidv4(),
     type: "column" as ContentType,
@@ -74,10 +76,11 @@ export const AccentLeft = {
   },
 };
 
+// Accent Right
 export const AccentRight = {
   slideName: "Accent Right",
   type: "accentRight",
-  className:"min-h-[300px]",
+  className: "min-h-[300px]",
   content: {
     id: uuidv4(),
     type: "column" as ContentType,
@@ -127,6 +130,7 @@ export const AccentRight = {
   },
 };
 
+// Image and Text
 export const ImageAndText = {
   slideName: "Image and text",
   type: "imageAndText",
@@ -187,6 +191,7 @@ export const ImageAndText = {
   },
 };
 
+// Text and Image
 export const TextAndImage = {
   slideName: "Text and image",
   type: "textAndImage",
@@ -247,6 +252,7 @@ export const TextAndImage = {
   },
 };
 
+// Two Columns
 export const TwoColumns = {
   slideName: "Two columns",
   type: "twoColumns",
@@ -289,6 +295,7 @@ export const TwoColumns = {
   },
 };
 
+// Two Columns with Headings
 export const TwoColumnsWithHeadings = {
   slideName: "Two columns with headings",
   type: "twoColumnsWithHeadings",
@@ -359,6 +366,7 @@ export const TwoColumnsWithHeadings = {
   },
 };
 
+// Three Columns
 export const ThreeColumns = {
   slideName: "Three column",
   type: "threeColumns",
@@ -408,7 +416,7 @@ export const ThreeColumns = {
   },
 };
 
-
+// Three Columns with Headings
 export const ThreeColumnsWithHeadings = {
   slideName: "Three columns with headings",
   type: "threeColumnsWithHeadings",
@@ -501,8 +509,7 @@ export const ThreeColumnsWithHeadings = {
   },
 };
 
-
-
+// Four Columns
 export const FourColumns = {
   slideName: "Four column",
   type: "fourColumns",
@@ -559,6 +566,7 @@ export const FourColumns = {
   },
 };
 
+// Two Image Columns
 export const TwoImageColumns = {
   slideName: "Two Image Columns",
   type: "twoImageColumns",
@@ -641,15 +649,13 @@ export const TwoImageColumns = {
               },
             ],
           },
-
-         
         ],
       },
     ],
   },
 };
 
-
+// Three Image Columns
 export const ThreeImageColumns = {
   slideName: "Three Image Columns",
   type: "threeImageColumns",
@@ -769,6 +775,7 @@ export const ThreeImageColumns = {
   },
 };
 
+// Four Image Columns
 export const FourImageColumns = {
   slideName: "Four Image Columns",
   type: "fourImageColumns",
@@ -883,7 +890,6 @@ export const FourImageColumns = {
             ],
           },
 
-
           {
             id: uuidv4(),
             type: "column" as ContentType,
@@ -920,6 +926,7 @@ export const FourImageColumns = {
   },
 };
 
+// Table Layout
 export const TableLayout = {
   slideName: "Table Layout",
   type: "tableLayout",

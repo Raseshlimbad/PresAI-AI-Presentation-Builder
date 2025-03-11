@@ -4,16 +4,22 @@ import { useSlideStore } from '@/store/useSlideStore'
 import React from 'react'
 import { MasterRecursiveComponent } from '../../editor/MasterRecursiveComponent'
 
+// ScaledPreview Component Props
 type ScaledPreviewProps = {
   slide: Slide
   isActive: boolean
   index: number
 }
 
+// ScaledPreview Component
 const ScaledPreview = ({slide, isActive, index}: ScaledPreviewProps) => {
 
+  // Get the current theme
   const { currentTheme} = useSlideStore();
+
+  // Render the ScaledPreview
   return (
+    // ScaledPreview Container
     <div
     className={cn(
       'w-full relative aspect-[16/9] rounded-lg overflow-hidden transition-all duration-200 p-2 ring-2 ring-primary-80 ring-offset-2',
@@ -28,6 +34,7 @@ const ScaledPreview = ({slide, isActive, index}: ScaledPreviewProps) => {
       backgroundImage: currentTheme.gradientBackground,
     }}
   >
+    {/* ScaledPreview Content */}
     <div className='scale-[0.5] origin-top-left w-[200%] h-[200%] overflow-hidden'>
     <MasterRecursiveComponent
       slideId={slide.id}

@@ -29,12 +29,15 @@ const AppSidebar = ({
 } & React.ComponentProps<typeof Sidebar>) => {
   const { theme } = useTheme();
   return (
+    // Sidebar Component
     <Sidebar
       collapsible="icon"
       className="max-w-[212px] bg-background-90"
       {...props}
     >
+      {/* Sidebar Header */}
       <SidebarHeader className="pt-6 px-3 pb-0">
+        {/* Sidebar Menu Button */}
         <SidebarMenuButton
           size={"lg"}
           className="data-[state=open]:text-sidebar-accent-foreground flex justify-center"
@@ -48,6 +51,7 @@ const AppSidebar = ({
                 <AvatarFallback className="">PresAI</AvatarFallback>
             </Avatar>
         </div> */}
+        {/* Link to the dashboard */}
           <Link href="/dashboard">
           {theme === "light" ? (
             <Image
@@ -72,11 +76,16 @@ const AppSidebar = ({
         </span> */}
         </SidebarMenuButton>
       </SidebarHeader>
+      {/* Sidebar Content */}
       <SidebarContent className="mt-10 gap-y-6">
+        {/* Nav Main */}
         <NavMain items={data.navItems} />
+        {/* Recent Open */}
         <RecentOpen recentProjects={recentProjects} />
       </SidebarContent>
+      {/* Sidebar Footer */}
       <SidebarFooter>
+        {/* Nav Footer */}
         <NavFooter prismaUser={user} />
       </SidebarFooter>
     </Sidebar>

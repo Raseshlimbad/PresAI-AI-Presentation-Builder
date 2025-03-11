@@ -11,6 +11,7 @@ type Props = {
 
 const ThumbnailPreview = ({ slide, theme }: Props) => {
   return (
+    // Thumbnail Preview
     <div
       className={cn(
         "w-full relative aspect-[16/9] rounded-lg overflow-hidden transition-all duration-200 p-2"
@@ -22,6 +23,7 @@ const ThumbnailPreview = ({ slide, theme }: Props) => {
         backgroundImage: theme.gradientBackground,
       }}
     >
+      {/* If the slide is defined, show the master recursive component */}
         {slide? (
             <div className="scale-[0.5] origin-top-left w-[200%] h-[200%] overflow-hidden">
                 <MasterRecursiveComponent
@@ -32,6 +34,7 @@ const ThumbnailPreview = ({ slide, theme }: Props) => {
                 />
             </div>
         ): (
+          // If the slide is not defined, show the image
             // eslint-disable-next-line react/jsx-no-comment-textnodes
             <div className="w-full h-full bg-gray-400 flex justify-center items-center">
                 <Image

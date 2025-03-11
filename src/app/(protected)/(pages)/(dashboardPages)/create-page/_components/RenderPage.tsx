@@ -12,10 +12,12 @@ const RenderPage = () => {
   const router = useRouter();
   const { page, setPage } = usePromptStore();
 
+  // Handle Back
   const handleBack = () =>{
     setPage('create')
   }
 
+  // Handle Select Option
   const handleSelectOption = (option:string) => {
     if(option === 'template'){
       router.push('/templates')
@@ -26,6 +28,7 @@ const RenderPage = () => {
     }
   }
 
+  // Render the step
   const renderStep = () => {
     switch(page){
       // 'create' case is default
@@ -39,6 +42,7 @@ const RenderPage = () => {
   }
 
   return (
+    // AnimatePresence for the page transitions
     <AnimatePresence mode="wait">
       <motion.div
         key={page}
@@ -47,7 +51,8 @@ const RenderPage = () => {
         exit={{ opacity: 0, x: -20 }}
         transition={{ duration: 0.3 }}
       >
-       {renderStep()}
+        {/* Render the step */}
+        {renderStep()}
       </motion.div>
     </AnimatePresence>
   );

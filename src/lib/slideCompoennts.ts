@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { ContentType } from "./types";
+
+// Heading 1
 export const Heading1 = {
   id: uuidv4(),
   type: "heading1" as ContentType,
@@ -8,6 +10,7 @@ export const Heading1 = {
   placeholder: "Heading1",
 };
 
+// Heading 2
 export const Heading2 = {
   id: uuidv4(),
   type: "heading2" as ContentType,
@@ -16,6 +19,7 @@ export const Heading2 = {
   placeholder: "Heading2",
 };
 
+// Heading 3
 export const Heading3 = {
   id: uuidv4(),
   type: "heading3" as ContentType,
@@ -24,6 +28,7 @@ export const Heading3 = {
   placeholder: "Heading3",
 };
 
+// Heading 4
 export const Heading4 = {
   id: uuidv4(),
   type: "heading4" as ContentType,
@@ -32,6 +37,7 @@ export const Heading4 = {
   placeholder: "Heading4",
 };
 
+// Title
 export const Title = {
   id: uuidv4(),
   type: "title" as ContentType,
@@ -40,6 +46,7 @@ export const Title = {
   placeholder: "title",
 };
 
+// Paragraph
 export const Paragraph = {
   id: uuidv4(),
   type: "paragraph" as ContentType,
@@ -48,6 +55,7 @@ export const Paragraph = {
   placeholder: "Start Typing",
 };
 
+// Table
 export const Table = {
   id: uuidv4(),
   type: "table" as ContentType,
@@ -57,6 +65,7 @@ export const Table = {
   content: [],
 };
 
+// Blockquote
 export const Blockquote = {
   id: uuidv4(),
   type: "blockquote" as ContentType,
@@ -65,15 +74,16 @@ export const Blockquote = {
   placeholder: "type here",
 };
 
+// Custom Image
 export const CustomImage = {
   id: uuidv4(),
   type: "image" as ContentType,
   name: "Image",
-  content:
-    "",
+  content: "",
   alt: "Image",
 };
 
+// Numbered List
 export const NumberedListComponent = {
   id: uuidv4(),
   type: "numberedList" as ContentType,
@@ -81,6 +91,7 @@ export const NumberedListComponent = {
   content: ["First item", "Second item", "Third item"],
 };
 
+// Bullet List
 export const BulletListComponent = {
   id: uuidv4(),
   type: "bulletList" as ContentType,
@@ -88,6 +99,7 @@ export const BulletListComponent = {
   content: ["First item", "Second item", "Third item"],
 };
 
+// Todo List
 export const TodoListComponent = {
   id: uuidv4(),
   type: "todoList" as ContentType,
@@ -95,7 +107,7 @@ export const TodoListComponent = {
   content: ["[ ] Task 1", "[ ] Task 2", "[ ] Task 3"],
 };
 
-
+// Callout Box
 export const CalloutBoxComponent = {
   id: uuidv4(),
   type: "calloutBox" as ContentType,
@@ -103,15 +115,16 @@ export const CalloutBoxComponent = {
   content: "This is a callout box",
 };
 
+// Code Block
 export const CodeBlockComponent = {
   id: uuidv4(),
   type: "codeBlock" as ContentType,
   name: "Code Block",
   language: "javascript",
   content: "console.log('Hello World!');",
-
 };
 
+// Custom Button
 export const CustomButtonComponent = {
   id: uuidv4(),
   type: "customButton" as ContentType,
@@ -122,18 +135,15 @@ export const CustomButtonComponent = {
   isTransparent: false,
 };
 
+// Table of Contents
 export const TableOfContentsComponent = {
   id: uuidv4(),
   type: "tableOfContents" as ContentType,
   name: "Table of Contents",
-  content: [
-      "Section1",
-      "Section2",
-      "Section3"
-    
-  ],
+  content: ["Section1", "Section2", "Section3"],
 };
 
+// Divider
 export const DividerComponent = {
   id: uuidv4(),
   type: "divider" as ContentType,
@@ -141,8 +151,8 @@ export const DividerComponent = {
   content: "",
 };
 
-
-export const ResizableColumn =   {
+// Resizable Column
+export const ResizableColumn = {
   id: uuidv4(),
   type: "resizable-column" as ContentType,
   name: "Text and image",

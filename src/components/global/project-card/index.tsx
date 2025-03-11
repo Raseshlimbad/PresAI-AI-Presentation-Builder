@@ -36,13 +36,16 @@ const ProjectCard = ({
   const { setSlides } = useSlideStore();
   const router = useRouter();
 
+  // Handle Navigation to the presentation
   const handleNavigation = () => {
     setSlides(JSON.parse(JSON.stringify(slideData)));
     router.push(`/presentation/${projectId}`);
   };
 
+  // Handle Recover Project
   const handleRecover = async () => {
     setLoading(true);
+    // Check if projectId is defined
     if (!projectId) {
       setLoading(false);
       toast.error("Error", {
@@ -51,12 +54,14 @@ const ProjectCard = ({
       return;
     }
     try {
+      // Recover Project
       const res = await recoverProject(projectId);
       if (res.status !== 200) {
         toast.error("Oppse!", {
           description: res.error || "Something went wrong",
         });
-      }
+        }
+      // Close the dialog
       setOpen(false);
 
       // Need to refresh states and user is recovering project
@@ -67,14 +72,17 @@ const ProjectCard = ({
       setLoading(false);
     } catch (error) {
       console.log(error);
+      // Show error toast
       toast.error("Oppse!", {
         description: "Something went wrong, Please contact support",
       });
     }
   };
 
+  // Handle Delete Project
   const handleDelete = async () => {
     setLoading(true);
+    // Check if projectId is defined
     if (!projectId) {
       setLoading(false);
       toast.error("Error", {
@@ -82,6 +90,7 @@ const ProjectCard = ({
       });
     }
 
+    // Delete Project
     try {
       const res = await deleteProject(projectId);
       if (res.status !== 200) {
@@ -105,7 +114,10 @@ const ProjectCard = ({
     }
   }
 
+  // Find the theme
   const theme = themes.find((theme) => theme.name === themeName) || themes[0];
+
+  // Return the project card
   return (
     <motion.div
       className={`group w-full flex flex-col gap-y-3 rounded-xl p-3 transition-colors ${
@@ -121,12 +133,15 @@ const ProjectCard = ({
         theme={theme}
       />
 
+      {/* Project Card Content */}
       <div className="w-full">
         <div className="space-y-1">
+          {/* Project Title */}
           <h3 className="font-semibold text-base text-primary line-clamp-1">
             {title}
           </h3>
           <div className="flex w-full justify-between items-center gap-2">
+            {/* Project Created At __ time ago */}
             <p
               className="text-sm text-muted-foreground"
               suppressHydrationWarning
@@ -136,6 +151,7 @@ const ProjectCard = ({
 
             {/* Alert Dilogue Box */}
             <div onClick={(e) => e.stopPropagation()}>
+              {/* If the project is deleted, show the recover button */}
             {isDelete ? (
               <AlertDialogBox
                 description="This will recover your project and your data."
@@ -145,6 +161,7 @@ const ProjectCard = ({
                 handleOpen={() => setOpen(!open)}
                 onClick={handleRecover}
               >
+                {/* Recover Button */}
                 <Button
                   size={"sm"}
                   variant={"ghost"}
@@ -156,6 +173,7 @@ const ProjectCard = ({
                 </Button>
               </AlertDialogBox>
             ) : (
+              // If the project is not deleted, show the delete button
               <AlertDialogBox
                 description="This will delete your project and send to trash."
                 className="bg-red-500 text-white dark:bg-red-600 hover:bg-red-600 dark:hover:bg-red-700"
@@ -164,6 +182,7 @@ const ProjectCard = ({
                 handleOpen={() => setOpen(!open)}
                 onClick={handleDelete}
               >
+                {/* Delete Button */}
                 <Button
                   size={"sm"}
                   variant={"ghost"}
