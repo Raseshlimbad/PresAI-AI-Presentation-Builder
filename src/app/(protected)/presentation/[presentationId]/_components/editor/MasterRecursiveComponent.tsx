@@ -17,7 +17,11 @@ import TableComponent from "@/components/global/editor/components/TableComponent
 import ColumnComponent from "@/components/global/editor/components/ColumnComponent";
 import CustomImage from "@/components/global/editor/components/ImageComponent";
 import Blockquote from "@/components/global/editor/components/Blockquote";
-import { NumberedList, BulletList, TodoList } from "@/components/global/editor/components/ListComponent";
+import {
+  NumberedList,
+  BulletList,
+  TodoList,
+} from "@/components/global/editor/components/ListComponent";
 import CalloutBox from "@/components/global/editor/components/CalloutBox";
 import CodeBlock from "@/components/global/editor/components/CodeBlock";
 import TableOfContents from "@/components/global/editor/components/TableOfContents";
@@ -45,6 +49,30 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
       },
       [content.id, onContentChange]
     );
+
+    const getCodeContent = (content: ContentItem): string | undefined => {
+      if (!content) return undefined;
+
+      if (typeof content.content === "string") {
+        return content.content; // If content is a string, return it directly
+      }
+
+      if (
+        content.type === "codeBlock" &&
+        typeof content.codeBlock === "string"
+      ) {
+        return content.codeBlock; // If it's a codeBlock type and has a codeBlock string, return it
+      }
+
+      if (Array.isArray(content.content)) {
+        for (const subContent of content.content) {
+          const found = getCodeContent(subContent as ContentItem);
+          if (found) return found; // Return the first valid code block found
+        }
+      }
+
+      return undefined; // Return undefined if nothing is found
+    };
 
     // Common props for the components
     const commonProps = {
@@ -147,6 +175,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
           <motion.div className="w-full h-full" {...animationProps}>
             <CustomImage
               src={content.content as string}
+              // src="https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt={content.alt || "image"}
               contentId={content.id}
               onComponentChange={(newContent) =>
@@ -221,55 +250,56 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
           </motion.div>
         );
 
-        // Callout Box
-        case "calloutBox":
+      // Callout Box
+      case "calloutBox":
         return (
           <motion.div className="w-full h-full" {...animationProps}>
-            <CalloutBox 
-            type={content.callOutType || 'info'}
-            className={content.className}
+            <CalloutBox
+              type={content.callOutType || "info"}
+              className={content.className}
             >
               <Paragraph {...commonProps} />
             </CalloutBox>
           </motion.div>
         );
 
-        // Code Block
-        case "codeBlock":
+      case "codeBlock":
         return (
           <motion.div className="w-full h-full" {...animationProps}>
-            <CodeBlock 
-            language={content.language}
-            className={content.className}
-            onChange={() => {}}
-            code={content.codeBlock || content.code}
+            <CodeBlock
+              language={content.language}
+              className={content.className}
+              onChange={(newCode) => {
+                onContentChange(content.id, newCode);
+              }}
+              code={getCodeContent(content) || ""} // Ensures a string is passed
             />
           </motion.div>
         );
 
-        // Table of Contents
-        case "tableOfContents":
-          return (
-            <motion.div className="w-full h-full" {...animationProps}>
-              <TableOfContents 
-            items = {content.content as string[]}
+      case "tableOfContents":
+        return (
+          <TableOfContents
+          items = {content.content as string[] || []}
             className={content.className}
-            onItemClick = {(id) => {
-              console.log(`Navigate to section: ${id}`)
+            onItemClick={(id) => {
+              console.log(`Navigate to section: ${id}`);
             }}
-              />
-            </motion.div>
-          );
+          isEditable={isEditable}
+          onUpdateItem={(index, newValue) => {
+            const updatedItems = [...(content.content as string[] || [])];
+            updatedItems[index] = newValue;
+            onContentChange(content.id, updatedItems);
+          }}
+        />);
 
-        // Divider
-        case "divider":
-          return (
-            <motion.div className="w-full h-full" {...animationProps}>
-              <Divider
-            className={content.className}
-              />
-            </motion.div>
-          );
+      // Divider
+      case "divider":
+        return (
+          <motion.div className="w-full h-full" {...animationProps}>
+            <Divider className={content.className} />
+          </motion.div>
+        );
 
       //   case "column":
       case "column":
@@ -278,7 +308,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
             // ✅ Add return here!
             <motion.div
               {...animationProps}
-              className={cn("w-full h-full flex flex-col", content.className)}
+              className={cn("w-full h-full flex flex-col p-4", content.className)}
             >
               {/* If the content is not empty, map through the content items */}
               {content.content.length > 0 ? (
@@ -321,8 +351,8 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
                     </React.Fragment>
                   )
                 )
-                // If the content is empty, render a drop zone
-              ) : isEditable ? (
+              ) : // If the content is empty, render a drop zone
+              isEditable ? (
                 <DropZone index={0} slideId={slideId} parentId={content.id} />
               ) : null}
             </motion.div>
@@ -330,7 +360,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
         }
         // If the content is not an array, return null
         return null;
-        // If the content is not a valid type, return null as default
+      // If the content is not a valid type, return null as default
       default:
         return null;
     }

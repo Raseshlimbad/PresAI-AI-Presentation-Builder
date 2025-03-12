@@ -100,6 +100,7 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
   const ref = useRef(null);
   const { currentSlide, setCurrentSlide, currentTheme, updateContentItem } =
     useSlideStore();
+      const [isHovered, setIsHovered] = useState(false); // Track hover state
 
   // UseDrag hook to handle the draggable slide
   const [{ isDragging }, drag] = useDrag({
@@ -163,11 +164,14 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
         index === currentSlide ? "ring-2 ring-blue-500 ring-offset-2" : "",
         slide.className,
         isDragging ? "opacity-50" : "opacity-100"
+        
       )}
       style={{
         backgroundImage: currentTheme.gradientBackground,
       }}
       onClick={() => setCurrentSlide(index)}
+      onMouseEnter={() => setIsHovered(true)} // Set hover state
+      onMouseLeave={() => setIsHovered(false)} // Remove hover state
     >
       <div className="h-full w-full flex-grow overflow-hidden">
         {/* MasterRecursiveComponent */}
@@ -182,7 +186,7 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
       </div>
 
       {/* If the editor is editable, render the popover for Delete Slide Button */}
-      {isEditable && (
+      {isEditable && isHovered && (
         <Popover>
           <PopoverTrigger asChild className="absolute top-2 left-2">
             {/* Button - Slide options */}

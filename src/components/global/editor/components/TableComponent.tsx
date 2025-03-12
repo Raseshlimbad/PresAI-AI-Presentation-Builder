@@ -6,7 +6,7 @@
 //   ResizablePanelGroup,
 // } from "@/components/ui/resizable";
 // import { useSlideStore } from "@/store/useSlideStore";
-// import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState, useRef } from "react";
 
 // // Define the props for the TableComponent
 // interface TableComponentProps {
@@ -22,90 +22,94 @@
 // const TableComponent = ({
 //   content,
 //   onChange,
-//   isPreview,
-//   isEditable,
-//   initialRowSize,
-//   initialColSize,
+//   isPreview = false,
+//   isEditable = true,
+//   initialRowSize = 3,
+//   initialColSize = 3,
 // }: TableComponentProps) => {
 //   const { currentTheme } = useSlideStore();
 //   const [colSizes, setColSizes] = useState<number[]>([]);
-//   const [rowSizes, setRowSizes] = useState<number[]>([]);
-//   // Initialize table data
 //   const [tableData, setTableData] = useState<string[][]>(() => {
-//     // If no content, create empty table
-//     if ((content.length === 0 || content[0], length === 0)) {
-//       return Array(initialRowSize).fill(Array(initialColSize).fill(""));
+//     if (content.length === 0 || content[0].length === 0) {
+//       return Array.from({ length: initialRowSize }, () =>
+//         Array(initialColSize).fill("")
+//       );
 //     }
 //     return content;
 //   });
 
-//   // Handle column resizing
-//   const handleResizeCol = (index: number, newSize: number) => {
-//     // If not editable, do nothing
-//     if (!isEditable) return;
-
-//     // Update column sizes
-//     const newSizes = [...colSizes];
-//     newSizes[index] = newSize;
-//     setColSizes(newSizes);
-//   };
+//   const autosaveTimerRef = useRef<NodeJS.Timeout | null>(null);
 
 //   // Handle cell updates
 //   const updateCell = (rowIndex: number, colIndex: number, value: string) => {
-//     // If not editable, do nothing
-//     if (!isEditable) return;
+//     if (!isEditable || isPreview) return;
 
-//     // Update table data
 //     const newData = tableData.map((row, rIndex) =>
-//       rIndex === rowIndex
-//         ? row.map((cell, cIndex) => (cIndex === colIndex ? value : cell))
-//         : row
+//       rIndex === rowIndex ? row.map((cell, cIndex) => (cIndex === colIndex ? value : cell)) : row
 //     );
+
 //     setTableData(newData);
 //     onChange(newData);
+//     triggerAutosave(newData);
 //   };
 
-//   //   set the row and column sizes
-//   useEffect(() => {
-//     //   set the row sizes
-//     setRowSizes(new Array(tableData.length).fill(100 / tableData.length));
-//     //   set the column sizes
-//     setColSizes(new Array(tableData[0].length).fill(100 / tableData[0].length));
-//   }, [tableData]);
+//   // Handle key presses (Enter for new row, Backspace for row deletion)
+//   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, rowIndex: number) => {
+//     if (!isEditable || isPreview) return;
 
-//   // If not preview, render the table
-//   if (!isPreview)
-//     <div className="w-full overflow-x-auto text-xs">
-//       <table className="w-full">
-//         <thead>
-//           <tr>
-//             {/* Header Row */}
-//             {tableData[0].map((cell, index) => (
-//               <th
-//                 key={index}
-//                 className="border p-2"
-//                 style={{ width: `${colSizes[index]}%` }}
-//               >
-//                 {cell || "Type here"}
-//               </th>
-//             ))}
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {/* Body Rows */}
-//           {tableData.slice(1).map((row, rowIndex) => (
-//             <tr key={rowIndex} style={{ height: `${rowSizes[rowIndex + 1]}%` }}>
-//               {/* Cell */}
-//               {row.map((cell, cellIndex) => (
-//                 <td key={cellIndex} className="border p-2">
-//                   {cell || "Type here"}
-//                 </td>
-//               ))}
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>;
+//     // ✅ Add a new row when Enter is pressed (anywhere)
+//     if (e.key === "Enter") {
+//       e.preventDefault();
+//       const newRow = Array(tableData[0].length).fill("");
+//       const updatedTable = [
+//         ...tableData.slice(0, rowIndex + 1),
+//         newRow,
+//         ...tableData.slice(rowIndex + 1),
+//       ];
+//       setTableData(updatedTable);
+//       onChange(updatedTable);
+//       triggerAutosave(updatedTable);
+//     }
+
+//     // ✅ Remove any row when Backspace is pressed on an empty row
+//     if (e.key === "Backspace" && tableData.length > 1) {
+//       const isEmptyRow = tableData[rowIndex].every((cell) => cell === "");
+
+//       if (isEmptyRow) {
+//         e.preventDefault();
+//         const updatedTable = tableData.filter((_, rIndex) => rIndex !== rowIndex);
+//         setTableData(updatedTable);
+//         onChange(updatedTable);
+//         triggerAutosave(updatedTable);
+//       }
+//     }
+//   };
+
+//   // Initialize column sizes based on initialColSize
+//   useEffect(() => {
+//     if (colSizes.length === 0 && tableData.length > 0) {
+//       setColSizes(new Array(tableData[0].length).fill(100 / tableData[0].length));
+//     }
+//   }, [tableData, colSizes.length]);
+
+//   // Autosave functionality
+//   const triggerAutosave = (updatedData: string[][]) => {
+//     if (autosaveTimerRef.current) {
+//       clearTimeout(autosaveTimerRef.current);
+//     }
+
+//     autosaveTimerRef.current = setTimeout(() => {
+//       onChange(updatedData); // Call onChange after 2s delay
+//     }, 2000);
+//   };
+
+//   useEffect(() => {
+//     return () => {
+//       if (autosaveTimerRef.current) {
+//         clearTimeout(autosaveTimerRef.current);
+//       }
+//     };
+//   }, []);
 
 //   return (
 //     <div
@@ -114,69 +118,42 @@
 //         background:
 //           currentTheme.gradientBackground || currentTheme.backgroundColor,
 //         borderRadius: "8px",
+//         opacity: isPreview ? 0.8 : 1,
 //       }}
 //     >
-//       {/* ResizablePanelGroup for vertical resizing */}
-//       <ResizablePanelGroup
-//         direction="vertical"
-//         className={`h-full w-full rounded-lg border ${
-//           initialColSize === 2
-//             ? "min-h-[100px]"
-//             : initialColSize === 3
-//             ? "min-h-[150px]"
-//             : initialColSize === 4
-//             ? "min-h-[200px]"
-//             : "min-h-[100px]"
-//         }`}
-//         onLayout={(sizes) => setRowSizes(sizes)}
-//       >
-//         {/* Render each row of the table */}
+//       {/* Render the table */}
+//       <div className="w-full overflow-x-auto text-xs border rounded-md">
 //         {tableData.map((row, rowIndex) => (
-//           <React.Fragment key={rowIndex}>
-//             {/* Add a handle between rows */}
-//             {rowIndex > 0 && <ResizableHandle />}
-//             {/* ResizablePanelGroup for horizontal resizing */}
-//             <ResizablePanelGroup
-//               direction="horizontal"
-//               onLayout={(sizes) => setColSizes(sizes)}
-//               className="w-full h-full"
-//             >
-//               {/* Render each cell of the row */}
+//           <div key={rowIndex} className="flex border-b last:border-b-0" style={{ minHeight: "40px" }}>
+//             {/* Render each cell */}
+//             <ResizablePanelGroup direction="horizontal" className="flex w-full">
 //               {row.map((cell, colIndex) => (
 //                 <React.Fragment key={colIndex}>
-//                   {/* Add a handle between cells */}
-//                   {colIndex > 0 && <ResizableHandle />}
-//                   {/* ResizablePanel for the cell */}
-//                   <ResizablePanel
-//                     defaultSize={colSizes[colIndex]}
-//                     onResize={(size) => handleResizeCol(colIndex, size)}
-//                     className="w-full h-full min-h-9"
-//                   >
-//                     {/* Input field for the cell */}
-//                     <div className="relative w-full h-full min-h-3">
-//                       <input
-//                         value={cell}
-//                         onChange={(e) =>
-//                           updateCell(rowIndex, colIndex, e.target.value)
-//                         }
-//                         className="w-full h-full p-4 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
-//                         style={{ color: currentTheme.fontColor }}
-//                         placeholder="Type here"
-//                         readOnly={!isEditable}
-//                       />
-//                     </div>
+//                   {colIndex > 0 && !isPreview && <ResizableHandle />}
+//                   <ResizablePanel defaultSize={colSizes[colIndex]} className="flex items-center justify-center">
+//                     <input
+//                       value={cell}
+//                       onChange={(e) => updateCell(rowIndex, colIndex, e.target.value)}
+//                       onKeyDown={(e) => handleKeyDown(e, rowIndex)}
+//                       className="w-full h-full p-2 bg-transparent text-xs text-center border-r border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//                       style={{ color: currentTheme.fontColor }}
+//                       placeholder="Type here"
+//                       readOnly={!isEditable || isPreview}
+//                       disabled={isPreview}
+//                     />
 //                   </ResizablePanel>
 //                 </React.Fragment>
 //               ))}
 //             </ResizablePanelGroup>
-//           </React.Fragment>
+//           </div>
 //         ))}
-//       </ResizablePanelGroup>
+//       </div>
 //     </div>
 //   );
 // };
 
 // export default TableComponent;
+
 
 
 "use client";
@@ -187,11 +164,10 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { useSlideStore } from "@/store/useSlideStore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-// Define the props for the TableComponent
 interface TableComponentProps {
-  content: string[][];
+  content: string |string[][];
   onChange: (newContent: string[][]) => void;
   isPreview?: boolean;
   isEditable?: boolean;
@@ -199,54 +175,122 @@ interface TableComponentProps {
   initialColSize?: number;
 }
 
-// Define the TableComponent component
 const TableComponent = ({
   content,
   onChange,
-  isPreview,
-  isEditable,
+  isPreview = false,
+  isEditable = true,
   initialRowSize = 3,
   initialColSize = 3,
 }: TableComponentProps) => {
   const { currentTheme } = useSlideStore();
   const [colSizes, setColSizes] = useState<number[]>([]);
+
   const [tableData, setTableData] = useState<string[][]>(() => {
-    if (content.length === 0 || content[0].length === 0) {
-      return Array.from({ length: initialRowSize }, () =>
-        Array(initialColSize).fill("")
+    if (Array.isArray(content) && content.length > 0 && Array.isArray(content[0])) {
+      return content.map(row =>
+        row.length < initialColSize
+          ? [...row, ...Array(initialColSize - row.length).fill("")]
+          : row
       );
     }
-    return content;
+  
+    if (typeof content === "string") {
+      const parsedData = content
+        .split("\n") // Ensure `content` is a string before splitting
+        .map((row: string) => row.split(",")); // Explicitly type `row` as a string
+  
+      return parsedData.length > 0
+        ? parsedData
+        : Array.from({ length: initialRowSize }, () =>
+            Array(initialColSize).fill("")
+          );
+    }
+  
+    return Array.from({ length: initialRowSize }, () =>
+      Array(initialColSize).fill("")
+    );
   });
+  
+  console.log("content: ", content)
+  console.log("tableData: ", tableData)
 
-  // Handle cell updates
+  const autosaveTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  /** Update cell data */
   const updateCell = (rowIndex: number, colIndex: number, value: string) => {
-    if (!isEditable) return;
+    if (!isEditable || isPreview) return;
 
     const newData = tableData.map((row, rIndex) =>
       rIndex === rowIndex
         ? row.map((cell, cIndex) => (cIndex === colIndex ? value : cell))
         : row
     );
+
     setTableData(newData);
-    onChange(newData);
+    triggerAutosave(newData);
   };
 
-  // Handle column resizing
-  const handleResizeCol = (index: number, newSize: number) => {
-    if (!isEditable) return;
+  /** Handle Enter (new row) and Backspace (delete row) */
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    rowIndex: number
+  ) => {
+    if (!isEditable || isPreview) return;
 
-    const newSizes = [...colSizes];
-    newSizes[index] = newSize;
-    setColSizes(newSizes);
-  };
-
-  // Initialize column sizes based on initialColSize
-  useEffect(() => {
-    if (colSizes.length === 0 && tableData.length > 0) {
-      setColSizes(new Array(tableData[0].length).fill(100 / tableData[0].length));
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const newRow = Array(tableData[0].length).fill("");
+      const updatedTable = [
+        ...tableData.slice(0, rowIndex + 1),
+        newRow,
+        ...tableData.slice(rowIndex + 1),
+      ];
+      setTableData(updatedTable);
+      triggerAutosave(updatedTable);
     }
-  }, [tableData, colSizes.length]);
+
+    if (e.key === "Backspace" && tableData.length > 1) {
+      const isEmptyRow = tableData[rowIndex].every((cell) => cell === "");
+
+      if (isEmptyRow) {
+        e.preventDefault();
+        const updatedTable = tableData.filter((_, rIndex) => rIndex !== rowIndex);
+        setTableData(updatedTable);
+        triggerAutosave(updatedTable);
+      }
+    }
+  };
+
+  /** Handle column size initialization */
+  useEffect(() => {
+    if (tableData.length > 0) {
+      setColSizes((prevSizes) =>
+        prevSizes.length === tableData[0].length
+          ? prevSizes
+          : new Array(tableData[0].length).fill(100 / tableData[0].length)
+      );
+    }
+  }, [tableData]);
+
+  /** Autosave function */
+  const triggerAutosave = (updatedData: string[][]) => {
+    if (autosaveTimerRef.current) {
+      clearTimeout(autosaveTimerRef.current);
+    }
+
+    autosaveTimerRef.current = setTimeout(() => {
+      onChange(updatedData);
+    }, 1500);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (autosaveTimerRef.current) {
+        clearTimeout(autosaveTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div
@@ -255,39 +299,29 @@ const TableComponent = ({
         background:
           currentTheme.gradientBackground || currentTheme.backgroundColor,
         borderRadius: "8px",
+        opacity: isPreview ? 0.8 : 1,
       }}
     >
-      {/* Render the table */}
       <div className="w-full overflow-x-auto text-xs border rounded-md">
         {tableData.map((row, rowIndex) => (
-          <div
-            key={rowIndex}
-            className="flex border-b last:border-b-0"
-            style={{ minHeight: "40px" }}
-          >
-            {/* Render each cell */}
-            <ResizablePanelGroup
-              direction="horizontal"
-              className="flex w-full"
-              onLayout={(sizes) => setColSizes(sizes)}
-            >
+          <div key={rowIndex} className="flex border-b last:border-b-0" style={{ minHeight: "40px" }}>
+            <ResizablePanelGroup direction="horizontal" className="flex w-full">
               {row.map((cell, colIndex) => (
                 <React.Fragment key={colIndex}>
-                  {colIndex > 0 && <ResizableHandle />}
+                  {colIndex > 0 && !isPreview && <ResizableHandle />}
                   <ResizablePanel
-                    defaultSize={colSizes[colIndex]}
-                    onResize={(size) => handleResizeCol(colIndex, size)}
+                    defaultSize={colSizes[colIndex] || 100 / row.length}
                     className="flex items-center justify-center"
                   >
                     <input
                       value={cell}
-                      onChange={(e) =>
-                        updateCell(rowIndex, colIndex, e.target.value)
-                      }
+                      onChange={(e) => updateCell(rowIndex, colIndex, e.target.value)}
+                      onKeyDown={(e) => handleKeyDown(e, rowIndex)}
                       className="w-full h-full p-2 bg-transparent text-xs text-center border-r border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       style={{ color: currentTheme.fontColor }}
                       placeholder="Type here"
-                      readOnly={!isEditable}
+                      readOnly={!isEditable || isPreview}
+                      disabled={isPreview}
                     />
                   </ResizablePanel>
                 </React.Fragment>
@@ -295,6 +329,7 @@ const TableComponent = ({
             </ResizablePanelGroup>
           </div>
         ))}
+        <p>{tableData}</p>
       </div>
     </div>
   );

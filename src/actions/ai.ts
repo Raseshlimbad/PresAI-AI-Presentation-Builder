@@ -358,7 +358,15 @@ The output must be an array of JSON objects.
         slideName: "Blank card",
         type: "blank-card",
         className: "p-8 mx-auto flex justify-center items-center min-h-[200px]",
-        content: {},
+        content: [
+          {
+            "id": uuidv4(),
+            "name": "Title",
+            "type": "title",
+            "content": "",
+            "placeholder": "Untitled Card"
+          }
+        ],
       },
     ]
   )}
