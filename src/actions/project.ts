@@ -222,7 +222,7 @@ export const updateSlides = async (projectId: string, slides: JsonValue) => {
         }
 
     // Update Slides
-    const updatedProject = await client.project.update({
+    const updatedProject = await client.project.updateMany({
       where: {
         id: projectId,
       },

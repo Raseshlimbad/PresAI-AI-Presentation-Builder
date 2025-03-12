@@ -55,16 +55,14 @@ const RecentOpen = ({ recentProjects }: Props) => {
                 <SidebarMenuButton
                   asChild
                   tooltip={item.title}
-                  className="hover:bg-primary-80"
+                  className="hover:bg-primary-80 w-full text-left" // ✅ Force left alignment
                 >
-                  {/* Button */}
                   <Button
                     variant="link"
-                    className="text-xs items-center justify-center"
+                    className="text-xs items-start justify-start w-full" // ✅ Force left alignment
                     onClick={() => handleClick(item.id, item.slides)}
                   >
-                    {/* Title */}
-                    <span>{item.title}</span>
+                    <span className="truncate">{item.title}</span>
                   </Button>
                 </SidebarMenuButton>
               </SidebarMenuItem>

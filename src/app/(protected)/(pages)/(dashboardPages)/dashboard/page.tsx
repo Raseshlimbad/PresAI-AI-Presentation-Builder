@@ -7,7 +7,7 @@ const DashboardPage = async ({searchParams}: {searchParams: {search?: string}}) 
   // const allProjects = await getAllProjects();
 
   // Get the search term
-  const searchTerm = await searchParams.search;
+  const searchTerm = searchParams.search;
 
   // Get the projects
   const projectsResponse = searchTerm

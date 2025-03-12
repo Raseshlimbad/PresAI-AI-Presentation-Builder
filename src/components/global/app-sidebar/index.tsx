@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Project, User } from "@prisma/client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavMain from "./nav-main";
 import { data } from "@/lib/constants";
 import RecentOpen from "./recent-open";
@@ -28,6 +28,21 @@ const AppSidebar = ({
   user: User;
 } & React.ComponentProps<typeof Sidebar>) => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    // Prevent hydration mismatch by not rendering image until theme is available
+    // return <div style={{ height: "70px", width: "140px" }} />;
+    return (
+      <div className="h-[70px] w-[140px] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-gray-300"></div>
+      </div>
+    );
+  }
   return (
     // Sidebar Component
     <Sidebar
@@ -60,6 +75,7 @@ const AppSidebar = ({
               height={70}
               width={140}
               alt="PresAI"
+              suppressHydrationWarning
             />
           ) : (
             <Image
@@ -68,6 +84,7 @@ const AppSidebar = ({
               height={70}
               width={140}
               alt="PresAI"
+              suppressHydrationWarning
             />
           )}
           </Link>

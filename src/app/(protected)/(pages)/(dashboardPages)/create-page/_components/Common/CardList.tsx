@@ -1,4 +1,4 @@
-"ue client";
+"use client";
 
 import { OutlineCard } from "@/lib/types";
 import { AnimatePresence, motion } from "framer-motion";
@@ -264,3 +264,237 @@ const CardList = ({
 };
 
 export default CardList;
+
+
+
+
+
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+
+// "use client";
+
+// import { OutlineCard } from "@/lib/types";
+// import { AnimatePresence, motion } from "framer-motion";
+// import React from "react";
+// import { DndProvider, useDrag, useDrop } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
+// import { v4 as uuidv4 } from "uuid";
+// import Card from "./Card";
+// import AddCardButton from "./AddCardButton";
+
+// type Props = {
+//   outlines: OutlineCard[];
+//   editingCard: string | null;
+//   selectedCard: string | null;
+//   editText: string;
+//   addOutline?: (card: OutlineCard) => void;
+//   onEditChange: (value: string) => void;
+//   onCardSelect: (id: string) => void;
+//   onCardDoubleClick: (id: string, title: string) => void;
+//   setEditText: (value: string) => void;
+//   setEditingCard: (id: string | null) => void;
+//   setSelectedCard: (id: string | null) => void;
+//   addMultipleOutlines?: (cards: OutlineCard[]) => void;
+// };
+
+// const CardList = ({
+//   editText,
+//   editingCard,
+//   onCardDoubleClick,
+//   onCardSelect,
+//   onEditChange,
+//   outlines,
+//   selectedCard,
+//   setEditText,
+//   setEditingCard,
+//   setSelectedCard,
+//   addMultipleOutlines,
+//   addOutline,
+// }: Props) => {
+//   const moveCard = (dragIndex: number, hoverIndex: number) => {
+//     const updatedCards = [...outlines];
+//     const [movedCard] = updatedCards.splice(dragIndex, 1);
+//     updatedCards.splice(hoverIndex, 0, movedCard);
+
+//     // Update the order after reordering
+//     addMultipleOutlines?.(
+//       updatedCards.map((card, index) => ({ ...card, order: index + 1 }))
+//     );
+//   };
+
+//   const handleAddCard = () => {
+//     const newCard: OutlineCard = {
+//       id: uuidv4(), // ✅ Always generate a new unique ID
+//       title: `New Slide`,
+//       order: outlines.length + 1,
+//     };
+//     addOutline?.(newCard);
+//   };
+
+//   return (
+//     <DndProvider backend={HTML5Backend}>
+//       <motion.div className="space-y-2 -my-2">
+//         <AnimatePresence>
+//           {outlines.map((card, index) => (
+//             <React.Fragment key={card.id}>
+//               <Card
+//                 index={index}
+//                 card={card}
+//                 isEditing={editingCard === card.id}
+//                 isSelected={selectedCard === card.id}
+//                 editText={editText}
+//                 onEditChange={onEditChange}
+//                 onEditBlur={() => setEditingCard(null)}
+//                 onEditKeyDown={(e) => {
+//                   if (e.key === "Enter") setEditingCard(null);
+//                 }}
+//                 onCardClick={() => onCardSelect(card.id)}
+//                 onCardDoubleClick={() =>
+//                   onCardDoubleClick(card.id, card.title)
+//                 }
+//                 onDeleteClick={() =>
+//                   addMultipleOutlines?.(
+//                     outlines
+//                       .filter((c) => c.id !== card.id)
+//                       .map((c, idx) => ({ ...c, order: idx + 1 }))
+//                   )
+//                 }
+//                 moveCard={moveCard}
+//               />
+//         <AddCardButton onAddCard={handleAddCard} />
+//             </React.Fragment>
+//           ))}
+//         </AnimatePresence>
+//       </motion.div>
+//     </DndProvider>
+//   );
+// };
+
+// export default CardList;
+
+
+
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+// "use client";
+
+// import { OutlineCard } from "@/lib/types";
+// import { AnimatePresence, motion } from "framer-motion";
+// import React from "react";
+// import { DndProvider, useDrag, useDrop } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
+// import { v4 as uuidv4 } from "uuid";
+// import Card from "./Card";
+// import AddCardButton from "./AddCardButton";
+
+// type Props = {
+//   outlines: OutlineCard[];
+//   selectedCard: string | null;
+//   editingCard: string | null;
+//   editText: string;
+//   onEditChange: (value: string) => void;
+//   onCardSelect: (id: string) => void;
+//   onCardDoubleClick: (id: string, title: string) => void;
+//   setEditText: (value: string) => void;
+//   setEditingCard: (id: string | null) => void;
+//   setSelectedCard: (id: string | null) => void;
+//   addOutline?: (card: OutlineCard) => void;
+//   addMultipleOutlines?: (cards: OutlineCard[]) => void;
+//   updateCardTitle?: (id: string, newTitle: string) => void;
+// };
+
+// const CardList = ({
+//   editText,
+//   editingCard,
+//   onCardDoubleClick,
+//   onCardSelect,
+//   onEditChange,
+//   outlines,
+//   selectedCard,
+//   setEditText,
+//   setEditingCard,
+//   setSelectedCard,
+//   addMultipleOutlines,
+//   addOutline,
+//   updateCardTitle,
+// }: Props) => {
+//   const moveCard = (dragIndex: number, hoverIndex: number) => {
+//     const updatedCards = [...outlines];
+//     const [movedCard] = updatedCards.splice(dragIndex, 1);
+//     updatedCards.splice(hoverIndex, 0, movedCard);
+
+//     addMultipleOutlines?.(
+//       updatedCards.map((card, index) => ({ ...card, order: index + 1 }))
+//     );
+//   };
+
+//   const handleAddCard = () => {
+//     const newCard: OutlineCard = {
+//       id: uuidv4(),
+//       title: `New Slide`,
+//       order: outlines.length + 1,
+//     };
+//     addOutline?.(newCard);
+//   };
+
+//   const handleEditSave = (id: string) => {
+//     if (editingCard === id) {
+//       if (editText.trim() !== "") {
+//         updateCardTitle?.(id, editText);
+//       }
+//       setEditingCard(null);
+//     }
+//   };
+
+//   const handleCardSelect = (id: string) => {
+//     // ✅ Auto-save when switching slides
+//     if (editingCard && editText.trim() !== "") {
+//       updateCardTitle?.(editingCard, editText);
+//     }
+//     setSelectedCard(id);
+//     setEditingCard(null);
+//   };
+
+//   return (
+//     <DndProvider backend={HTML5Backend}>
+//       <motion.div className="space-y-2 -my-2">
+//         <AnimatePresence>
+//           {outlines.map((card, index) => (
+//             <React.Fragment key={card.id}>
+//               <Card
+//                 index={index}
+//                 card={card}
+//                 isEditing={editingCard === card.id}
+//                 isSelected={selectedCard === card.id}
+//                 editText={editText}
+//                 onEditChange={onEditChange}
+//                 onEditBlur={() => handleEditSave(card.id)}
+//                 onEditKeyDown={(e) => {
+//                   if (e.key === "Enter") handleEditSave(card.id);
+//                 }}
+//                 onCardClick={() => handleCardSelect(card.id)}
+//                 onCardDoubleClick={() =>
+//                   onCardDoubleClick(card.id, card.title)
+//                 }
+//                 onDeleteClick={() =>
+//                   addMultipleOutlines?.(
+//                     outlines
+//                       .filter((c) => c.id !== card.id)
+//                       .map((c, idx) => ({ ...c, order: idx + 1 }))
+//                   )
+//                 }
+//                 moveCard={moveCard}
+//               />
+//             </React.Fragment>
+//           ))}
+//         </AnimatePresence>
+//         <AddCardButton onAddCard={handleAddCard} />
+//       </motion.div>
+//     </DndProvider>
+//   );
+// };
+
+// export default CardList;

@@ -24,6 +24,8 @@ import { OutlineCard } from "@/lib/types";
 import { createProject } from "@/actions/project";
 import { useRouter } from "next/navigation";
 import { useSlideStore } from "@/store/useSlideStore";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 type Props = {
   onBack: () => void;
@@ -177,7 +179,8 @@ const CreativeAI = ({ onBack }: Props) => {
 
   // Render the Creative AI Component
   return (
-    // Motion.div for the container
+    <DndProvider backend={HTML5Backend}>
+      {/* Motion.div for the container */}
     <motion.div
       className="space-y-6 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
       variants={containerVariants}
@@ -321,6 +324,7 @@ const CreativeAI = ({ onBack }: Props) => {
       {/* Recent Prompts */}
       {prompts?.length > 0 && <RecentPrompts />}
     </motion.div>
+    </DndProvider>
   );
 };
 

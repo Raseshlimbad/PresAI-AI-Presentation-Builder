@@ -17,7 +17,7 @@ import TableComponent from "@/components/global/editor/components/TableComponent
 import ColumnComponent from "@/components/global/editor/components/ColumnComponent";
 import CustomImage from "@/components/global/editor/components/ImageComponent";
 import Blockquote from "@/components/global/editor/components/Blockquote";
-import NumberedList, { BulletList, TodoList } from "@/components/global/editor/components/ListComponent";
+import { NumberedList, BulletList, TodoList } from "@/components/global/editor/components/ListComponent";
 import CalloutBox from "@/components/global/editor/components/CalloutBox";
 import CodeBlock from "@/components/global/editor/components/CodeBlock";
 import TableOfContents from "@/components/global/editor/components/TableOfContents";
