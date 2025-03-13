@@ -13,14 +13,14 @@ const Paragraph: React.FC<ParagraphProps> = ({ className, styles, value }) => {
   return (
     <p
       className={cn(
-        "w-full bg-transparent font-normal text-gray-900 placeholder:text-gray-300 leading-tight",
-        "text-lg", // Fixed text size
+        "w-full bg-transparent font-normal text-gray-900 dark:text-white placeholder:text-gray-300 leading-tight",
+        "text-md", // Fixed text size
         className
       )}
       style={{
         padding: 0,
         margin: 0,
-        color: "inherit",
+        // color: "inherit",
         boxSizing: "content-box",
         lineHeight: "1.5em",
         minHeight: "1.5em",

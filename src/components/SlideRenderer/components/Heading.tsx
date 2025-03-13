@@ -16,14 +16,14 @@ const createHeading = (displayName: string, defaultClassName: string) => {
     return (
       <div
         className={cn(
-          `w-full bg-transparent ${defaultClassName} font-normal text-gray-900 
+          `w-full bg-transparent ${defaultClassName} font-normal text-gray-900 dark:text-white   
           placeholder:text-gray-300 leading-tight`,
           className
         )}
         style={{
           padding: 0,
           margin: 0,
-          color: "inherit",
+        //   color: "inherit",
           boxSizing: "content-box",
           lineHeight: "1.2em",
           minHeight: "1.2em",

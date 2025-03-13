@@ -36,7 +36,7 @@ const CalloutBox: React.FC<CalloutBoxProps> = ({ type, children, className }) =>
   return (
     <div
       className={cn(
-        'rounded-lg border-l-4 p-4 flex items-start gap-3',
+        'rounded-lg border-l-4 p-4 flex items-start gap-3 dark:text-white',
         colors[type].bg,
         colors[type].border,
         colors[type].text,

@@ -4,7 +4,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Template } from "@/lib/types";
@@ -30,13 +29,10 @@ const TemplatePreviewModal = ({
   if (!template) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={onClose} >
       <DialogContent className="max-w-4xl w-full">
         <DialogHeader>
           <DialogTitle>Preview: {template.name}</DialogTitle>
-          {/* <DialogClose asChild>
-            <Button variant="ghost" className="absolute top-2 right-2">✕</Button>
-          </DialogClose> */}
         </DialogHeader>
 
         {/* Slide Preview */}
@@ -52,11 +48,11 @@ const TemplatePreviewModal = ({
 
         {/* Slide Preview */}
         <div className="w-full overflow-auto">
-          <div className="aspect-[16/9] bg-white shadow-lg rounded-lg overflow-hidden">
+          <div className="aspect-[16/9] bg-white dark:bg-[#262626] shadow-lg rounded-lg overflow-hidden">
             <div className="flex items-center justify-center p-8">
               {template.slides[currentSlideIndex] && (
                 <div
-                  className={`w-full h-full ${template.slides[currentSlideIndex].className}`}
+                  className={`w-full h-full text-black dark:text-white ${template.slides[currentSlideIndex].className}`}
                 >
                   <SlideRenderer
                     content={template.slides[currentSlideIndex].content}
@@ -90,7 +86,7 @@ const TemplatePreviewModal = ({
 
         {/* Use Template Button */}
         <div className="flex justify-end mt-4">
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+          <Button className="bg-black text-white dark:bg-white dark:text-black dark:hover:bg-gray-200 hover:bg-[#262626]">
             Use This Template
           </Button>
         </div>

@@ -12,7 +12,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ items, className }) =
   const { currentTheme } = useSlideStore();
 
   return (
-    <nav className={cn("space-y-2", className)} style={{ color: currentTheme.fontColor }}>
+    <nav className={cn("space-y-2 dark:text-white", className)} style={{ color: currentTheme.fontColor }}>
       {items.map((item, index) => (
         <div key={index} className="cursor-pointer hover:underline">
           {item}

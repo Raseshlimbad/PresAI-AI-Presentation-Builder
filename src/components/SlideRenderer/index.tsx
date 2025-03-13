@@ -188,6 +188,7 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ content }) => {
     default:
       return null;
   }
+
 };
 
 export default SlideRenderer;

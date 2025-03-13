@@ -20,7 +20,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code = "", language = "plaintext"
       style={{ backgroundColor: currentTheme.accentColor + "20", color: currentTheme.fontColor }}
     >
       {/* Code Block */}
-      <code className={`language-${language}`}>{code}</code>
+      <code className={`language-${language} dark:text-white`}>{code}</code>
     </pre>
   );
 };

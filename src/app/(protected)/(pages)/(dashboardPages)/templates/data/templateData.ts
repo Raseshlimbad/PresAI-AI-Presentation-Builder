@@ -534,792 +534,1193 @@ import { Template } from '@/lib/types';
 import { v4 as uuidv4 } from 'uuid';
 
 export const templates : Template[] = [
-    // Business template
-    {
-      id: uuidv4(),
-      name: "Quarterly Business Review",
-      description: "Professional template for business presentations and quarterly reviews",
-      category: { id: "business", name: "Business" },
-      thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop",
-      slides: [
-        {
-          id: uuidv4(),
-          slideOrder: 1,
-          type: "accentLeft",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Resizable column",
-                type: "resizable-column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    alt: "Business chart showing growth",
-                    name: "Image",
-                    type: "image",
-                    content: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
-                  }
-                ],
-                restrictToDrop: true
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Heading1",
-                    type: "heading1",
-                    content: "Q2 2023 Business Review",
-                    placeholder: "Heading1"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "Comprehensive overview of our business performance and strategic initiatives for the second quarter.",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Heading1"
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Title Slide"
-        },
-        {
-          id: uuidv4(),
-          slideOrder: 2,
-          type: "twoColumnsWithHeadings",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading3",
-                type: "heading3",
-                content: "Revenue Growth",
-                placeholder: "Heading3"
-              },
-              {
-                id: uuidv4(),
-                name: "Paragraph",
-                type: "paragraph",
-                content: "We've seen a 15% increase in revenue compared to last quarter.",
-                placeholder: "start typing here..."
-              },
-              {
-                id: uuidv4(),
-                name: "Bullet List",
-                type: "bulletList",
-                content: [
-                  "New enterprise clients",
-                  "Upselling to existing customers",
-                  "Expansion into new markets"
-                ]
-              },
-              {   
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Heading3",
-                    type: "heading3",
-                    content: "Cost Optimization",
-                    placeholder: "Heading3"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "Our cost-cutting initiatives have resulted in a 12% reduction in operational expenses.",
-                    placeholder: "start typing here..."
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Bullet List",
-                    type: "bulletList",
-                    content: [
-                      "Process automation",
-                      "Vendor consolidation",
-                      "Remote work policies"
-                    ]
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Heading3",
-                restrictToDrop: true
-              },
-            ],
-            className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Heading3",
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Financial Highlights"
-        },
-        {
-          id: uuidv4(),
-          slideOrder: 3,
-          type: "tableLayout",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading2",
-                type: "heading2",
-                content: "Q2 Financial Summary",
-                placeholder: "Heading2"
-              },
-              {
-                id: uuidv4(),
-                name: "Table",
-                type: "table",
-                content: [
-                  ["Metric", "Q1 2023", "Q2 2023", "Change", "YoY Change"],
-                  ["Revenue", "$4.2M", "$4.8M", "+15%", "+22%"],
-                  ["EBITDA", "$1.1M", "$1.3M", "+18%", "+25%"],
-                  ["Operating Expenses", "$2.5M", "$2.2M", "-12%", "-8%"],
-                  ["Customer Acquisition Cost", "$420", "$380", "-10%", "-15%"],
-                  ["Customer Retention", "87%", "92%", "+5%", "+8%"]
-                ]
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Financial Table"
-        }
-      ]
-    },
+    // // Business template
+    // {
+    //   id: uuidv4(),
+    //   name: "Quarterly Business Review",
+    //   description: "Professional template for business presentations and quarterly reviews",
+    //   category: { id: "business", name: "Business" },
+    //   thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop",
+    //   slides: [
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 1,
+    //       type: "accentLeft",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Resizable column",
+    //             type: "resizable-column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 alt: "Business chart showing growth",
+    //                 name: "Image",
+    //                 type: "image",
+    //                 content: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
+    //               }
+    //             ],
+    //             restrictToDrop: true
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading1",
+    //                 type: "heading1",
+    //                 content: "Q2 2023 Business Review",
+    //                 placeholder: "Heading1"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "Comprehensive overview of our business performance and strategic initiatives for the second quarter.",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Heading1"
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Title Slide"
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 2,
+    //       type: "twoColumnsWithHeadings",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Heading3",
+    //             type: "heading3",
+    //             content: "Revenue Growth",
+    //             placeholder: "Heading3"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Paragraph",
+    //             type: "paragraph",
+    //             content: "We've seen a 15% increase in revenue compared to last quarter.",
+    //             placeholder: "start typing here..."
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Bullet List",
+    //             type: "bulletList",
+    //             content: [
+    //               "New enterprise clients",
+    //               "Upselling to existing customers",
+    //               "Expansion into new markets"
+    //             ]
+    //           },
+    //           {   
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading3",
+    //                 type: "heading3",
+    //                 content: "Cost Optimization",
+    //                 placeholder: "Heading3"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "Our cost-cutting initiatives have resulted in a 12% reduction in operational expenses.",
+    //                 placeholder: "start typing here..."
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Bullet List",
+    //                 type: "bulletList",
+    //                 content: [
+    //                   "Process automation",
+    //                   "Vendor consolidation",
+    //                   "Remote work policies"
+    //                 ]
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Heading3",
+    //             restrictToDrop: true
+    //           },
+    //         ],
+    //         className: "w-full h-full p-8 flex justify-center items-center",
+    //         placeholder: "Heading3",
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Financial Highlights"
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 3,
+    //       type: "tableLayout",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Heading2",
+    //             type: "heading2",
+    //             content: "Q2 Financial Summary",
+    //             placeholder: "Heading2"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Table",
+    //             type: "table",
+    //             content: [
+    //               ["Metric", "Q1 2023", "Q2 2023", "Change", "YoY Change"],
+    //               ["Revenue", "$4.2M", "$4.8M", "+15%", "+22%"],
+    //               ["EBITDA", "$1.1M", "$1.3M", "+18%", "+25%"],
+    //               ["Operating Expenses", "$2.5M", "$2.2M", "-12%", "-8%"],
+    //               ["Customer Acquisition Cost", "$420", "$380", "-10%", "-15%"],
+    //               ["Customer Retention", "87%", "92%", "+5%", "+8%"]
+    //             ]
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Financial Table"
+    //     }
+    //   ]
+    // },
     
-    // Creative template
-    {
-      id: uuidv4(),
-      name: "Creative Portfolio",
-      description:   "Showcase your creative work with this visually appealing template",   
-      category: { id: "creative", name: "Creative" },
-      thumbnail: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=2940&auto=format&fit=crop",
-      slides: [
-        {
-          id: uuidv4(),
-          slideOrder: 1,
-          type: "accentRight",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Heading1",
-                    type: "heading1",
-                    content: "Creative Portfolio",
-                    placeholder: "Heading1"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "A collection of my most influential creative works and design projects from 2023.",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Heading1"
-              },
-              {
-                id: uuidv4(),
-                name: "Resizable column",
-                type: "resizable-column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    alt: "Abstract colorful art",
-                    name: "Image",
-                    type: "image",
-                    content: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=2787&auto=format&fit=crop"
-                  }
-                ],
-                restrictToDrop: true
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Portfolio Cover"
-        },
-        {
-          id: uuidv4(),
-          slideOrder: 2,
-          type: "threeImageColumns",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading2",
-                type: "heading2",
-                content: "Visual Design Projects",
-                placeholder: "Heading2"
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    alt: "Project 1 - Brand identity for tech startup",
-                    name: "Image",
-                    type: "image",
-                    content: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2942&auto=format&fit=crop"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Heading3",
-                    type: "heading3",
-                    content: "Brand Identity",
-                    placeholder: "Heading3"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "Complete rebrand for an emerging tech company",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full flex flex-col items-center p-4"
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    alt: "Project 2 - UI design for mobile app",
-                    name: "Image",
-                    type: "image",
-                    content: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=2940&auto=format&fit=crop"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Heading3",
-                    type: "heading3",
-                    content: "UI/UX Design",
-                    placeholder: "Heading3"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "Mobile app interface for health and wellness tracking",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full flex flex-col items-center p-4"
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    alt: "Project 3 - Print campaign for retail brand",
-                    name: "Image",
-                    type: "image",
-                    content: "https://images.unsplash.com/photo-1583321500900-82807e458f3c?q=80&w=2940&auto=format&fit=crop"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Heading3",
-                    type: "heading3",
-                    content: "Print Design",
-                    placeholder: "Heading3"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "Award-winning print campaign for retail fashion brand",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full flex flex-col items-center p-4"
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Project Showcase"
-        }
-      ]
-    },
+    // // Creative template
+    // {
+    //   id: uuidv4(),
+    //   name: "Creative Portfolio",
+    //   description:   "Showcase your creative work with this visually appealing template",   
+    //   category: { id: "creative", name: "Creative" },
+    //   thumbnail: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=2940&auto=format&fit=crop",
+    //   slides: [
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 1,
+    //       type: "accentRight",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading1",
+    //                 type: "heading1",
+    //                 content: "Creative Portfolio",
+    //                 placeholder: "Heading1"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "A collection of my most influential creative works and design projects from 2023.",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Heading1"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Resizable column",
+    //             type: "resizable-column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 alt: "Abstract colorful art",
+    //                 name: "Image",
+    //                 type: "image",
+    //                 content: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=2787&auto=format&fit=crop"
+    //               }
+    //             ],
+    //             restrictToDrop: true
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Portfolio Cover"
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 2,
+    //       type: "threeImageColumns",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Heading2",
+    //             type: "heading2",
+    //             content: "Visual Design Projects",
+    //             placeholder: "Heading2"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 alt: "Project 1 - Brand identity for tech startup",
+    //                 name: "Image",
+    //                 type: "image",
+    //                 content: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2942&auto=format&fit=crop"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading3",
+    //                 type: "heading3",
+    //                 content: "Brand Identity",
+    //                 placeholder: "Heading3"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "Complete rebrand for an emerging tech company",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full flex flex-col items-center p-4"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 alt: "Project 2 - UI design for mobile app",
+    //                 name: "Image",
+    //                 type: "image",
+    //                 content: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=2940&auto=format&fit=crop"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading3",
+    //                 type: "heading3",
+    //                 content: "UI/UX Design",
+    //                 placeholder: "Heading3"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "Mobile app interface for health and wellness tracking",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full flex flex-col items-center p-4"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 alt: "Project 3 - Print campaign for retail brand",
+    //                 name: "Image",
+    //                 type: "image",
+    //                 content: "https://images.unsplash.com/photo-1583321500900-82807e458f3c?q=80&w=2940&auto=format&fit=crop"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading3",
+    //                 type: "heading3",
+    //                 content: "Print Design",
+    //                 placeholder: "Heading3"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "Award-winning print campaign for retail fashion brand",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full flex flex-col items-center p-4"
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Project Showcase"
+    //     }
+    //   ]
+    // },
     
-    // Data template
-    {
-      id: uuidv4(),
-      name: "Data Analysis Report",
-      description: "Present your data analysis with clear visuals and structured information",
-      category: { id: "data", name: "Data" },
-      thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
-      slides: [
-        {
-          id: uuidv4(),
-                slideOrder: 1,
-          type: "accentLeft",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Resizable column",
-                type: "resizable-column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    alt: "Data visualization chart",
-                    name: "Image",
-                    type: "image",
-                    content: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
-                  }
-                ],
-                restrictToDrop: true
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Heading1",
-                    type: "heading1",
-                    content: "Market Analysis Report",
-                    placeholder: "Heading1"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "In-depth analysis of market trends and consumer behavior in the tech sector for Q2 2023.",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Heading1"
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Title Slide"
-        },
-        {   
-          id: uuidv4(),
-          slideOrder: 2,
-          type: "tableLayout",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading2",
-                type: "heading2",
-                content: "Key Metrics Overview",
-                placeholder: "Heading2"
-              },
-              {
-                id: uuidv4(),
-                name: "Table",
-                type: "table",
-                content: [
-                  ["Metric", "Current Value", "Previous Period", "Change", "Status"],
-                  ["User Engagement", "24.8%", "18.3%", "+6.5%", "Improved"],
-                  ["Conversion Rate", "3.2%", "2.7%", "+0.5%", "Improved"],
-                  ["Avg. Session Duration", "3:42", "3:12", "+0:30", "Improved"],
-                  ["Bounce Rate", "45.2%", "53.7%", "-8.5%", "Improved"],
-                  ["Cost per Acquisition", "$28.40", "$35.80", "-$7.40", "Improved"]
-                ]
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Data Metrics"
-        },
-        {
-          id: uuidv4(),
-          slideOrder: 3,
-          type: "twoColumnsWithHeadings",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading3",
-                type: "heading3",
-                content: "Key Findings",
-                placeholder: "Heading3"
-              },
-              {
-                id: uuidv4(),
-                name: "Bullet List",
-                type: "bulletList",
-                content: [
-                  "Mobile usage increased by 18% YoY",
-                  "Social media referrals grew by 22%",
-                  "Email marketing conversion improved to 4.5%",
-                  "Video content engagement up 35%"
-                ]
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Heading3",
-                    type: "heading3",
-                    content: "Recommendations",
-                    placeholder: "Heading3"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Bullet List",
-                    type: "bulletList",
-                    content: [
-                      "Increase investment in mobile optimization",
-                      "Expand social media marketing efforts",
-                      "Develop more video content",
-                      "Refine email marketing strategy",
-                      "Test new CTAs across digital platforms"
-                    ]
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Heading3",
-                restrictToDrop: true
-              },
-            ],
-            className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Heading3",
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Findings & Recommendations"
-        }
-      ]
-    },
+    // // Data template
+    // {
+    //   id: uuidv4(),
+    //   name: "Data Analysis Report",
+    //   description: "Present your data analysis with clear visuals and structured information",
+    //   category: { id: "data", name: "Data" },
+    //   thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+    //   slides: [
+    //     {
+    //       id: uuidv4(),
+    //             slideOrder: 1,
+    //       type: "accentLeft",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Resizable column",
+    //             type: "resizable-column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 alt: "Data visualization chart",
+    //                 name: "Image",
+    //                 type: "image",
+    //                 content: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
+    //               }
+    //             ],
+    //             restrictToDrop: true
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading1",
+    //                 type: "heading1",
+    //                 content: "Market Analysis Report",
+    //                 placeholder: "Heading1"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "In-depth analysis of market trends and consumer behavior in the tech sector for Q2 2023.",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Heading1"
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Title Slide"
+    //     },
+    //     {   
+    //       id: uuidv4(),
+    //       slideOrder: 2,
+    //       type: "tableLayout",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Heading2",
+    //             type: "heading2",
+    //             content: "Key Metrics Overview",
+    //             placeholder: "Heading2"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Table",
+    //             type: "table",
+    //             content: [
+    //               ["Metric", "Current Value", "Previous Period", "Change", "Status"],
+    //               ["User Engagement", "24.8%", "18.3%", "+6.5%", "Improved"],
+    //               ["Conversion Rate", "3.2%", "2.7%", "+0.5%", "Improved"],
+    //               ["Avg. Session Duration", "3:42", "3:12", "+0:30", "Improved"],
+    //               ["Bounce Rate", "45.2%", "53.7%", "-8.5%", "Improved"],
+    //               ["Cost per Acquisition", "$28.40", "$35.80", "-$7.40", "Improved"]
+    //             ]
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Data Metrics"
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 3,
+    //       type: "twoColumnsWithHeadings",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Heading3",
+    //             type: "heading3",
+    //             content: "Key Findings",
+    //             placeholder: "Heading3"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Bullet List",
+    //             type: "bulletList",
+    //             content: [
+    //               "Mobile usage increased by 18% YoY",
+    //               "Social media referrals grew by 22%",
+    //               "Email marketing conversion improved to 4.5%",
+    //               "Video content engagement up 35%"
+    //             ]
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading3",
+    //                 type: "heading3",
+    //                 content: "Recommendations",
+    //                 placeholder: "Heading3"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Bullet List",
+    //                 type: "bulletList",
+    //                 content: [
+    //                   "Increase investment in mobile optimization",
+    //                   "Expand social media marketing efforts",
+    //                   "Develop more video content",
+    //                   "Refine email marketing strategy",
+    //                   "Test new CTAs across digital platforms"
+    //                 ]
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Heading3",
+    //             restrictToDrop: true
+    //           },
+    //         ],
+    //         className: "w-full h-full p-8 flex justify-center items-center",
+    //         placeholder: "Heading3",
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Findings & Recommendations"
+    //     }
+    //   ]
+    // },
     
-    // Minimalist template
-    {
-      id: uuidv4(),
-      name: "Minimalist Presentation",
-      description: "Clean, simple design for impactful presentations",
-      category: { id: "minimalist", name: "Minimalist" },
-      thumbnail: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=2940&auto=format&fit=crop",
-      slides: [
-        {
-          id: uuidv4(),
-          slideOrder: 1,
-          type: "accentLeft",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Heading1",
-                    type: "heading1",
-                    content: "Minimalist Approach",
-                    placeholder: "Heading1"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "Less is more. Focus on what truly matters.",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Heading1"
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Title Slide"
-        },
-        {
-          id: uuidv4(),
-          slideOrder: 2,
-          type: "twoColumns",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading2",
-                type: "heading2",
-                content: "Core Principles",
-                placeholder: "Heading2"
-              },
-              {
-                id: uuidv4(),
-                name: "Bullet List",
-                type: "bulletList",
-                content: [
-                  "Simplicity in design",
-                  "Focus on essential content",
-                  "Eliminate distractions",
-                  "Clean typography"
-                ]
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Blockquote",
-                    type: "blockquote",
-                    content: "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "— Antoine de Saint-Exupéry",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Quote",
-                restrictToDrop: true
-              },
-            ],
-            className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Heading2",
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Principles"
-        }
-      ]
-    },
+    // // Minimalist template
+    // {
+    //   id: uuidv4(),
+    //   name: "Minimalist Presentation",
+    //   description: "Clean, simple design for impactful presentations",
+    //   category: { id: "minimalist", name: "Minimalist" },
+    //   thumbnail: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=2940&auto=format&fit=crop",
+    //   slides: [
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 1,
+    //       type: "accentLeft",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading1",
+    //                 type: "heading1",
+    //                 content: "Minimalist Approach",
+    //                 placeholder: "Heading1"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "Less is more. Focus on what truly matters.",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Heading1"
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Title Slide"
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 2,
+    //       type: "twoColumns",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Heading2",
+    //             type: "heading2",
+    //             content: "Core Principles",
+    //             placeholder: "Heading2"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Bullet List",
+    //             type: "bulletList",
+    //             content: [
+    //               "Simplicity in design",
+    //               "Focus on essential content",
+    //               "Eliminate distractions",
+    //               "Clean typography"
+    //             ]
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Blockquote",
+    //                 type: "blockquote",
+    //                 content: "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "— Antoine de Saint-Exupéry",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Quote",
+    //             restrictToDrop: true
+    //           },
+    //         ],
+    //         className: "w-full h-full p-8 flex justify-center items-center",
+    //         placeholder: "Heading2",
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Principles"
+    //     }
+    //   ]
+    // },
     
-    // Study template
-    {
-      id: uuidv4(),
-      name: "Academic Research",
-      description: "Present your academic research with structured sections and clear information",
-      category: { id: "study", name: "Study" },
-      thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2940&auto=format&fit=crop",
-      slides: [
-        {
-          id: uuidv4(),
-          slideOrder: 1,
-          type: "accentLeft",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Resizable column",
-                type: "resizable-column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    alt: "Research illustration",
-                    name: "Image",
-                    type: "image",
-                    content: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2940&auto=format&fit=crop"
-                  }
-                ],
-                restrictToDrop: true
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Heading1",
-                    type: "heading1",
-                    content: "Climate Change Impact on Urban Ecosystems",
-                    placeholder: "Heading1"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "A comprehensive research study on the effects of climate change on urban biodiversity and ecosystem services.",
-                    placeholder: "start typing here..."
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Paragraph",
-                    type: "paragraph",
-                    content: "Dr. Emma Johnson • Department of Environmental Science",
-                    placeholder: "start typing here..."
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Heading1"
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Research Title"
-        },
-        {
-          id: uuidv4(),
-          slideOrder: 2,
-          type: "twoColumnsWithHeadings",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading3",
-                type: "heading3",
-                content: "Research Objectives",
-                placeholder: "Heading3"
-              },
-              {
-                id: uuidv4(),
-                name: "Numbered List",
-                type: "numberedList",
-                content: [
-                  "Evaluate temperature changes in urban centers over 50 years",
-                  "Document shifts in urban flora and fauna populations",
-                  "Analyze the impact on ecosystem services",
-                  "Develop adaptation strategies for urban planning"
-                ]
-              },
-              {
-                id: uuidv4(),
-                name: "Column",
-                type: "column",
-                content: [
-                  {
-                    id: uuidv4(),
-                    name: "Heading3",
-                    type: "heading3",
-                    content: "Methodology",
-                    placeholder: "Heading3"
-                  },
-                  {
-                    id: uuidv4(),
-                    name: "Bullet List",
-                    type: "bulletList",
-                    content: [
-                      "Longitudinal data collection (1970-2023)",
-                      "GIS mapping of urban heat islands",
-                      "Biodiversity inventories in 15 major cities",
-                      "Satellite imagery analysis",
-                      "Interviews with urban ecologists and planners"
-                    ]
-                  }
-                ],
-                className: "w-full h-full p-8 flex justify-center items-center",
-                placeholder: "Heading3",
-                restrictToDrop: true
-              },
-            ],
-            className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Heading3",
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Research Methods"
-        },
-        {
-          id: uuidv4(),
-          slideOrder: 3,
-          type: "tableLayout",
-          content: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading2",
-                type: "heading2",
-                content: "Key Findings",
-                placeholder: "Heading2"
-              },
-              {
-                id: uuidv4(),
-                name: "Table",
-                type: "table",
-                content: [
-                  ["Urban Factor", "1970s Baseline", "Current Status", "Change", "Impact Level"],
-                  ["Average Temperature", "21.2°C", "23.8°C", "+2.6°C", "High"],
-                  ["Native Plant Species", "423 species", "387 species", "-8.5%", "Moderate"],
-                  ["Bird Populations", "89 species", "72 species", "-19.1%", "High"],
-                  ["Urban Tree Canopy", "27.3%", "22.1%", "-5.2%", "High"],
-                  ["Carbon Sequestration", "18.4 Mt/year", "15.2 Mt/year", "-17.4%", "High"]
-                ]
-              }
-            ],
-            restrictToDrop: true
-          },
-          className: "min-h-[300px]",
-          slideName: "Research Findings"
-        }
-      ]
-    }
+    // // Study template
+    // {
+    //   id: uuidv4(),
+    //   name: "Academic Research",
+    //   description: "Present your academic research with structured sections and clear information",
+    //   category: { id: "study", name: "Study" },
+    //   thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2940&auto=format&fit=crop",
+    //   slides: [
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 1,
+    //       type: "accentLeft",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Resizable column",
+    //             type: "resizable-column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 alt: "Research illustration",
+    //                 name: "Image",
+    //                 type: "image",
+    //                 content: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2940&auto=format&fit=crop"
+    //               }
+    //             ],
+    //             restrictToDrop: true
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading1",
+    //                 type: "heading1",
+    //                 content: "Climate Change Impact on Urban Ecosystems",
+    //                 placeholder: "Heading1"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "A comprehensive research study on the effects of climate change on urban biodiversity and ecosystem services.",
+    //                 placeholder: "start typing here..."
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Paragraph",
+    //                 type: "paragraph",
+    //                 content: "Dr. Emma Johnson • Department of Environmental Science",
+    //                 placeholder: "start typing here..."
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Heading1"
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Research Title"
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 2,
+    //       type: "twoColumnsWithHeadings",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Heading3",
+    //             type: "heading3",
+    //             content: "Research Objectives",
+    //             placeholder: "Heading3"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Numbered List",
+    //             type: "numberedList",
+    //             content: [
+    //               "Evaluate temperature changes in urban centers over 50 years",
+    //               "Document shifts in urban flora and fauna populations",
+    //               "Analyze the impact on ecosystem services",
+    //               "Develop adaptation strategies for urban planning"
+    //             ]
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Column",
+    //             type: "column",
+    //             content: [
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Heading3",
+    //                 type: "heading3",
+    //                 content: "Methodology",
+    //                 placeholder: "Heading3"
+    //               },
+    //               {
+    //                 id: uuidv4(),
+    //                 name: "Bullet List",
+    //                 type: "bulletList",
+    //                 content: [
+    //                   "Longitudinal data collection (1970-2023)",
+    //                   "GIS mapping of urban heat islands",
+    //                   "Biodiversity inventories in 15 major cities",
+    //                   "Satellite imagery analysis",
+    //                   "Interviews with urban ecologists and planners"
+    //                 ]
+    //               }
+    //             ],
+    //             className: "w-full h-full p-8 flex justify-center items-center",
+    //             placeholder: "Heading3",
+    //             restrictToDrop: true
+    //           },
+    //         ],
+    //         className: "w-full h-full p-8 flex justify-center items-center",
+    //         placeholder: "Heading3",
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Research Methods"
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       slideOrder: 3,
+    //       type: "tableLayout",
+    //       content: {
+    //         id: uuidv4(),
+    //         name: "Column",
+    //         type: "column",
+    //         content: [
+    //           {
+    //             id: uuidv4(),
+    //             name: "Heading2",
+    //             type: "heading2",
+    //             content: "Key Findings",
+    //             placeholder: "Heading2"
+    //           },
+    //           {
+    //             id: uuidv4(),
+    //             name: "Table",
+    //             type: "table",
+    //             content: [
+    //               ["Urban Factor", "1970s Baseline", "Current Status", "Change", "Impact Level"],
+    //               ["Average Temperature", "21.2°C", "23.8°C", "+2.6°C", "High"],
+    //               ["Native Plant Species", "423 species", "387 species", "-8.5%", "Moderate"],
+    //               ["Bird Populations", "89 species", "72 species", "-19.1%", "High"],
+    //               ["Urban Tree Canopy", "27.3%", "22.1%", "-5.2%", "High"],
+    //               ["Carbon Sequestration", "18.4 Mt/year", "15.2 Mt/year", "-17.4%", "High"]
+    //             ]
+    //           }
+    //         ],
+    //         restrictToDrop: true
+    //       },
+    //       className: "min-h-[300px]",
+    //       slideName: "Research Findings"
+    //     }
+    //   ]
+    // },
+
+
+
+    // test
+    { 
+      id: uuidv4(), 
+      name: "Creative Portfolio", 
+      description: "Visually stunning template for creative professionals, portfolios, and design presentations", 
+      category: { id: "creative", name: "Creative" }, 
+      thumbnail: "https://images.unsplash.com/photo-1523726491678-bf852e717f6a?q=80&w=2940&auto=format&fit=crop", 
+      slides: [ 
+        { 
+          id: uuidv4(), 
+          type: "accentLeft", 
+          slideOrder: 1, 
+          content: { 
+            id: uuidv4(), 
+            name: "Column", 
+            type: "column", 
+            content: [ 
+              { 
+                id: uuidv4(), 
+                name: "Resizable column", 
+                type: "resizable-column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    alt: "Creative workspace with design elements and vibrant colors", 
+                    name: "Image", 
+                    type: "image", 
+                    content: "https://images.unsplash.com/photo-1534531173927-aeb928d54385?q=80&w=2940&auto=format&fit=crop" 
+                  } 
+                ], 
+                restrictToDrop: true 
+              }, 
+              { 
+                id: uuidv4(), 
+                name: "Column", 
+                type: "column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    name: "Heading1", 
+                    type: "heading1", 
+                    content: "Creative Vision 2024", 
+                    placeholder: "Heading1" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "Showcasing our design philosophy, creative process, and innovative solutions for modern brands.", 
+                    placeholder: "start typing here..." 
+                  } 
+                ], 
+                className: "w-full h-full p-8 flex justify-center items-center", 
+                placeholder: "Heading1" 
+              } 
+            ], 
+            restrictToDrop: true 
+          }, 
+          className: "min-h-[300px]", 
+          slideName: "Creative Introduction" 
+        }, 
+        { 
+          id: uuidv4(), 
+          slideOrder: 2, 
+          type: "threeColumnsWithHeadings", 
+          content: { 
+            id: uuidv4(), 
+            name: "Column", 
+            type: "column", 
+            content: [ 
+              { 
+                id: uuidv4(), 
+                name: "Heading2", 
+                type: "heading2", 
+                content: "Our Creative Process", 
+                placeholder: "Heading2" 
+              }, 
+              { 
+                id: uuidv4(), 
+                name: "Column", 
+                type: "column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    name: "Heading3", 
+                    type: "heading3", 
+                    content: "Discovery", 
+                    placeholder: "Heading3" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "We immerse ourselves in your brand and audience to understand core needs.", 
+                    placeholder: "start typing here..." 
+                  } 
+                ], 
+                className: "p-4" 
+              }, 
+              { 
+                id: uuidv4(), 
+                name: "Column", 
+                type: "column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    name: "Heading3", 
+                    type: "heading3", 
+                    content: "Creation", 
+                    placeholder: "Heading3" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "Our designers craft visual solutions that align with your strategic goals.", 
+                    placeholder: "start typing here..." 
+                  } 
+                ], 
+                className: "p-4" 
+              }, 
+              { 
+                id: uuidv4(), 
+                name: "Column", 
+                type: "column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    name: "Heading3", 
+                    type: "heading3", 
+                    content: "Refinement", 
+                    placeholder: "Heading3" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "We iterate and perfect our work until it exceeds expectation and delivers impact.", 
+                    placeholder: "start typing here..." 
+                  } 
+                ], 
+                className: "p-4" 
+              } 
+            ], 
+            restrictToDrop: true 
+          }, 
+          className: "min-h-[300px]", 
+          slideName: "Creative Process" 
+        }, 
+        { 
+          id: uuidv4(), 
+          slideOrder: 3, 
+          type: "twoImageColumns", 
+          content: { 
+            id: uuidv4(), 
+            name: "Column", 
+            type: "column", 
+            content: [ 
+              { 
+                id: uuidv4(), 
+                name: "Heading2", 
+                type: "heading2", 
+                content: "Portfolio Highlights", 
+                placeholder: "Heading2" 
+              }, 
+              { 
+                id: uuidv4(), 
+                name: "Column", 
+                type: "column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    alt: "Brand identity design with logo mockups", 
+                    name: "Image", 
+                    type: "image", 
+                    content: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Heading3", 
+                    type: "heading3", 
+                    content: "Brand Identity", 
+                    placeholder: "Heading3" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "Creating distinctive visual identities that capture brand essence and resonate with audiences.", 
+                    placeholder: "start typing here..." 
+                  } 
+                ], 
+                className: "p-4" 
+              }, 
+              { 
+                id: uuidv4(), 
+                name: "Column", 
+                type: "column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    alt: "Digital interface design for mobile application", 
+                    name: "Image", 
+                    type: "image", 
+                    content: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Heading3", 
+                    type: "heading3", 
+                    content: "UI/UX Design", 
+                    placeholder: "Heading3" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "Crafting intuitive digital experiences that balance form and function for maximum user engagement.", 
+                    placeholder: "start typing here..." 
+                  } 
+                ], 
+                className: "p-4" 
+              } 
+            ], 
+            restrictToDrop: true 
+          }, 
+          className: "min-h-[300px]", 
+          slideName: "Portfolio Showcase" 
+        }, 
+        { 
+          id: uuidv4(), 
+          slideOrder: 4, 
+          type: "tableLayout", 
+          content: { 
+            id: uuidv4(), 
+            name: "Column", 
+            type: "column", 
+            content: [ 
+              { 
+                id: uuidv4(), 
+                name: "Heading2", 
+                type: "heading2", 
+                content: "Design Services & Pricing", 
+                placeholder: "Heading2" 
+              }, 
+              { 
+                id: uuidv4(), 
+                name: "Table", 
+                type: "table", 
+                content: [ 
+                  ["Service", "Deliverables", "Timeline", "Investment"], 
+                  ["Brand Identity", "Logo, Guidelines, Assets", "3-4 weeks", "$2,500-5,000"], 
+                  ["Web Design", "Wireframes, UI Design, Prototype", "4-6 weeks", "$3,500-7,000"], 
+                  ["Print Design", "Business Cards, Brochures, Packaging", "2-3 weeks", "$1,500-3,000"], 
+                  ["Social Media", "Templates, Campaign Assets", "1-2 weeks", "$1,000-2,500"] 
+                ] 
+              } 
+            ], 
+            restrictToDrop: true 
+          }, 
+          className: "min-h-[300px]", 
+          slideName: "Services & Pricing" 
+        }, 
+        { 
+          id: uuidv4(), 
+          slideOrder: 5, 
+          type: "textAndImage", 
+          content: { 
+            id: uuidv4(), 
+            name: "Column", 
+            type: "column", 
+            content: [ 
+              { 
+                id: uuidv4(), 
+                name: "Column", 
+                type: "column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    name: "Heading2", 
+                    type: "heading2", 
+                    content: "Client Testimonials", 
+                    placeholder: "Heading2" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Blockquote", 
+                    type: "blockquote", 
+                    content: "Their creative team transformed our brand from ordinary to extraordinary. The attention to detail and strategic thinking behind each design decision was impressive." 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "— Sarah Johnson, Marketing Director at Elevate Brands", 
+                    placeholder: "start typing here..." 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Blockquote", 
+                    type: "blockquote", 
+                    content: "Working with this creative team gave us exactly what we needed: a visual identity that communicates our values and resonates with our audience." 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "— Michael Chen, Founder of Nexus Technologies", 
+                    placeholder: "start typing here..." 
+                  } 
+                ], 
+                className: "w-full h-full p-8 flex justify-center items-center" 
+              }, 
+              { 
+                id: uuidv4(), 
+                alt: "Happy clients in a creative meeting", 
+                name: "Image", 
+                type: "image", 
+                content: "https://images.unsplash.com/photo-1559223607-a43c990c692c?q=80&w=2940&auto=format&fit=crop" 
+              } 
+            ], 
+            restrictToDrop: true 
+          }, 
+          className: "min-h-[300px]", 
+          slideName: "Client Testimonials" 
+        }, 
+        { 
+          id: uuidv4(), 
+          slideOrder: 6, 
+          type: "accentRight", 
+          content: { 
+            id: uuidv4(), 
+            name: "Column", 
+            type: "column", 
+            content: [ 
+              { 
+                id: uuidv4(), 
+                name: "Column", 
+                type: "column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    name: "Heading2", 
+                    type: "heading2", 
+                    content: "Let's Create Together", 
+                    placeholder: "Heading2" 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "Ready to transform your visual identity and create meaningful connections with your audience?", 
+                    placeholder: "start typing here..." 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Bullet List", 
+                    type: "bulletList", 
+                    content: [ 
+                      "Free initial consultation", 
+                      "Customized project proposals", 
+                      "Dedicated creative team", 
+                      "Ongoing support and collaboration" 
+                    ] 
+                  }, 
+                  { 
+                    id: uuidv4(), 
+                    name: "Paragraph", 
+                    type: "paragraph", 
+                    content: "Contact us: hello@creativestudio.com | (555) 123-4567", 
+                    placeholder: "start typing here..." 
+                  } 
+                ], 
+                className: "w-full h-full p-8 flex justify-center items-center" 
+              }, 
+              { 
+                id: uuidv4(), 
+                name: "Resizable column", 
+                type: "resizable-column", 
+                content: [ 
+                  { 
+                    id: uuidv4(), 
+                    alt: "Creative workspace with design tools and inspiration board", 
+                    name: "Image", 
+                    type: "image", 
+                    content: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=3069&auto=format&fit=crop" 
+                  } 
+                ], 
+                restrictToDrop: true 
+              } 
+            ], 
+            restrictToDrop: true 
+          }, 
+          className: "min-h-[300px]", 
+          slideName: "Contact & Next Steps" 
+        } 
+      ] 
+    },
   ];
   
   export const categories = [
