@@ -127,8 +127,10 @@ export interface ComponentGroup {
 export interface Template {
   id: string;
   name: string;
-  theme: string;
+  theme?: string;
   slides: Slide[];
+  description?: string;
+  thumbnail?: string;
   category?: Category;
 }
 

@@ -1,6 +1,6 @@
 // components/Sidebar.jsx
 import React from 'react';
-import { Layout, LayoutGrid, Search, PenTool } from 'lucide-react';
+import { Layout, LayoutGrid, Search, PenTool, BookOpen, Frame } from 'lucide-react';
 import { Category } from '@/lib/types';
 
 type SidebarProps = {
@@ -38,7 +38,8 @@ const Sidebar = ({ categories, selectedCategory, onSelectCategory }: SidebarProp
               {category.id === "business" && <LayoutGrid className="mr-2 h-4 w-4" />}
               {category.id === "creative" && <PenTool className="mr-2 h-4 w-4" />}
               {category.id === "data" && <Layout className="mr-2 h-4 w-4" />}
-              {category.id === "minimalist" && <Layout className="mr-2 h-4 w-4" />}
+              {category.id === "minimalist" && <Frame className="mr-2 h-4 w-4" />}
+              {category.id === "study" && <BookOpen className="mr-2 h-4 w-4" />}
               {category.name}
             </button>
           ))}

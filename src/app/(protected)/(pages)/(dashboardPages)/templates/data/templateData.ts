@@ -627,41 +627,41 @@ export const templates : Template[] = [
                   "Upselling to existing customers",
                   "Expansion into new markets"
                 ]
-              }
-            ],
-            className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Heading3",
-            restrictToDrop: true
-          },
-          content2: {   
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading3",
-                type: "heading3",
-                content: "Cost Optimization",
-                placeholder: "Heading3"
               },
-              {
+              {   
                 id: uuidv4(),
-                name: "Paragraph",
-                type: "paragraph",
-                content: "Our cost-cutting initiatives have resulted in a 12% reduction in operational expenses.",
-                placeholder: "start typing here..."
-              },
-              {
-                id: uuidv4(),
-                name: "Bullet List",
-                type: "bulletList",
+                name: "Column",
+                type: "column",
                 content: [
-                  "Process automation",
-                  "Vendor consolidation",
-                  "Remote work policies"
-                ]
-              }
+                  {
+                    id: uuidv4(),
+                    name: "Heading3",
+                    type: "heading3",
+                    content: "Cost Optimization",
+                    placeholder: "Heading3"
+                  },
+                  {
+                    id: uuidv4(),
+                    name: "Paragraph",
+                    type: "paragraph",
+                    content: "Our cost-cutting initiatives have resulted in a 12% reduction in operational expenses.",
+                    placeholder: "start typing here..."
+                  },
+                  {
+                    id: uuidv4(),
+                    name: "Bullet List",
+                    type: "bulletList",
+                    content: [
+                      "Process automation",
+                      "Vendor consolidation",
+                      "Remote work policies"
+                    ]
+                  }
+                ],
+                className: "w-full h-full p-8 flex justify-center items-center",
+                placeholder: "Heading3",
+                restrictToDrop: true
+              },
             ],
             className: "w-full h-full p-8 flex justify-center items-center",
             placeholder: "Heading3",
@@ -979,6 +979,7 @@ export const templates : Template[] = [
         },
         {
           id: uuidv4(),
+          slideOrder: 3,
           type: "twoColumnsWithHeadings",
           content: {
             id: uuidv4(),
@@ -1002,36 +1003,36 @@ export const templates : Template[] = [
                   "Email marketing conversion improved to 4.5%",
                   "Video content engagement up 35%"
                 ]
-              }
-            ],
-            className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Heading3",
-            restrictToDrop: true
-          },
-          content2: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading3",
-                type: "heading3",
-                content: "Recommendations",
-                placeholder: "Heading3"
               },
               {
                 id: uuidv4(),
-                name: "Bullet List",
-                type: "bulletList",
+                name: "Column",
+                type: "column",
                 content: [
-                  "Increase investment in mobile optimization",
-                  "Expand social media marketing efforts",
-                  "Develop more video content",
-                  "Refine email marketing strategy",
-                  "Test new CTAs across digital platforms"
-                ]
-              }
+                  {
+                    id: uuidv4(),
+                    name: "Heading3",
+                    type: "heading3",
+                    content: "Recommendations",
+                    placeholder: "Heading3"
+                  },
+                  {
+                    id: uuidv4(),
+                    name: "Bullet List",
+                    type: "bulletList",
+                    content: [
+                      "Increase investment in mobile optimization",
+                      "Expand social media marketing efforts",
+                      "Develop more video content",
+                      "Refine email marketing strategy",
+                      "Test new CTAs across digital platforms"
+                    ]
+                  }
+                ],
+                className: "w-full h-full p-8 flex justify-center items-center",
+                placeholder: "Heading3",
+                restrictToDrop: true
+              },
             ],
             className: "w-full h-full p-8 flex justify-center items-center",
             placeholder: "Heading3",
@@ -1115,33 +1116,33 @@ export const templates : Template[] = [
                   "Eliminate distractions",
                   "Clean typography"
                 ]
-              }
-            ],
-            className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Heading2",
-            restrictToDrop: true
-          },
-          content2: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Blockquote",
-                type: "blockquote",
-                content: "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."
               },
               {
                 id: uuidv4(),
-                name: "Paragraph",
-                type: "paragraph",
-                content: "— Antoine de Saint-Exupéry",
-                placeholder: "start typing here..."
-              }
+                name: "Column",
+                type: "column",
+                content: [
+                  {
+                    id: uuidv4(),
+                    name: "Blockquote",
+                    type: "blockquote",
+                    content: "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."
+                  },
+                  {
+                    id: uuidv4(),
+                    name: "Paragraph",
+                    type: "paragraph",
+                    content: "— Antoine de Saint-Exupéry",
+                    placeholder: "start typing here..."
+                  }
+                ],
+                className: "w-full h-full p-8 flex justify-center items-center",
+                placeholder: "Quote",
+                restrictToDrop: true
+              },
             ],
             className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Quote",
+            placeholder: "Heading2",
             restrictToDrop: true
           },
           className: "min-h-[300px]",
@@ -1244,36 +1245,36 @@ export const templates : Template[] = [
                   "Analyze the impact on ecosystem services",
                   "Develop adaptation strategies for urban planning"
                 ]
-              }
-            ],
-            className: "w-full h-full p-8 flex justify-center items-center",
-            placeholder: "Heading3",
-            restrictToDrop: true
-          },
-          content2: {
-            id: uuidv4(),
-            name: "Column",
-            type: "column",
-            content: [
-              {
-                id: uuidv4(),
-                name: "Heading3",
-                type: "heading3",
-                content: "Methodology",
-                placeholder: "Heading3"
               },
               {
                 id: uuidv4(),
-                name: "Bullet List",
-                type: "bulletList",
+                name: "Column",
+                type: "column",
                 content: [
-                  "Longitudinal data collection (1970-2023)",
-                  "GIS mapping of urban heat islands",
-                  "Biodiversity inventories in 15 major cities",
-                  "Satellite imagery analysis",
-                  "Interviews with urban ecologists and planners"
-                ]
-              }
+                  {
+                    id: uuidv4(),
+                    name: "Heading3",
+                    type: "heading3",
+                    content: "Methodology",
+                    placeholder: "Heading3"
+                  },
+                  {
+                    id: uuidv4(),
+                    name: "Bullet List",
+                    type: "bulletList",
+                    content: [
+                      "Longitudinal data collection (1970-2023)",
+                      "GIS mapping of urban heat islands",
+                      "Biodiversity inventories in 15 major cities",
+                      "Satellite imagery analysis",
+                      "Interviews with urban ecologists and planners"
+                    ]
+                  }
+                ],
+                className: "w-full h-full p-8 flex justify-center items-center",
+                placeholder: "Heading3",
+                restrictToDrop: true
+              },
             ],
             className: "w-full h-full p-8 flex justify-center items-center",
             placeholder: "Heading3",

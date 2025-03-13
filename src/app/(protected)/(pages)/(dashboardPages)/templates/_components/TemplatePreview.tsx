@@ -37,7 +37,7 @@ const TemplatePreview = ({ template, currentSlideIndex, onNextSlide, onPrevSlide
       </div>
       
       <div className="aspect-[16/9] bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="w-full h-full flex items-center justify-center p-16">
+        <div className="w-full h-full flex items-center justify-center p-16 border-red-600 border-2">
           {template.slides[currentSlideIndex] && (
             <div className={`w-full ${template.slides[currentSlideIndex].className}`}>
               <SlideRenderer content={template.slides[currentSlideIndex].content} />

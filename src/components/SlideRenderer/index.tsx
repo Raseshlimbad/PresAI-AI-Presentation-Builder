@@ -3,23 +3,20 @@
 import { ContentItem } from "@/lib/types";
 import React from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+// Read only components
 import {
   Heading1,
   Heading2,
   Heading3,
   Heading4,
   Title,
-} from "@/components/global/editor/components/Heading";
-import { cn } from "@/lib/utils";
-import Paragraph from "@/components/global/editor/components/Paragraph";
+} from "./components/Heading";
 
-
-import Blockquote from "@/components/global/editor/components/Blockquote";
-
-import CalloutBox from "@/components/global/editor/components/CalloutBox";
-
-
-import Divider from "@/components/global/editor/components/Divider";
+import Divider from "./components/Divider";
+import CalloutBox from "./components/CalloutBox";
+import Blockquote from "./components/Blockquote";
+import Paragraph from "./components/Paragraph";
 import TableComponent from "./components/TableComponent";
 import ColumnComponent from "./components/ColumnComponent";
 import { BulletList, NumberedList, TodoList } from "./components/ListComponent";

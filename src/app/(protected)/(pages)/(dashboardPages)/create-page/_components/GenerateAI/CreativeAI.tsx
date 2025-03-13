@@ -197,7 +197,7 @@ const CreativeAI = ({ onBack }: Props) => {
         <h1 className="text-4xl font-bold text-primary">
           Generate with <span className="text-vivid">Creative AI</span>
         </h1>
-        <p className="text-secondary">What would you like to create today?</p>
+        <p className="dark:text-secondary">What would you like to create today?</p>
       </motion.div>
       {/* Input Container */}
       <motion.div

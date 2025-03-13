@@ -15,8 +15,8 @@ const CustomImage: React.FC<CustomImageProps> = ({ src, alt = "image", className
         <Image 
         src={staticUrl}
         alt={alt}
-        width={500}
-        height={500}
+        width={"500"}
+        height={"500"}
         className={className || "w-full h-full object-cover rounded-lg"}
         />
 
