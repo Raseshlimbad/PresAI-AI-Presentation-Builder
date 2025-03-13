@@ -75,6 +75,7 @@ export interface Theme {
   sidebarColor?: string;
   navbarColor?: string;
   type: 'light' | 'dark';
+  category?: Category;
 }
 
 // Outline Card
@@ -128,6 +129,11 @@ export interface Template {
   name: string;
   theme: string;
   slides: Slide[];
+  category?: Category;
 }
 
 
+export type Category = {
+  id: string;
+  name: string;
+}
