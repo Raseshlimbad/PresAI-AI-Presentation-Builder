@@ -1,0 +1,37 @@
+
+Removed just before Reset Button
+
+
+            <Select
+              value={outlines.length > 0 ? outlines.length.toString() : "0"}
+            >
+              {/* Select Trigger */}
+              <SelectTrigger className="w-fit gap-2 font-semibold shadow-xl">
+                <SelectValue placeholder="Select number of cards" />
+              </SelectTrigger>
+              {/* Select Content */}
+              <SelectContent className="w-fit">
+                {/* If the outlines are empty, show a select item */}
+                {outlines.length === 0 ? (
+                  <SelectItem value="0" className="font-semibold">
+                    No cards
+                  </SelectItem>
+                ) : (
+                  // Map through the outlines and show a select item
+                  Array.from(
+                    { length: outlines.length },
+                    (_, idx) => idx + 1
+                  ).map((num) => (
+                    // Select Item
+                    <SelectItem
+                      value={num.toString()}
+                      className="font-semibold"
+                      key={num}
+                    >
+                      {/* Select Item Text */}
+                      {num} {num === 1 ? "Card" : "Cards"}
+                    </SelectItem>
+                  ))
+                )}
+              </SelectContent>
+            </Select>

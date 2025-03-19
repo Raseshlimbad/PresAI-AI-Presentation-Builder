@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Layout, LayoutGrid, Search, PenTool, BookOpen, Frame, Network } from "lucide-react";
+import {
+  Layout,
+  LayoutGrid,
+  Search,
+  PenTool,
+  BookOpen,
+  Frame,
+  Network,
+} from "lucide-react";
 import { Category } from "@/lib/types";
 
 type NavCategoryBarProps = {
@@ -9,7 +17,12 @@ type NavCategoryBarProps = {
   onSearch: (query: string) => void; // Pass search query to parent
 };
 
-const NavCategoryBar = ({ categories, selectedCategory, onSelectCategory, onSearch }: NavCategoryBarProps) => {
+const NavCategoryBar = ({
+  categories,
+  selectedCategory,
+  onSelectCategory,
+  onSearch,
+}: NavCategoryBarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +49,22 @@ const NavCategoryBar = ({ categories, selectedCategory, onSelectCategory, onSear
 
       {/* Categories Navigation */}
       <div className="flex space-x-4 px-6 py-2 overflow-x-auto text-sm text-gray-600 dark:text-gray-300">
-        {categories.map((category) => (
+        <button
+          key={categories[0].id}
+          className={`px-4 py-2 rounded-md flex items-center gap-2 transition-colors ${
+            selectedCategory === categories[0].id
+              ? "bg-black text-white dark:bg-white dark:text-black font-medium"
+              : "hover:bg-gray-100 dark:hover:bg-[#262626]"
+          } ${
+            categories[0] &&
+            "border-r rounded-none border-gray-300 dark:border-gray-600"
+          }`}
+          onClick={() => onSelectCategory(categories[0].id)}
+        >
+          {categories[0].id === "all" && <Layout className="h-4 w-4" />}
+          {categories[0].name}
+        </button>
+        {categories.slice(1).map((category) => (
           <button
             key={category.id}
             className={`px-4 py-2 rounded-md flex items-center gap-2 transition-colors ${
@@ -46,7 +74,6 @@ const NavCategoryBar = ({ categories, selectedCategory, onSelectCategory, onSear
             }`}
             onClick={() => onSelectCategory(category.id)}
           >
-            {category.id === "all" && <Layout className="h-4 w-4" />}
             {category.id === "business" && <LayoutGrid className="h-4 w-4" />}
             {category.id === "creative" && <PenTool className="h-4 w-4" />}
             {category.id === "data" && <Network className="h-4 w-4" />}

@@ -2,8 +2,9 @@
 
 import { client } from "@/lib/prisma";
 import { onAuthenticateUser } from "./user";
-import { Category, OutlineCard, Slide } from "@/lib/types";
+import { Category, OutlineCard, Slide, Theme } from "@/lib/types";
 import { JsonValue } from "@prisma/client/runtime/library";
+import { v4 as uuidv4 } from "uuid";
 
 // Get All Projects #########################################################################################################################################
 export const getAllProjects = async () => {
@@ -180,64 +181,122 @@ export const createProject = async (title: string, outlines: OutlineCard[]) => {
   }
 }
 
-// Create Template Project ####################################################################################################
-// export const createTemplateProject = async (
-//   title: string,
-//   slides: Slide[],
-//   outlines: OutlineCard[] = [],
-//   description?: string,
-//   thumbnail?: string,
-//   category?: Category
-// ) => {
+// Create Template Project 1 ####################################################################################################
+export const createTemplateProject = async (
+  title: string,
+  slides: Slide[],
+  outlines: OutlineCard[] = [],
+  thumbnail?: string
+) => {
+  try {
+    // Check if Title and Slides are Required
+    if (!title || !slides || slides.length === 0) {
+      return { status: 400, error: "Title and slides are required" };
+    }
+
+    // Map Outline Titles
+    const outlineTitles = outlines.map((outline) => outline.title);
+
+    // Check User Authentication
+    const checkUser = await onAuthenticateUser();
+    if (checkUser.status !== 200 || !checkUser.user) {
+      return { status: 403, error: "User Not Authenticated" };
+    }
+
+
+    // Prepare Slides to be saved as JSON
+    // const serializedSlides = slides.map((slide) => ({
+    //   id: slide.id,
+    //   slideName: slide.slideName,
+    //   type: slide.type,
+    //   slideOrder: slide.slideOrder,
+    //   content: JSON.stringify(slide.content), // Serialize the content (or ensure it's JSON-safe)
+    //   className: slide.className || '',
+    // }));
+
+    const serializedSlides = JSON.stringify(slides);
+
+    // Create Template Project
+    const templateProject = await client.project.create({
+      data: {
+        title,
+        outlines: outlineTitles,
+        slides: serializedSlides, // Store slides as JSON
+        userId: checkUser.user.id,
+        thumbnail, // Optional thumbnail
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDeleted: false,
+        isSellable: false,
+        themeName: 'dark', // Default theme (could be customized as needed)
+      },
+    });
+
+    // If Failed to Create Template Project
+    if (!templateProject) {
+      return { status: 500, error: "Failed to create template project" };
+    }
+
+    // Return Created Template Project
+    return { status: 200, data: templateProject };
+  } catch (error) {
+    console.log("Error: ", error);
+    return { status: 500, message: "Internal Server Error" };
+  }
+};
+
+// Create Template Project 2 #########################################################################################################################################
+// export const createTemplateProject = async (templateData: any) => {
 //   try {
-//     // Check if Title and Slides are Required
-//     if (!title || !slides || slides.length === 0) {
-//       return { status: 400, error: "Title and slides are required" };
+//     // Check if Template Data is Provided
+//     if (!templateData || !templateData.name || !templateData.outlines || templateData.outlines.length === 0) {
+//       return { status: 400, error: "Template data, name, and outlines are required" };
 //     }
 
-//     // Map Outline Titles
-//     const outlineTitles = outlines.map((outline) => outline.title);
+//     const { name, description, category, thumbnail, outlines, slides } = templateData;
 
 //     // Check User Authentication
-//     const checkUser = await onAuthenticateUser();
-//     if (checkUser.status !== 200 || !checkUser.user) {
+//     const checkuser = await onAuthenticateUser();
+//     if (checkuser.status !== 200 || !checkuser.user) {
 //       return { status: 403, error: "User Not Authenticated" };
 //     }
 
-//     // Create Template Project
-//     const templateProject = await client.project.create({
-//       data: {
-//         title,
-//         description,
-//         thumbnail,
-//         categoryId: category ? category.id : null,
-//         outlines: outlineTitles,
-//         slides: slides.map((slide) => ({
-//           id: slide.id,
-//           slideName: slide.slideName,
-//           type: slide.type,
-//           slideOrder: slide.slideOrder,
-//           content: slide.content, // This assumes content is properly handled (nested ContentItems will need serialization)
-//           className: slide.className || '',
-//         })),
-//         userId: checkUser.user.id,
-//         createdAt: new Date(),
-//         updatedAt: new Date(),
-//       },
+//     // Map Outlines
+//     const allOutlines = outlines.map((outline : OutlineCard) => outline.title);
+
+//     // Prepare Project Data
+//     const projectData = {
+//       title: name,
+//       outlines: allOutlines,
+//       slides: slides || [], // Can be an empty array if no slides are provided
+//       thumbnail: thumbnail || null,
+//       userId: checkuser.user.id,
+//       createdAt: new Date(),
+//       updatedAt: new Date(),
+//       isDeleted: false,
+//       isSellable: false,
+//       themeName: 'light', // Assuming default theme
+//     };
+
+//     // Create Project from Template Data
+//     const project = await client.project.create({
+//       data: projectData,
 //     });
 
-//     // If Failed to Create Template Project
-//     if (!templateProject) {
-//       return { status: 500, error: "Failed to create template project" };
+//     // Check if Project Creation Failed
+//     if (!project) {
+//       return { status: 500, error: "Failed to create project from template" };
 //     }
 
-//     // Return Created Template Project
-//     return { status: 200, data: templateProject };
+//     // Return Project Data
+//     return { status: 200, data: project };
 //   } catch (error) {
 //     console.log("Error: ", error);
 //     return { status: 500, message: "Internal Server Error" };
 //   }
 // };
+
+
 
 
 // Get Project By ID #########################################################################################################################################

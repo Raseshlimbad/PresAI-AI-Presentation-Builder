@@ -1,0 +1,34 @@
+ <SelectContent className="w-fit">
+                  {/* If the outlines are empty, show a select item */}
+                  {outlines.length === 0 ? (
+                    <SelectItem value={"0"} className="font-semibold">
+                      No cards
+                    </SelectItem>
+                  ) : (
+                    // Map through the outlines and show a select item
+                    // Array.from({ length: outlines.length }, (_, i) => i + 1).map(
+                    //   (num) => (
+                    //     // Select Item
+                    //     <SelectItem
+                    //       key={num}
+                    //       value={num.toString()}
+                    //       className="font-semibold"
+                    //     >
+                    //       {/* Select Item Text */}
+                    //       {num} {num === 1 ? "Card" : "Cards"}
+                    //     </SelectItem>
+                    //   )
+                    // )
+
+                    // Map through 15 possible cards and show them as select items
+                    Array.from({ length: 15 }, (_, i) => i + 1).map((num) => (
+                      <SelectItem
+                        key={num}
+                        value={num.toString()}
+                        className="font-semibold"
+                      >
+                        {num} {num === 1 ? "Card" : "Cards"}
+                      </SelectItem>
+                    ))
+                  )}
+                </SelectContent>

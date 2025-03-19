@@ -47,7 +47,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
       (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         onContentChange(content.id, e.target.value);
       },
-      [content.id, onContentChange]
+      [content?.id, onContentChange]
     );
 
     const getCodeContent = (content: ContentItem): string | undefined => {
@@ -76,8 +76,8 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
 
     // Common props for the components
     const commonProps = {
-      placeholder: content.placeholder,
-      value: content.content as string,
+      placeholder: content?.placeholder,
+      value: content?.content as string,
       onChange: handleChange,
       isPreview: isPreview,
     };
@@ -90,7 +90,7 @@ const ContentRenderer: React.FC<MasterRecursiveComponentProps> = React.memo(
     };
 
     // Render the component based on the content type
-    switch (content.type) {
+    switch (content?.type) {
       // Heading 1
       case "heading1":
         return (

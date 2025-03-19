@@ -1,7 +1,7 @@
 "use server";
 
 import { client } from "@/lib/prisma";
-import { ContentItem, ContentType, Slide } from "@/lib/types";
+import { ContentItem, Slide } from "@/lib/types";
 import { currentUser } from "@clerk/nextjs/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { v4 as uuidv4 } from "uuid";
@@ -14,7 +14,7 @@ if (!process.env.GEMINI_API_KEY) {
 const google = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Generate Creative Prompt #########################################################################################################################################
-export const generateCreativePrompt = async (userPrompt: string) => {
+export const generateCreativePrompt = async (userPrompt: string, numberOfOutlines: number) => {
   try {
     // Get Model
     const model = google.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -33,10 +33,11 @@ export const generateCreativePrompt = async (userPrompt: string) => {
               "Point 4",
               "Point 5",
               "Point 6"
+              // Continue up to ${numberOfOutlines} points
           ]
       }
 
-      Ensure that the JSON is valid and properly formatted. Do not include any other text or explanation outside the JSON.
+      Ensure that the JSON is valid and properly formatted. Do not include any other text or explanation outside the JSON and generate .
     `;
 
     const response = await model.generateContent({

@@ -6,14 +6,14 @@ import { containerVariants, itemVariants } from "@/lib/constants";
 import { ChevronLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import useScratchStore from "@/store/useStartScratchStore";
-import { v4 as uuidv4} from "uuid";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { v4 as uuidv4 } from "uuid";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import CardList from "../Common/CardList";
 import { OutlineCard } from "@/lib/types";
@@ -89,11 +89,11 @@ const ScratchPage = ({ onBack }: Props) => {
       });
       // Redirect to the select theme page
       router.push(`/presentation/${res.data?.id}/select-theme`);
-    }else{
-        // If the project is not created, show an error toast
-        toast.error("Error", {
-            description: "Failed to create project",
-        })
+    } else {
+      // If the project is not created, show an error toast
+      toast.error("Error", {
+        description: "Failed to create project",
+      });
     }
   };
 
@@ -129,53 +129,28 @@ const ScratchPage = ({ onBack }: Props) => {
             className="text-base sm:text-xl borer-0 focus-visible:ring-0 shadow-none p-0 bg-transparent flex-grow"
             required
           />
-          {/* Select */}
-          <div className="flex items-center gap-3">
-            <Select
-              value={outlines.length > 0 ? outlines.length.toString() : "0"}
-            >
-              {/* Select Trigger */}
-              <SelectTrigger className="w-fit gap-2 font-semibold shadow-xl">
-                <SelectValue placeholder="Select number of cards" />
-              </SelectTrigger>
-              {/* Select Content */}
-              <SelectContent className="w-fit">
-                {/* If the outlines are empty, show a select item */}
-                {outlines.length === 0 ? (
-                  <SelectItem value="0" className="font-semibold">
-                    No cards
-                  </SelectItem>
-                ) : (
-                  // Map through the outlines and show a select item
-                  Array.from(
-                    { length: outlines.length },
-                    (_, idx) => idx + 1
-                  ).map((num) => (
-                    // Select Item
-                    <SelectItem
-                      value={num.toString()}
-                      className="font-semibold"
-                      key={num}
-                    >
-                      {/* Select Item Text */}
-                      {num} {num === 1 ? "Card" : "Cards"}
-                    </SelectItem>
-                  ))
-                )}
-              </SelectContent>
-            </Select>
-            {/* Reset Cards Button */}
-          <Button
-            variant={"destructive"}
-            size={"icon"}
-            aria-label="Reset cards"
-            onClick={resetcards}
-          >
-            {/* RotateCcw Icon */}
-            <RotateCcw className="h-4 w-4 mx-4" />
-          </Button>
-          </div>
 
+          {/* Display number of outline cards */}
+          <div className="flex items-center gap-3 whitespace-nowrap">
+            <span className="font-semibold">
+              {outlines.length === 0
+                ? "No cards"
+                : `${outlines.length} ${
+                    outlines.length === 1 ? "Card" : "Cards"
+                  }`}
+            </span>
+
+            {/* Reset Cards Button */}
+            <Button
+              variant={"destructive"}
+              size={"icon"}
+              aria-label="Reset cards"
+              onClick={resetcards}
+            >
+              {/* RotateCcw Icon */}
+              <RotateCcw className="h-4 w-4 mx-4" />
+            </Button>
+          </div>
         </div>
       </motion.div>
 
@@ -210,7 +185,7 @@ const ScratchPage = ({ onBack }: Props) => {
       {/* Generate Slides Button */}
       {outlines?.length > 0 && (
         <Button className="w-full" onClick={handleGenerate}>
-          Generate Slides
+          Create Slides
         </Button>
       )}
     </motion.div>
