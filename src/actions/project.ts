@@ -2,7 +2,7 @@
 
 import { client } from "@/lib/prisma";
 import { onAuthenticateUser } from "./user";
-import { OutlineCard } from "@/lib/types";
+import { Category, OutlineCard, Slide } from "@/lib/types";
 import { JsonValue } from "@prisma/client/runtime/library";
 
 // Get All Projects #########################################################################################################################################
@@ -180,6 +180,66 @@ export const createProject = async (title: string, outlines: OutlineCard[]) => {
   }
 }
 
+// Create Template Project ####################################################################################################
+// export const createTemplateProject = async (
+//   title: string,
+//   slides: Slide[],
+//   outlines: OutlineCard[] = [],
+//   description?: string,
+//   thumbnail?: string,
+//   category?: Category
+// ) => {
+//   try {
+//     // Check if Title and Slides are Required
+//     if (!title || !slides || slides.length === 0) {
+//       return { status: 400, error: "Title and slides are required" };
+//     }
+
+//     // Map Outline Titles
+//     const outlineTitles = outlines.map((outline) => outline.title);
+
+//     // Check User Authentication
+//     const checkUser = await onAuthenticateUser();
+//     if (checkUser.status !== 200 || !checkUser.user) {
+//       return { status: 403, error: "User Not Authenticated" };
+//     }
+
+//     // Create Template Project
+//     const templateProject = await client.project.create({
+//       data: {
+//         title,
+//         description,
+//         thumbnail,
+//         categoryId: category ? category.id : null,
+//         outlines: outlineTitles,
+//         slides: slides.map((slide) => ({
+//           id: slide.id,
+//           slideName: slide.slideName,
+//           type: slide.type,
+//           slideOrder: slide.slideOrder,
+//           content: slide.content, // This assumes content is properly handled (nested ContentItems will need serialization)
+//           className: slide.className || '',
+//         })),
+//         userId: checkUser.user.id,
+//         createdAt: new Date(),
+//         updatedAt: new Date(),
+//       },
+//     });
+
+//     // If Failed to Create Template Project
+//     if (!templateProject) {
+//       return { status: 500, error: "Failed to create template project" };
+//     }
+
+//     // Return Created Template Project
+//     return { status: 200, data: templateProject };
+//   } catch (error) {
+//     console.log("Error: ", error);
+//     return { status: 500, message: "Internal Server Error" };
+//   }
+// };
+
+
 // Get Project By ID #########################################################################################################################################
 export const getProjectById = async (projectId: string) => {
   try {
@@ -206,6 +266,68 @@ export const getProjectById = async (projectId: string) => {
     return { status: 500, message: "Internal Server Error" };
   }
 }
+
+// Get Project Title #########################################################################################################################################
+export const getProjectTitle = async (projectId: string) => {
+  try {
+    // Check User
+    const checkUser = await onAuthenticateUser();
+    if (checkUser.status !== 200 || !checkUser.user) {
+      return { status: 403, error: "User Not Authenticated" };
+    }
+
+    // Get Project Title by Project ID
+    const project = await client.project.findFirst({
+      where: { id: projectId, userId: checkUser.user.id, isDeleted: false },
+      select: { title: true },  // Only select the title
+    });
+
+    // If Project Not Found
+    if (!project) {
+      return { status: 404, error: "Project Not Found" };
+    }
+
+    // Return Project Title
+    return { status: 200, data: { title: project.title } };
+  } catch (error) {
+    console.log("Error: ", error);
+    return { status: 500, message: "Internal Server Error" };
+  }
+};
+
+// Update Project Title #########################################################################################################################################
+export const updateProjectTitle = async (projectId: string, newTitle: string) => {
+  try {
+    // Check if Project ID and Title are Required
+    if (!projectId || !newTitle) {
+      return { status: 400, error: "Project ID and Title are required" };
+    }
+
+    // Check User
+    const checkUser = await onAuthenticateUser();
+    if (checkUser.status !== 200 || !checkUser.user) {
+      return { status: 403, error: "User Not Authenticated" };
+    }
+
+    // Update Project Title
+    const updatedProject = await client.project.update({
+      where: { id: projectId, userId: checkUser.user.id },
+      data: { title: newTitle },
+    });
+
+    // If Failed to Update Project Title
+    if (!updatedProject) {
+      return { status: 500, error: "Failed to update project title" };
+    }
+
+    // Return Updated Project
+    return { status: 200, data: updatedProject };
+  } catch (error) {
+    console.log("Error: ", error);
+    return { status: 500, message: "Internal Server Error" };
+  }
+};
+
 
 // Update Slides #########################################################################################################################################
 export const updateSlides = async (projectId: string, slides: JsonValue) => {
