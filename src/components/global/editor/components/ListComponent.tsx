@@ -127,7 +127,7 @@ const BulletList: React.FC<ListProps> = ({
   const handlechange = (index: number, value: string) => {
     if (isEditable) {
       const newItems = [...items];
-      newItems[index] = value;
+      newItems[index] = value;  
       onChange(newItems);
     }
   };
@@ -187,7 +187,83 @@ const BulletList: React.FC<ListProps> = ({
   );
 };
 
+// const BulletList: React.FC<ListProps> = ({
+//   items = [], // ✅ Default to an empty array
+//   className,
+//   onChange,
+//   isEditable = true,
+// }) => {
+//   const { currentTheme } = useSlideStore();
+
+//   // Ensure items is an array before using map
+//   if (!Array.isArray(items)) {
+//     console.error("BulletList: items is not an array", items);
+//     return null; // Prevent rendering to avoid crash
+//   }
+
+//   const handleChange = (index: number, value: string) => {
+//     if (isEditable) {
+//       const newItems = [...items];
+//       newItems[index] = value;
+//       onChange(newItems);
+//     }
+//   };
+
+//   const handleKeyDown = (
+//     e: React.KeyboardEvent<HTMLInputElement>,
+//     index: number
+//   ) => {
+//     if (e.key === "Enter") {
+//       e.preventDefault();
+//       const newItems = [...items];
+//       newItems.splice(index + 1, 0, "");
+//       onChange(newItems);
+//       setTimeout(() => {
+//         const nextInput = document.querySelector(
+//           `li:nth-child(${index + 2}) input`
+//         ) as HTMLElement;
+//         if (nextInput) {
+//           nextInput.focus();
+//         }
+//       }, 0);
+//     } else if (
+//       e.key === "Backspace" &&
+//       items[index] === "" &&
+//       items.length > 1
+//     ) {
+//       e.preventDefault();
+//       const newItems = [...items];
+//       newItems.splice(index, 1);
+//       onChange(newItems);
+//     }
+//   };
+
+//   return (
+//     <ul
+//       className={cn("list-disc list-inside space-y-1", className)}
+//       style={{ color: currentTheme.fontColor }}
+//     >
+//       {items.map((item, index) => (
+//         <li key={index} className="flex items-center gap-2">
+//           <span className="text-inherit">•</span>
+//           <ListItem
+//             key={index}
+//             item={item}
+//             index={index}
+//             isEditable={isEditable}
+//             onChange={handleChange}
+//             onKeyDown={handleKeyDown}
+//             fontColor={currentTheme.fontColor}
+//           />
+//         </li>
+//       ))}
+//     </ul>
+//   );
+// };
+
+
 // TodoList is the component for the todo list
+
 const TodoList: React.FC<ListProps> = ({
   items,
   className,

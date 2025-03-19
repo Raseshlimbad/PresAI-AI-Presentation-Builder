@@ -128,6 +128,7 @@ export interface Template {
   id: string;
   name: string;
   theme?: string;
+  outlines?: OutlineCard[];
   slides: Slide[];
   description?: string;
   thumbnail?: string;

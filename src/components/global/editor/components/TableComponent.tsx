@@ -352,7 +352,7 @@ import React, { useEffect, useState, useRef } from "react";
 type TableRow = Record<string, string | TableRow[]>; // Object with string values or nested arrays
 
 interface TableComponentProps {
-  content: string | TableRow[]; // Handles nested objects properly
+  content: string | string[][] | TableRow[]; // Handles nested objects properly
   onChange: (newContent: string[][]) => void;
   isPreview?: boolean;
   isEditable?: boolean;
@@ -412,7 +412,7 @@ const TableComponent = ({
   /** 🔥 Initialize tableData recursively */
   const initializeTableData = () => {
     if (Array.isArray(content) && content.length > 0 && typeof content[0] === "object") {
-      return flattenContent(content);
+      return flattenContent(content as TableRow[]);
     }
 
     if (typeof content === "string") {

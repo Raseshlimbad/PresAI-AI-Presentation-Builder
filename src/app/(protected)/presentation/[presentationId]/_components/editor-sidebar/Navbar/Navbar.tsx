@@ -50,12 +50,16 @@ const Navbar = ({ presentationId }: Props) => {
       </Link>
 
       {/* Presentation Editor Button */}
-      <Link
+      {/* <Link
         href={"/presentation/template-market"}
         className="text-lg font-semibold hidden sm:block"
-      >
+      > */}
+      <span
+        className="text-lg font-semibold hidden sm:block"
+        >
         Presntation Editor
-      </Link>
+      </span>
+      {/* </Link> */}
 
       {/* Copy Link and Present Button */}
       <div className="flex items-center gap-4">

@@ -2773,9 +2773,19 @@ export const templates: Template[] = [
   {
     id: uuidv4(),
     name: "Quarterly Business Review",
-    description: "Professional template for business presentations and quarterly reviews",
+    description:
+      "Professional template for business presentations and quarterly reviews",
     category: { id: "business", name: "Business" },
-    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop",
+    outlines: [
+      { id: uuidv4(), title: "Title Slide", order: 1 },
+      { id: uuidv4(), title: "Financial Highlights", order: 2 },
+      { id: uuidv4(), title: "Financial Table", order: 3 },
+      { id: uuidv4(), title: "Strategic Initiatives", order: 4 },
+      { id: uuidv4(), title: "Success Metrics & Development", order: 5 },
+      { id: uuidv4(), title: "Outlook & Next Steps", order: 6 },
+    ],
     slides: [
       {
         id: uuidv4(),
@@ -2796,10 +2806,11 @@ export const templates: Template[] = [
                   alt: "Business chart showing growth",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
-                }
+                  content:
+                    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+                },
               ],
-              restrictToDrop: true
+              restrictToDrop: true,
             },
             {
               id: uuidv4(),
@@ -2811,24 +2822,25 @@ export const templates: Template[] = [
                   name: "Heading1",
                   type: "heading1",
                   content: "Q2 2023 Business Review",
-                  placeholder: "Heading1"
+                  placeholder: "Heading1",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Comprehensive overview of our business performance and strategic initiatives for the second quarter.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Comprehensive overview of our business performance and strategic initiatives for the second quarter.",
+                  placeholder: "start typing here...",
+                },
               ],
               className: "w-full h-full p-8 flex justify-center items-center",
-              placeholder: "Heading1"
-            }
+              placeholder: "Heading1",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Title Slide"
+        slideName: "Title Slide",
       },
       {
         id: uuidv4(),
@@ -2844,14 +2856,15 @@ export const templates: Template[] = [
               name: "Heading3",
               type: "heading3",
               content: "Revenue Growth",
-              placeholder: "Heading3"
+              placeholder: "Heading3",
             },
             {
               id: uuidv4(),
               name: "Paragraph",
               type: "paragraph",
-              content: "We've seen a 15% increase in revenue compared to last quarter.",
-              placeholder: "start typing here..."
+              content:
+                "We've seen a 15% increase in revenue compared to last quarter.",
+              placeholder: "start typing here...",
             },
             {
               id: uuidv4(),
@@ -2860,8 +2873,8 @@ export const templates: Template[] = [
               content: [
                 "New enterprise clients",
                 "Upselling to existing customers",
-                "Expansion into new markets"
-              ]
+                "Expansion into new markets",
+              ],
             },
             {
               id: uuidv4(),
@@ -2873,14 +2886,15 @@ export const templates: Template[] = [
                   name: "Heading3",
                   type: "heading3",
                   content: "Cost Optimization",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Our cost-cutting initiatives have resulted in a 12% reduction in operational expenses.",
-                  placeholder: "start typing here..."
+                  content:
+                    "Our cost-cutting initiatives have resulted in a 12% reduction in operational expenses.",
+                  placeholder: "start typing here...",
                 },
                 {
                   id: uuidv4(),
@@ -2889,21 +2903,21 @@ export const templates: Template[] = [
                   content: [
                     "Process automation",
                     "Vendor consolidation",
-                    "Remote work policies"
-                  ]
-                }
+                    "Remote work policies",
+                  ],
+                },
               ],
               className: "w-full h-full p-8 flex justify-center items-center",
               placeholder: "Heading3",
-              restrictToDrop: true
+              restrictToDrop: true,
             },
           ],
           className: "w-full h-full p-8 flex justify-center items-center",
           placeholder: "Heading3",
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Financial Highlights"
+        slideName: "Financial Highlights",
       },
       {
         id: uuidv4(),
@@ -2919,7 +2933,7 @@ export const templates: Template[] = [
               name: "Heading2",
               type: "heading2",
               content: "Q2 Financial Summary",
-              placeholder: "Heading2"
+              placeholder: "Heading2",
             },
             {
               id: uuidv4(),
@@ -2931,14 +2945,14 @@ export const templates: Template[] = [
                 ["EBITDA", "$1.1M", "$1.3M", "+18%", "+25%"],
                 ["Operating Expenses", "$2.5M", "$2.2M", "-12%", "-8%"],
                 ["Customer Acquisition Cost", "$420", "$380", "-10%", "-15%"],
-                ["Customer Retention", "87%", "92%", "+5%", "+8%"]
-              ]
-            }
+                ["Customer Retention", "87%", "92%", "+5%", "+8%"],
+              ],
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Financial Table"
+        slideName: "Financial Table",
       },
       {
         id: uuidv4(),
@@ -2959,14 +2973,15 @@ export const templates: Template[] = [
                   name: "Heading2",
                   type: "heading2",
                   content: "Strategic Initiatives",
-                  placeholder: "Heading2"
+                  placeholder: "Heading2",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Key initiatives driving our business growth and market expansion.",
-                  placeholder: "start typing here..."
+                  content:
+                    "Key initiatives driving our business growth and market expansion.",
+                  placeholder: "start typing here...",
                 },
                 {
                   id: uuidv4(),
@@ -2976,24 +2991,25 @@ export const templates: Template[] = [
                     "Digital transformation acceleration",
                     "Market expansion in APAC region",
                     "Product portfolio diversification",
-                    "Operational excellence program"
-                  ]
-                }
+                    "Operational excellence program",
+                  ],
+                },
               ],
-              className: "w-full h-full p-8 flex justify-center items-center"
+              className: "w-full h-full p-8 flex justify-center items-center",
             },
             {
               id: uuidv4(),
               alt: "Business strategy meeting",
               name: "Image",
               type: "image",
-              content: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2940&auto=format&fit=crop"
-            }
+              content:
+                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2940&auto=format&fit=crop",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Strategic Initiatives"
+        slideName: "Strategic Initiatives",
       },
       {
         id: uuidv4(),
@@ -3009,14 +3025,15 @@ export const templates: Template[] = [
               name: "Heading3",
               type: "heading3",
               content: "Customer Success Metrics",
-              placeholder: "Heading3"
+              placeholder: "Heading3",
             },
             {
               id: uuidv4(),
               name: "Paragraph",
               type: "paragraph",
-              content: "Our customer-centric approach is yielding positive results.",
-              placeholder: "start typing here..."
+              content:
+                "Our customer-centric approach is yielding positive results.",
+              placeholder: "start typing here...",
             },
             {
               id: uuidv4(),
@@ -3025,8 +3042,8 @@ export const templates: Template[] = [
               content: [
                 "NPS increased to 72 (+8)",
                 "Customer satisfaction at 94%",
-                "Support response time reduced by 35%"
-              ]
+                "Support response time reduced by 35%",
+              ],
             },
             {
               id: uuidv4(),
@@ -3038,14 +3055,14 @@ export const templates: Template[] = [
                   name: "Heading3",
                   type: "heading3",
                   content: "Product Development",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
                   content: "Innovation milestones achieved in Q2 2023.",
-                  placeholder: "start typing here..."
+                  placeholder: "start typing here...",
                 },
                 {
                   id: uuidv4(),
@@ -3055,21 +3072,21 @@ export const templates: Template[] = [
                     "3 major product releases",
                     "15 new features deployed",
                     "Development velocity increased by 22%",
-                    "Technical debt reduced by 18%"
-                  ]
-                }
+                    "Technical debt reduced by 18%",
+                  ],
+                },
               ],
               className: "w-full h-full p-8 flex justify-center items-center",
               placeholder: "Heading3",
-              restrictToDrop: true
+              restrictToDrop: true,
             },
           ],
           className: "w-full h-full p-8 flex justify-center items-center",
           placeholder: "Heading3",
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Success Metrics & Development"
+        slideName: "Success Metrics & Development",
       },
       {
         id: uuidv4(),
@@ -3090,14 +3107,14 @@ export const templates: Template[] = [
                   name: "Heading2",
                   type: "heading2",
                   content: "Q3 Outlook & Next Steps",
-                  placeholder: "Heading2"
+                  placeholder: "Heading2",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
                   content: "Our strategic focus for the upcoming quarter.",
-                  placeholder: "start typing here..."
+                  placeholder: "start typing here...",
                 },
                 {
                   id: uuidv4(),
@@ -3107,11 +3124,11 @@ export const templates: Template[] = [
                     "Accelerate enterprise sales pipeline",
                     "Launch Customer Success 2.0 program",
                     "Expand engineering team by 15%",
-                    "Prepare for Series C funding round"
-                  ]
-                }
+                    "Prepare for Series C funding round",
+                  ],
+                },
               ],
-              className: "w-full h-full p-8 flex justify-center items-center"
+              className: "w-full h-full p-8 flex justify-center items-center",
             },
             {
               id: uuidv4(),
@@ -3123,424 +3140,481 @@ export const templates: Template[] = [
                   alt: "Future business growth concept",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2815&auto=format&fit=crop"
-                }
+                  content:
+                    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2815&auto=format&fit=crop",
+                },
               ],
-              restrictToDrop: true
-            }
+              restrictToDrop: true,
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Outlook & Next Steps"
-      }
-    ]
+        slideName: "Outlook & Next Steps",
+      },
+    ],
   },
   // Creative template
-  { 
-    id: uuidv4(), 
-    name: "Creative Portfolio", 
-    description: "Visually stunning template for creative professionals, portfolios, and design presentations", 
-    category: { id: "creative", name: "Creative" }, 
-    thumbnail: "https://images.unsplash.com/photo-1523726491678-bf852e717f6a?q=80&w=2940&auto=format&fit=crop", 
-    slides: [ 
-      { 
-        id: uuidv4(), 
-        type: "accentLeft", 
-        slideOrder: 1, 
-        content: { 
-          id: uuidv4(), 
-          name: "Column", 
-          type: "column", 
-          content: [ 
-            { 
-              id: uuidv4(), 
-              name: "Resizable column", 
-              type: "resizable-column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  alt: "Creative workspace with design elements and vibrant colors", 
-                  name: "Image", 
-                  type: "image", 
-                  content: "https://images.unsplash.com/photo-1534531173927-aeb928d54385?q=80&w=2940&auto=format&fit=crop" 
-                } 
-              ], 
-              restrictToDrop: true 
-            }, 
-            { 
-              id: uuidv4(), 
-              name: "Column", 
-              type: "column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  name: "Heading1", 
-                  type: "heading1", 
-                  content: "Creative Vision 2024", 
-                  placeholder: "Heading1" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "Showcasing our design philosophy, creative process, and innovative solutions for modern brands.", 
-                  placeholder: "start typing here..." 
-                } 
-              ], 
-              className: "w-full h-full p-8 flex justify-center items-center", 
-              placeholder: "Heading1" 
-            } 
-          ], 
-          restrictToDrop: true 
-        }, 
-        className: "min-h-[300px]", 
-        slideName: "Creative Introduction" 
-      }, 
-      { 
-        id: uuidv4(), 
-        slideOrder: 2, 
-        type: "threeColumnsWithHeadings", 
-        content: { 
-          id: uuidv4(), 
-          name: "Column", 
-          type: "column", 
-          content: [ 
-            { 
-              id: uuidv4(), 
-              name: "Heading2", 
-              type: "heading2", 
-              content: "Our Creative Process", 
-              placeholder: "Heading2" 
-            }, 
-            { 
-              id: uuidv4(), 
-              name: "Column", 
-              type: "column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  name: "Heading3", 
-                  type: "heading3", 
-                  content: "Discovery", 
-                  placeholder: "Heading3" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "We immerse ourselves in your brand and audience to understand core needs.", 
-                  placeholder: "start typing here..." 
-                } 
-              ], 
-              className: "p-4" 
-            }, 
-            { 
-              id: uuidv4(), 
-              name: "Column", 
-              type: "column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  name: "Heading3", 
-                  type: "heading3", 
-                  content: "Creation", 
-                  placeholder: "Heading3" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "Our designers craft visual solutions that align with your strategic goals.", 
-                  placeholder: "start typing here..." 
-                } 
-              ], 
-              className: "p-4" 
-            }, 
-            { 
-              id: uuidv4(), 
-              name: "Column", 
-              type: "column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  name: "Heading3", 
-                  type: "heading3", 
-                  content: "Refinement", 
-                  placeholder: "Heading3" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "We iterate and perfect our work until it exceeds expectation and delivers impact.", 
-                  placeholder: "start typing here..." 
-                } 
-              ], 
-              className: "p-4" 
-            } 
-          ], 
-          restrictToDrop: true 
-        }, 
-        className: "min-h-[300px]", 
-        slideName: "Creative Process" 
-      }, 
-      { 
-        id: uuidv4(), 
-        slideOrder: 3, 
-        type: "twoImageColumns", 
-        content: { 
-          id: uuidv4(), 
-          name: "Column", 
-          type: "column", 
-          content: [ 
-            { 
-              id: uuidv4(), 
-              name: "Heading2", 
-              type: "heading2", 
-              content: "Portfolio Highlights", 
-              placeholder: "Heading2" 
-            }, 
-            { 
-              id: uuidv4(), 
-              name: "Column", 
-              type: "column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  alt: "Brand identity design with logo mockups", 
-                  name: "Image", 
-                  type: "image", 
-                  content: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Heading3", 
-                  type: "heading3", 
-                  content: "Brand Identity", 
-                  placeholder: "Heading3" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "Creating distinctive visual identities that capture brand essence and resonate with audiences.", 
-                  placeholder: "start typing here..." 
-                } 
-              ], 
-              className: "p-4" 
-            }, 
-            { 
-              id: uuidv4(), 
-              name: "Column", 
-              type: "column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  alt: "Digital interface design for mobile application", 
-                  name: "Image", 
-                  type: "image", 
-                  content: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Heading3", 
-                  type: "heading3", 
-                  content: "UI/UX Design", 
-                  placeholder: "Heading3" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "Crafting intuitive digital experiences that balance form and function for maximum user engagement.", 
-                  placeholder: "start typing here..." 
-                } 
-              ], 
-              className: "p-4" 
-            } 
-          ], 
-          restrictToDrop: true 
-        }, 
-        className: "min-h-[300px]", 
-        slideName: "Portfolio Showcase" 
-      }, 
-      { 
-        id: uuidv4(), 
-        slideOrder: 4, 
-        type: "tableLayout", 
-        content: { 
-          id: uuidv4(), 
-          name: "Column", 
-          type: "column", 
-          content: [ 
-            { 
-              id: uuidv4(), 
-              name: "Heading2", 
-              type: "heading2", 
-              content: "Design Services & Pricing", 
-              placeholder: "Heading2" 
-            }, 
-            { 
-              id: uuidv4(), 
-              name: "Table", 
-              type: "table", 
-              content: [ 
-                ["Service", "Deliverables", "Timeline", "Investment"], 
-                ["Brand Identity", "Logo, Guidelines, Assets", "3-4 weeks", "$2,500-5,000"], 
-                ["Web Design", "Wireframes, UI Design, Prototype", "4-6 weeks", "$3,500-7,000"], 
-                ["Print Design", "Business Cards, Brochures, Packaging", "2-3 weeks", "$1,500-3,000"], 
-                ["Social Media", "Templates, Campaign Assets", "1-2 weeks", "$1,000-2,500"] 
-              ] 
-            } 
-          ], 
-          restrictToDrop: true 
-        }, 
-        className: "min-h-[300px]", 
-        slideName: "Services & Pricing" 
-      }, 
-      { 
-        id: uuidv4(), 
-        slideOrder: 5, 
-        type: "textAndImage", 
-        content: { 
-          id: uuidv4(), 
-          name: "Column", 
-          type: "column", 
-          content: [ 
-            { 
-              id: uuidv4(), 
-              name: "Column", 
-              type: "column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  name: "Heading2", 
-                  type: "heading2", 
-                  content: "Client Testimonials", 
-                  placeholder: "Heading2" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Blockquote", 
-                  type: "blockquote", 
-                  content: "Their creative team transformed our brand from ordinary to extraordinary. The attention to detail and strategic thinking behind each design decision was impressive." 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "— Sarah Johnson, Marketing Director at Elevate Brands", 
-                  placeholder: "start typing here..." 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Blockquote", 
-                  type: "blockquote", 
-                  content: "Working with this creative team gave us exactly what we needed: a visual identity that communicates our values and resonates with our audience." 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "— Michael Chen, Founder of Nexus Technologies", 
-                  placeholder: "start typing here..." 
-                } 
-              ], 
-              className: "w-full h-full p-8 flex justify-center items-center" 
-            }, 
-            { 
-              id: uuidv4(), 
-              alt: "Happy clients in a creative meeting", 
-              name: "Image", 
-              type: "image", 
-              content: "https://images.unsplash.com/photo-1559223607-a43c990c692c?q=80&w=2940&auto=format&fit=crop" 
-            } 
-          ], 
-          restrictToDrop: true 
-        }, 
-        className: "min-h-[300px]", 
-        slideName: "Client Testimonials" 
-      }, 
-      { 
-        id: uuidv4(), 
-        slideOrder: 6, 
-        type: "accentRight", 
-        content: { 
-          id: uuidv4(), 
-          name: "Column", 
-          type: "column", 
-          content: [ 
-            { 
-              id: uuidv4(), 
-              name: "Column", 
-              type: "column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  name: "Heading2", 
-                  type: "heading2", 
-                  content: "Let's Create Together", 
-                  placeholder: "Heading2" 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "Ready to transform your visual identity and create meaningful connections with your audience?", 
-                  placeholder: "start typing here..." 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Bullet List", 
-                  type: "bulletList", 
-                  content: [ 
-                    "Free initial consultation", 
-                    "Customized project proposals", 
-                    "Dedicated creative team", 
-                    "Ongoing support and collaboration" 
-                  ] 
-                }, 
-                { 
-                  id: uuidv4(), 
-                  name: "Paragraph", 
-                  type: "paragraph", 
-                  content: "Contact us: hello@creativestudio.com | (555) 123-4567", 
-                  placeholder: "start typing here..." 
-                } 
-              ], 
-              className: "w-full h-full p-8 flex justify-center items-center" 
-            }, 
-            { 
-              id: uuidv4(), 
-              name: "Resizable column", 
-              type: "resizable-column", 
-              content: [ 
-                { 
-                  id: uuidv4(), 
-                  alt: "Creative workspace with design tools and inspiration board", 
-                  name: "Image", 
-                  type: "image", 
-                  content: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=3069&auto=format&fit=crop" 
-                } 
-              ], 
-              restrictToDrop: true 
-            } 
-          ], 
-          restrictToDrop: true 
-        }, 
-        className: "min-h-[300px]", 
-        slideName: "Contact & Next Steps" 
-      } 
-    ] 
+  {
+    id: uuidv4(),
+    name: "Creative Portfolio",
+    description:
+      "Visually stunning template for creative professionals, portfolios, and design presentations",
+    category: { id: "creative", name: "Creative" },
+    thumbnail:
+      "https://images.unsplash.com/photo-1523726491678-bf852e717f6a?q=80&w=2940&auto=format&fit=crop",
+    outlines: [
+      { id: uuidv4(), title: "Creative Introduction", order: 1 },
+      { id: uuidv4(), title: "Creative Process", order: 2 },
+      { id: uuidv4(), title: "Portfolio Showcase", order: 3 },
+      { id: uuidv4(), title: "Services & Pricing", order: 4 },
+      { id: uuidv4(), title: "Client Testimonials", order: 5 },
+      { id: uuidv4(), title: "Contact & Next Steps", order: 6 },
+    ],
+    slides: [
+      {
+        id: uuidv4(),
+        type: "accentLeft",
+        slideOrder: 1,
+        content: {
+          id: uuidv4(),
+          name: "Column",
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              name: "Resizable column",
+              type: "resizable-column",
+              content: [
+                {
+                  id: uuidv4(),
+                  alt: "Creative workspace with design elements and vibrant colors",
+                  name: "Image",
+                  type: "image",
+                  content:
+                    "https://images.unsplash.com/photo-1534531173927-aeb928d54385?q=80&w=2940&auto=format&fit=crop",
+                },
+              ],
+              restrictToDrop: true,
+            },
+            {
+              id: uuidv4(),
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: uuidv4(),
+                  name: "Heading1",
+                  type: "heading1",
+                  content: "Creative Vision 2024",
+                  placeholder: "Heading1",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "Showcasing our design philosophy, creative process, and innovative solutions for modern brands.",
+                  placeholder: "start typing here...",
+                },
+              ],
+              className: "w-full h-full p-8 flex justify-center items-center",
+              placeholder: "Heading1",
+            },
+          ],
+          restrictToDrop: true,
+        },
+        className: "min-h-[300px]",
+        slideName: "Creative Introduction",
+      },
+      {
+        id: uuidv4(),
+        slideOrder: 2,
+        type: "threeColumnsWithHeadings",
+        content: {
+          id: uuidv4(),
+          name: "Column",
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              name: "Heading2",
+              type: "heading2",
+              content: "Our Creative Process",
+              placeholder: "Heading2",
+            },
+            {
+              id: uuidv4(),
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: uuidv4(),
+                  name: "Heading3",
+                  type: "heading3",
+                  content: "Discovery",
+                  placeholder: "Heading3",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "We immerse ourselves in your brand and audience to understand core needs.",
+                  placeholder: "start typing here...",
+                },
+              ],
+              className: "p-4",
+            },
+            {
+              id: uuidv4(),
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: uuidv4(),
+                  name: "Heading3",
+                  type: "heading3",
+                  content: "Creation",
+                  placeholder: "Heading3",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "Our designers craft visual solutions that align with your strategic goals.",
+                  placeholder: "start typing here...",
+                },
+              ],
+              className: "p-4",
+            },
+            {
+              id: uuidv4(),
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: uuidv4(),
+                  name: "Heading3",
+                  type: "heading3",
+                  content: "Refinement",
+                  placeholder: "Heading3",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "We iterate and perfect our work until it exceeds expectation and delivers impact.",
+                  placeholder: "start typing here...",
+                },
+              ],
+              className: "p-4",
+            },
+          ],
+          restrictToDrop: true,
+        },
+        className: "min-h-[300px]",
+        slideName: "Creative Process",
+      },
+      {
+        id: uuidv4(),
+        slideOrder: 3,
+        type: "twoImageColumns",
+        content: {
+          id: uuidv4(),
+          name: "Column",
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              name: "Heading2",
+              type: "heading2",
+              content: "Portfolio Highlights",
+              placeholder: "Heading2",
+            },
+            {
+              id: uuidv4(),
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: uuidv4(),
+                  alt: "Brand identity design with logo mockups",
+                  name: "Image",
+                  type: "image",
+                  content:
+                    "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Heading3",
+                  type: "heading3",
+                  content: "Brand Identity",
+                  placeholder: "Heading3",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "Creating distinctive visual identities that capture brand essence and resonate with audiences.",
+                  placeholder: "start typing here...",
+                },
+              ],
+              className: "p-4",
+            },
+            {
+              id: uuidv4(),
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: uuidv4(),
+                  alt: "Digital interface design for mobile application",
+                  name: "Image",
+                  type: "image",
+                  content:
+                    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Heading3",
+                  type: "heading3",
+                  content: "UI/UX Design",
+                  placeholder: "Heading3",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "Crafting intuitive digital experiences that balance form and function for maximum user engagement.",
+                  placeholder: "start typing here...",
+                },
+              ],
+              className: "p-4",
+            },
+          ],
+          restrictToDrop: true,
+        },
+        className: "min-h-[300px]",
+        slideName: "Portfolio Showcase",
+      },
+      {
+        id: uuidv4(),
+        slideOrder: 4,
+        type: "tableLayout",
+        content: {
+          id: uuidv4(),
+          name: "Column",
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              name: "Heading2",
+              type: "heading2",
+              content: "Design Services & Pricing",
+              placeholder: "Heading2",
+            },
+            {
+              id: uuidv4(),
+              name: "Table",
+              type: "table",
+              content: [
+                ["Service", "Deliverables", "Timeline", "Investment"],
+                [
+                  "Brand Identity",
+                  "Logo, Guidelines, Assets",
+                  "3-4 weeks",
+                  "$2,500-5,000",
+                ],
+                [
+                  "Web Design",
+                  "Wireframes, UI Design, Prototype",
+                  "4-6 weeks",
+                  "$3,500-7,000",
+                ],
+                [
+                  "Print Design",
+                  "Business Cards, Brochures, Packaging",
+                  "2-3 weeks",
+                  "$1,500-3,000",
+                ],
+                [
+                  "Social Media",
+                  "Templates, Campaign Assets",
+                  "1-2 weeks",
+                  "$1,000-2,500",
+                ],
+              ],
+            },
+          ],
+          restrictToDrop: true,
+        },
+        className: "min-h-[300px]",
+        slideName: "Services & Pricing",
+      },
+      {
+        id: uuidv4(),
+        slideOrder: 5,
+        type: "textAndImage",
+        content: {
+          id: uuidv4(),
+          name: "Column",
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: uuidv4(),
+                  name: "Heading2",
+                  type: "heading2",
+                  content: "Client Testimonials",
+                  placeholder: "Heading2",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Blockquote",
+                  type: "blockquote",
+                  content:
+                    "Their creative team transformed our brand from ordinary to extraordinary. The attention to detail and strategic thinking behind each design decision was impressive.",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "— Sarah Johnson, Marketing Director at Elevate Brands",
+                  placeholder: "start typing here...",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Blockquote",
+                  type: "blockquote",
+                  content:
+                    "Working with this creative team gave us exactly what we needed: a visual identity that communicates our values and resonates with our audience.",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content: "— Michael Chen, Founder of Nexus Technologies",
+                  placeholder: "start typing here...",
+                },
+              ],
+              className: "w-full h-full p-8 flex justify-center items-center",
+            },
+            {
+              id: uuidv4(),
+              alt: "Happy clients in a creative meeting",
+              name: "Image",
+              type: "image",
+              content:
+                "https://images.unsplash.com/photo-1559223607-a43c990c692c?q=80&w=2940&auto=format&fit=crop",
+            },
+          ],
+          restrictToDrop: true,
+        },
+        className: "min-h-[300px]",
+        slideName: "Client Testimonials",
+      },
+      {
+        id: uuidv4(),
+        slideOrder: 6,
+        type: "accentRight",
+        content: {
+          id: uuidv4(),
+          name: "Column",
+          type: "column",
+          content: [
+            {
+              id: uuidv4(),
+              name: "Column",
+              type: "column",
+              content: [
+                {
+                  id: uuidv4(),
+                  name: "Heading2",
+                  type: "heading2",
+                  content: "Let's Create Together",
+                  placeholder: "Heading2",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "Ready to transform your visual identity and create meaningful connections with your audience?",
+                  placeholder: "start typing here...",
+                },
+                {
+                  id: uuidv4(),
+                  name: "Bullet List",
+                  type: "bulletList",
+                  content: [
+                    "Free initial consultation",
+                    "Customized project proposals",
+                    "Dedicated creative team",
+                    "Ongoing support and collaboration",
+                  ],
+                },
+                {
+                  id: uuidv4(),
+                  name: "Paragraph",
+                  type: "paragraph",
+                  content:
+                    "Contact us: hello@creativestudio.com | (555) 123-4567",
+                  placeholder: "start typing here...",
+                },
+              ],
+              className: "w-full h-full p-8 flex justify-center items-center",
+            },
+            {
+              id: uuidv4(),
+              name: "Resizable column",
+              type: "resizable-column",
+              content: [
+                {
+                  id: uuidv4(),
+                  alt: "Creative workspace with design tools and inspiration board",
+                  name: "Image",
+                  type: "image",
+                  content:
+                    "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=3069&auto=format&fit=crop",
+                },
+              ],
+              restrictToDrop: true,
+            },
+          ],
+          restrictToDrop: true,
+        },
+        className: "min-h-[300px]",
+        slideName: "Contact & Next Steps",
+      },
+    ],
   },
   // Data template
   {
     id: uuidv4(),
     name: "Data Analytics",
-    description: "Professional template for data presentations, analytics reports, and insights visualization",
+    description:
+      "Professional template for data presentations, analytics reports, and insights visualization",
     category: { id: "data", name: "Data" },
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+    outlines: [
+      { id: uuidv4(), title: "Data Overview", order: 1 },
+      { id: uuidv4(), title: "Key Metrics", order: 2 },
+      { id: uuidv4(), title: "Data Comparison", order: 3 },
+      { id: uuidv4(), title: "Regional Analysis", order: 4 },
+      { id: uuidv4(), title: "Key Insights", order: 5 },
+      { id: uuidv4(), title: "Recommendations", order: 6 },
+    ],
     slides: [
       {
         id: uuidv4(),
@@ -3561,10 +3635,11 @@ export const templates: Template[] = [
                   alt: "Data visualization dashboard with charts and graphs",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop"
-                }
+                  content:
+                    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop",
+                },
               ],
-              restrictToDrop: true
+              restrictToDrop: true,
             },
             {
               id: uuidv4(),
@@ -3576,24 +3651,25 @@ export const templates: Template[] = [
                   name: "Heading1",
                   type: "heading1",
                   content: "2024 Data Insights",
-                  placeholder: "Heading1"
+                  placeholder: "Heading1",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "A comprehensive analysis of key metrics, trends, and actionable insights for data-driven decision making.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "A comprehensive analysis of key metrics, trends, and actionable insights for data-driven decision making.",
+                  placeholder: "start typing here...",
+                },
               ],
               className: "w-full h-full p-8 flex justify-center items-center",
-              placeholder: "Heading1"
-            }
+              placeholder: "Heading1",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Data Overview"
+        slideName: "Data Overview",
       },
       {
         id: uuidv4(),
@@ -3609,7 +3685,7 @@ export const templates: Template[] = [
               name: "Heading2",
               type: "heading2",
               content: "Key Performance Indicators",
-              placeholder: "Heading2"
+              placeholder: "Heading2",
             },
             {
               id: uuidv4(),
@@ -3621,17 +3697,18 @@ export const templates: Template[] = [
                   name: "Heading3",
                   type: "heading3",
                   content: "Revenue Growth",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "23% increase year-over-year, exceeding market expectations.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "23% increase year-over-year, exceeding market expectations.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
+              className: "p-4",
             },
             {
               id: uuidv4(),
@@ -3643,17 +3720,18 @@ export const templates: Template[] = [
                   name: "Heading3",
                   type: "heading3",
                   content: "User Acquisition",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "42K new users this quarter, with 68% retention rate.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "42K new users this quarter, with 68% retention rate.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
+              className: "p-4",
             },
             {
               id: uuidv4(),
@@ -3665,23 +3743,24 @@ export const templates: Template[] = [
                   name: "Heading3",
                   type: "heading3",
                   content: "Conversion Rate",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "3.8% average conversion, up 1.2 percentage points from last period.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "3.8% average conversion, up 1.2 percentage points from last period.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
-            }
+              className: "p-4",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Key Metrics"
+        slideName: "Key Metrics",
       },
       {
         id: uuidv4(),
@@ -3697,7 +3776,7 @@ export const templates: Template[] = [
               name: "Heading2",
               type: "heading2",
               content: "Quarterly Comparison",
-              placeholder: "Heading2"
+              placeholder: "Heading2",
             },
             {
               id: uuidv4(),
@@ -3708,14 +3787,14 @@ export const templates: Template[] = [
                 ["Total Users", "128,450", "152,680", "187,920", "210,340"],
                 ["Avg. Session Duration", "4:32", "5:18", "6:07", "5:52"],
                 ["Bounce Rate", "42.3%", "38.7%", "34.2%", "32.8%"],
-                ["Revenue per User", "$24.50", "$27.80", "$31.20", "$34.70"]
-              ]
-            }
+                ["Revenue per User", "$24.50", "$27.80", "$31.20", "$34.70"],
+              ],
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Data Comparison"
+        slideName: "Data Comparison",
       },
       {
         id: uuidv4(),
@@ -3731,7 +3810,7 @@ export const templates: Template[] = [
               name: "Heading2",
               type: "heading2",
               content: "Regional Performance",
-              placeholder: "Heading2"
+              placeholder: "Heading2",
             },
             {
               id: uuidv4(),
@@ -3743,24 +3822,26 @@ export const templates: Template[] = [
                   alt: "Map visualization showing North America market data",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2940&auto=format&fit=crop"
+                  content:
+                    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2940&auto=format&fit=crop",
                 },
                 {
                   id: uuidv4(),
                   name: "Heading3",
                   type: "heading3",
                   content: "North America",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Market share increased by 12% with significant growth in enterprise segment.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Market share increased by 12% with significant growth in enterprise segment.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
+              className: "p-4",
             },
             {
               id: uuidv4(),
@@ -3772,30 +3853,32 @@ export const templates: Template[] = [
                   alt: "Map visualization showing EMEA region market data",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2940&auto=format&fit=crop"
+                  content:
+                    "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2940&auto=format&fit=crop",
                 },
                 {
                   id: uuidv4(),
                   name: "Heading3",
                   type: "heading3",
                   content: "EMEA Region",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "46% growth in new markets with strong adoption in financial services sector.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "46% growth in new markets with strong adoption in financial services sector.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
-            }
+              className: "p-4",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Regional Analysis"
+        slideName: "Regional Analysis",
       },
       {
         id: uuidv4(),
@@ -3816,7 +3899,7 @@ export const templates: Template[] = [
                   name: "Heading2",
                   type: "heading2",
                   content: "Key Insights & Trends",
-                  placeholder: "Heading2"
+                  placeholder: "Heading2",
                 },
                 {
                   id: uuidv4(),
@@ -3827,24 +3910,25 @@ export const templates: Template[] = [
                     "AI-powered recommendations improved conversion by 28%",
                     "User segmentation shows highest growth in 25-34 demographic",
                     "Average order value increased 18% following UX improvements",
-                    "Customer acquisition cost decreased by 12% through channel optimization"
-                  ]
-                }
+                    "Customer acquisition cost decreased by 12% through channel optimization",
+                  ],
+                },
               ],
-              className: "w-full h-full p-8 flex justify-center items-center"
+              className: "w-full h-full p-8 flex justify-center items-center",
             },
             {
               id: uuidv4(),
               alt: "Data trend visualization with colored charts and statistics",
               name: "Image",
               type: "image",
-              content: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2940&auto=format&fit=crop"
-            }
+              content:
+                "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2940&auto=format&fit=crop",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Key Insights"
+        slideName: "Key Insights",
       },
       {
         id: uuidv4(),
@@ -3865,14 +3949,15 @@ export const templates: Template[] = [
                   name: "Heading2",
                   type: "heading2",
                   content: "Strategic Recommendations",
-                  placeholder: "Heading2"
+                  placeholder: "Heading2",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Based on our comprehensive data analysis, we recommend the following action items:",
-                  placeholder: "start typing here..."
+                  content:
+                    "Based on our comprehensive data analysis, we recommend the following action items:",
+                  placeholder: "start typing here...",
                 },
                 {
                   id: uuidv4(),
@@ -3883,11 +3968,11 @@ export const templates: Template[] = [
                     "Optimize customer journey for mobile-first experience",
                     "Expand AI capabilities for personalized recommendations",
                     "Develop targeted campaigns for the growing 25-34 demographic",
-                    "Implement enhanced analytics tracking for deeper insights"
-                  ]
-                }
+                    "Implement enhanced analytics tracking for deeper insights",
+                  ],
+                },
               ],
-              className: "w-full h-full p-8 flex justify-center items-center"
+              className: "w-full h-full p-8 flex justify-center items-center",
             },
             {
               id: uuidv4(),
@@ -3899,19 +3984,20 @@ export const templates: Template[] = [
                   alt: "Strategic planning with data visualization dashboards",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=2940&auto=format&fit=crop"
-                }
+                  content:
+                    "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=2940&auto=format&fit=crop",
+                },
               ],
-              restrictToDrop: true
-            }
+              restrictToDrop: true,
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Recommendations"
-      }
-    ]
-  },  
+        slideName: "Recommendations",
+      },
+    ],
+  },
   // Minimalist template
   // {
   //   id: uuidv4(),
@@ -4024,9 +4110,19 @@ export const templates: Template[] = [
   {
     id: uuidv4(),
     name: "Minimalist Elegance",
-    description: "Clean, simple design focused on essential content with refined typography and ample white space",
+    description:
+      "Clean, simple design focused on essential content with refined typography and ample white space",
     category: { id: "minimalist", name: "Minimalist" },
-    thumbnail: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2940&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2940&auto=format&fit=crop",
+    outlines: [
+      { id: uuidv4(), title: "Minimalist Introduction", order: 1 },
+      { id: uuidv4(), title: "Core Principles", order: 2 },
+      { id: uuidv4(), title: "Design Elements", order: 3 },
+      { id: uuidv4(), title: "Comparison", order: 4 },
+      { id: uuidv4(), title: "Philosophy", order: 5 },
+      { id: uuidv4(), title: "Next Steps", order: 6 },
+    ],
     slides: [
       {
         id: uuidv4(),
@@ -4047,10 +4143,11 @@ export const templates: Template[] = [
                   alt: "Minimalist workspace with white desk and simple objects",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=2787&auto=format&fit=crop"
-                }
+                  content:
+                    "https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=2787&auto=format&fit=crop",
+                },
               ],
-              restrictToDrop: true
+              restrictToDrop: true,
             },
             {
               id: uuidv4(),
@@ -4062,24 +4159,25 @@ export const templates: Template[] = [
                   name: "Heading1",
                   type: "heading1",
                   content: "Less is more.",
-                  placeholder: "Heading1"
+                  placeholder: "Heading1",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Clarity through simplicity. Focusing on what truly matters.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Clarity through simplicity. Focusing on what truly matters.",
+                  placeholder: "start typing here...",
+                },
               ],
               className: "w-full h-full p-8 flex justify-center items-center",
-              placeholder: "Heading1"
-            }
+              placeholder: "Heading1",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Minimalist Introduction"
+        slideName: "Minimalist Introduction",
       },
       {
         id: uuidv4(),
@@ -4095,7 +4193,7 @@ export const templates: Template[] = [
               name: "Heading2",
               type: "heading2",
               content: "Core Principles",
-              placeholder: "Heading2"
+              placeholder: "Heading2",
             },
             {
               id: uuidv4(),
@@ -4107,17 +4205,18 @@ export const templates: Template[] = [
                   name: "Heading3",
                   type: "heading3",
                   content: "Simplicity",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Remove the unnecessary. Keep only what serves a purpose.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Remove the unnecessary. Keep only what serves a purpose.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
+              className: "p-4",
             },
             {
               id: uuidv4(),
@@ -4129,17 +4228,18 @@ export const templates: Template[] = [
                   name: "Heading3",
                   type: "heading3",
                   content: "Clarity",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Clear communication without distraction or ornamentation.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Clear communication without distraction or ornamentation.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
+              className: "p-4",
             },
             {
               id: uuidv4(),
@@ -4151,23 +4251,24 @@ export const templates: Template[] = [
                   name: "Heading3",
                   type: "heading3",
                   content: "Focus",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Emphasize the essential. Draw attention to what matters most.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Emphasize the essential. Draw attention to what matters most.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
-            }
+              className: "p-4",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Core Principles"
+        slideName: "Core Principles",
       },
       {
         id: uuidv4(),
@@ -4183,7 +4284,7 @@ export const templates: Template[] = [
               name: "Heading2",
               type: "heading2",
               content: "Minimalist Design",
-              placeholder: "Heading2"
+              placeholder: "Heading2",
             },
             {
               id: uuidv4(),
@@ -4195,24 +4296,26 @@ export const templates: Template[] = [
                   alt: "Clean, minimal interior design with monochrome palette",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2940&auto=format&fit=crop"
+                  content:
+                    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2940&auto=format&fit=crop",
                 },
                 {
                   id: uuidv4(),
                   name: "Heading3",
                   type: "heading3",
                   content: "Space",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Using negative space as a design element. Allowing content to breathe.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Using negative space as a design element. Allowing content to breathe.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
+              className: "p-4",
             },
             {
               id: uuidv4(),
@@ -4224,30 +4327,32 @@ export const templates: Template[] = [
                   alt: "Minimalist product with clean lines and simple form",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2940&auto=format&fit=crop"
+                  content:
+                    "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2940&auto=format&fit=crop",
                 },
                 {
                   id: uuidv4(),
                   name: "Heading3",
                   type: "heading3",
                   content: "Form",
-                  placeholder: "Heading3"
+                  placeholder: "Heading3",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Clean lines, intentional composition, and refined aesthetics that communicate purpose.",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Clean lines, intentional composition, and refined aesthetics that communicate purpose.",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "p-4"
-            }
+              className: "p-4",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Design Elements"
+        slideName: "Design Elements",
       },
       {
         id: uuidv4(),
@@ -4263,7 +4368,7 @@ export const templates: Template[] = [
               name: "Heading2",
               type: "heading2",
               content: "Simplified Approach",
-              placeholder: "Heading2"
+              placeholder: "Heading2",
             },
             {
               id: uuidv4(),
@@ -4271,17 +4376,33 @@ export const templates: Template[] = [
               type: "table",
               content: [
                 ["Element", "Traditional", "Minimalist"],
-                ["Typography", "Multiple fonts, sizes, weights", "Single typeface, limited variations"],
-                ["Color", "Expansive palette, gradients", "Monochrome or limited palette"],
-                ["Layout", "Dense, filled spaces", "Generous whitespace, breathing room"],
-                ["Content", "Comprehensive, detailed", "Essential, focused on key points"]
-              ]
-            }
+                [
+                  "Typography",
+                  "Multiple fonts, sizes, weights",
+                  "Single typeface, limited variations",
+                ],
+                [
+                  "Color",
+                  "Expansive palette, gradients",
+                  "Monochrome or limited palette",
+                ],
+                [
+                  "Layout",
+                  "Dense, filled spaces",
+                  "Generous whitespace, breathing room",
+                ],
+                [
+                  "Content",
+                  "Comprehensive, detailed",
+                  "Essential, focused on key points",
+                ],
+              ],
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Comparison"
+        slideName: "Comparison",
       },
       {
         id: uuidv4(),
@@ -4302,14 +4423,15 @@ export const templates: Template[] = [
                   name: "Heading2",
                   type: "heading2",
                   content: "Minimal Impact",
-                  placeholder: "Heading2"
+                  placeholder: "Heading2",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "The minimalist approach extends beyond design to a philosophy of sustainable living and business practices.",
-                  placeholder: "start typing here..."
+                  content:
+                    "The minimalist approach extends beyond design to a philosophy of sustainable living and business practices.",
+                  placeholder: "start typing here...",
                 },
                 {
                   id: uuidv4(),
@@ -4320,24 +4442,25 @@ export const templates: Template[] = [
                     "Focus on quality over quantity",
                     "Intentional decision-making",
                     "Sustainable, long-lasting solutions",
-                    "Clarity of purpose and vision"
-                  ]
-                }
+                    "Clarity of purpose and vision",
+                  ],
+                },
               ],
-              className: "w-full h-full p-8 flex justify-center items-center"
+              className: "w-full h-full p-8 flex justify-center items-center",
             },
             {
               id: uuidv4(),
               alt: "Minimalist lifestyle with few carefully selected objects",
               name: "Image",
               type: "image",
-              content: "https://images.unsplash.com/photo-1472289065668-ce650ac443d2?q=80&w=2938&auto=format&fit=crop"
-            }
+              content:
+                "https://images.unsplash.com/photo-1472289065668-ce650ac443d2?q=80&w=2938&auto=format&fit=crop",
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Philosophy"
+        slideName: "Philosophy",
       },
       {
         id: uuidv4(),
@@ -4358,14 +4481,15 @@ export const templates: Template[] = [
                   name: "Heading2",
                   type: "heading2",
                   content: "Simply Begin",
-                  placeholder: "Heading2"
+                  placeholder: "Heading2",
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Start your minimalist journey with these essential steps:",
-                  placeholder: "start typing here..."
+                  content:
+                    "Start your minimalist journey with these essential steps:",
+                  placeholder: "start typing here...",
                 },
                 {
                   id: uuidv4(),
@@ -4376,18 +4500,19 @@ export const templates: Template[] = [
                     "Remove the unnecessary",
                     "Create space for intention",
                     "Refine and iterate",
-                    "Focus on quality over quantity"
-                  ]
+                    "Focus on quality over quantity",
+                  ],
                 },
                 {
                   id: uuidv4(),
                   name: "Paragraph",
                   type: "paragraph",
-                  content: "Contact: hello@minimalist.design | @minimalist.design",
-                  placeholder: "start typing here..."
-                }
+                  content:
+                    "Contact: hello@minimalist.design | @minimalist.design",
+                  placeholder: "start typing here...",
+                },
               ],
-              className: "w-full h-full p-8 flex justify-center items-center"
+              className: "w-full h-full p-8 flex justify-center items-center",
             },
             {
               id: uuidv4(),
@@ -4399,18 +4524,19 @@ export const templates: Template[] = [
                   alt: "Minimalist workspace with single object on white background",
                   name: "Image",
                   type: "image",
-                  content: "https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=2787&auto=format&fit=crop"
-                }
+                  content:
+                    "https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=2787&auto=format&fit=crop",
+                },
               ],
-              restrictToDrop: true
-            }
+              restrictToDrop: true,
+            },
           ],
-          restrictToDrop: true
+          restrictToDrop: true,
         },
         className: "min-h-[300px]",
-        slideName: "Next Steps"
-      }
-    ]
+        slideName: "Next Steps",
+      },
+    ],
   },
 
   // Study template
@@ -4422,6 +4548,23 @@ export const templates: Template[] = [
     category: { id: "study", name: "Study" },
     thumbnail:
       "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2940&auto=format&fit=crop",
+    outlines: [
+      {
+        id: uuidv4(),
+        title: "Research Title",
+        order: 1,
+      },
+      {
+        id: uuidv4(),
+        title: "Research Methods",
+        order: 2,
+      },
+      {
+        id: uuidv4(),
+        title: "Research Findings",
+        order: 3,
+      },
+    ],
     slides: [
       {
         id: uuidv4(),
