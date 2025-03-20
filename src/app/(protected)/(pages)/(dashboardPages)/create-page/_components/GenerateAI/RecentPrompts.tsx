@@ -69,7 +69,7 @@ const RecentPrompts = () => {
                 {/* Motion.span for the creative ai */}
                   <motion.span
                   variants={itemVariants}
-                  className="text-sm text-vivid"
+                  className="text-sm text-presai"
                 >
                   Creative AI
                 </motion.span>

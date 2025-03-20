@@ -78,7 +78,7 @@ const CreatePage = ({ onSelectOption }: Props) => {
                   </p>
                   <p
                     className={`${
-                      option.highlight ? "text-vivid" : "text-primary"
+                      option.highlight ? "text-presai" : "text-primary"
                     } text-4xl font-bold`}
                   >
                     {option.highlightedText}

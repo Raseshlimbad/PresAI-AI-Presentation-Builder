@@ -198,7 +198,7 @@ const CreativeAI = ({ onBack }: Props) => {
         {/* Title */}
         <motion.div variants={itemVariants} className="text-center space-y-2">
           <h1 className="text-4xl font-bold text-primary">
-            Generate with <span className="text-vivid">Creative AI</span>
+            Generate with <span className="text-presai">Creative AI</span>
           </h1>
           <p className="dark:text-secondary">
             What would you like to create today?
