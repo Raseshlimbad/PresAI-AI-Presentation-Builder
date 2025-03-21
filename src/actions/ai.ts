@@ -1588,21 +1588,185 @@ export const generateSlideJson = async (outline: string, slideOrder: number): Pr
 // Now generate the JSON output based on these rules.`;
 
 // ------test-prompt-run 7 : Good run - Table generation formate changes and list type content empty sometimes @@@ No parsing error--------------------------------------------------------------
+
+// ------Perfect Run with image generation  --------------------------------------------------------------
+
+// const prompt = `### Guidelines
+// You are a highly creative AI that generates JSON-based layouts for presentations. I will provide you with a pattern and a format to follow, and for each outline, you must generate a unique layout and content, giving me the output in the JSON format expected.
+// Our final JSON output is a combination of layouts and elements. The available LAYOUT TYPES are as follows: "accentLeft", "accentRight", "imageAndText", "textAndImage", "twoColumns", "twoColumnsWithHeadings", "threeColumns", "threeColumnsWithHeadings", "fourColumns", "twoImageColumns", "threeImageColumns", "fourImageColumns", "tableLayout".
+// The available CONTENT TYPES are: "heading1", "heading2", "heading3", "heading4", "title", "paragraph", "table", "resizable-column", "image", "blockquote", "numberedList", "bulletList", "todoList", "calloutBox", "codeBlock", "tableOfContents", "divider", "column".
+
+// The output must be a single JSON object.
+// 1. Write a layout based on the specific outline provided. Do not use types that are not mentioned in the example layouts.
+// 2. Ensure the layout is unique.
+// 3. Adhere to the structure of existing layouts.
+// 4. Fill placeholder data into content fields where required. If the outline does not provide specific content, use meaningful placeholder text from the outline's context or the "placeholder" field, ensuring it is non-empty.
+// 5. Generate unique image placeholders for the 'content' property of image components and also alt text according to the outline.
+// 6. Ensure proper formatting and schema alignment for the output JSON.
+// 7. The "content" property of the layout must strictly use only the "content" key. Do not use alternative names such as "content1", "content2", "content3", or any other variations—only "content" is permitted.
+
+// 8. The "content" property of the layout must start with a "column", and within the column's content property, you can use any of the CONTENT TYPES provided above. 
+//    - "resizable-column", "column", and other multi-element content types (e.g., "table", "numberedList", "bulletList", "todoList") must have their "content" property as an array because they may contain nested elements.
+//    - Static elements like "title", "heading1", "heading2", "heading3", "heading4", "paragraph", "blockquote", "calloutBox", "codeBlock", "tableOfContents", and "divider" must have their "content" property set to a string.
+//    - Here is an example of what one layout with one column with a title inside would look like:
+
+//    ${JSON.stringify({
+//      id: uuidv4(),
+//      slideName: "Blank card",
+//      type: "blank-card",
+//      className: "p-8 mx-auto flex justify-center items-center min-h-[200px]",
+//      content: {
+//        id: uuidv4(),
+//        type: "column",
+//        name: "Column",
+//        content: [
+//          {
+//            id: uuidv4(),
+//            type: "title",
+//            name: "Title",
+//            content: "Untitled Card",
+//            placeholder: "Untitled Card",
+//          },
+//        ],
+//      },
+//    })}
+
+// 9. Here is a final example output to ensure consistency and correctness:
+// ${JSON.stringify({
+//   id: uuidv4(),
+//   slideName: "Three Columns with Lists",
+//   type: "threeColumns",
+//   className: "min-h-[300px]",
+//   content: {
+//     id: uuidv4(),
+//     type: "column",
+//     name: "Column",
+//     restrictDropTo: true,
+//     content: [
+//       {
+//         id: uuidv4(),
+//         type: "resizable-column",
+//         name: "Resizable column 1",
+//         restrictToDrop: true,
+//         content: [
+//           {
+//             id: uuidv4(),
+//             type: "heading2",
+//             name: "Heading2",
+//             content: "Project Steps",
+//             placeholder: "Heading2",
+//           },
+//           {
+//             id: uuidv4(),
+//             type: "numberedList",
+//             name: "NumberedList",
+//             content: [
+//               "Step 1: Define project scope.",
+//               "Step 2: Assign team roles.",
+//               "Step 3: Set deadlines.",
+//               "Step 4: Review progress."
+//             ],
+//             placeholder: "List Item",
+//           },
+//         ],
+//       },
+//       {
+//         id: uuidv4(),
+//         type: "resizable-column",
+//         name: "Resizable column 2",
+//         restrictToDrop: true,
+//         content: [
+//           {
+//             id: uuidv4(),
+//             type: "heading2",
+//             name: "Heading2",
+//             content: "Key Features",
+//             placeholder: "Heading2",
+//           },
+//           {
+//             id: uuidv4(),
+//             type: "bulletList",
+//             name: "BulletList",
+//             content: [
+//               "Real-time collaboration.",
+//               "Responsive design.",
+//               "SEO optimization.",
+//               "Fast load times."
+//             ],
+//             placeholder: "List Item",
+//           },
+//         ],
+//       },
+//       {
+//         id: uuidv4(),
+//         type: "resizable-column",
+//         name: "Resizable column 3",
+//         restrictToDrop: true,
+//         content: [
+//           {
+//             id: uuidv4(),
+//             type: "heading2",
+//             name: "Heading2",
+//             content: "Tasks",
+//             placeholder: "Heading2",
+//           },
+//           {
+//             id: uuidv4(),
+//             type: "todoList",
+//             name: "TodoList",
+//             content: [
+//               "[ ] Finalize design mockups.",
+//               "[x] Deploy initial version.",
+//               "[ ] Test user feedback.",
+//               "[x] Optimize performance."
+//             ],
+//             placeholder: "List Item",
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// })}
+
+// 10. Strictly ensure that the "content" property of all CONTENT TYPES ("heading1", "heading2", "heading3", "heading4", "title", "paragraph", "table", "resizable-column", "image", "blockquote", "numberedList", "bulletList", "todoList", "calloutBox", "codeBlock", "tableOfContents", "divider", "column") is never empty. Populate the "content" field as follows, with no exceptions:
+//    - For "heading1", "heading2", "heading3", "heading4", "title": Use the "placeholder" value or a concise, contextually relevant string based on the outline (e.g., "Section Title").
+//    - For "paragraph", "blockquote", "calloutBox": Use the "placeholder" value or a brief sentence relevant to the outline (e.g., "Description goes here.").
+//    - For "codeBlock": Use a sample code snippet relevant to the outline or "console.log('Example');".
+//    - For "table": Use an array with at least one row (e.g., [["Header1", "Header2"], ["Data1", "Data2"]]).
+//    - For "resizable-column", "column": Use an array with at least one nested element (e.g., a "paragraph" or "image").
+//    - For "image": Use a valid URL (e.g., from Unsplash) relevant to the outline.
+//    - For "numberedList": Always populate with at least three plain strings, each contextually relevant to the outline (e.g., ["Step 1: Define goals.", "Step 2: Assign tasks.", "Step 3: Review progress."]).
+//    - For "bulletList": Always populate with at least three plain strings, each contextually relevant to the outline (e.g., ["Feature 1", "Feature 2", "Feature 3"]).
+//    - For "todoList": Always populate with at least three strings prefixed with "[ ]" or "[x]", each contextually relevant to the outline (e.g., ["[ ] Task 1", "[x] Task 2", "[ ] Task 3"]).
+//    - For "tableOfContents": Use a string like "TOC Placeholder".
+//    - For "divider": Use a string like "Divider Line".
+
+// 11. Generate the JSON Output for the Following Outline:**  
+//   **Outline:** ${outline}  
+
+// 12. Before finalizing the output, validate that the "content" arrays for "numberedList", "bulletList", and "todoList" are never empty and contain at least three items. If they are empty or have fewer than three items, populate them with contextually relevant defaults based on the outline or slideName.
+
+// For Images:
+// - The alt text should describe the image clearly and concisely.
+// - Focus on the main subject(s) of the image and any relevant context.
+// - Example: Instead of "An image of a laptop," use "A developer coding on a laptop in a dimly lit room."
+
+// Now generate the JSON output based on these rules.`;
+
 const prompt = `### Guidelines
 You are a highly creative AI that generates JSON-based layouts for presentations. I will provide you with a pattern and a format to follow, and for each outline, you must generate a unique layout and content, giving me the output in the JSON format expected.
-Our final JSON output is a combination of layouts and elements. The available LAYOUT TYPES are as follows: "accentLeft", "accentRight", "imageAndText", "textAndImage", "twoColumns", "twoColumnsWithHeadings", "threeColumns", "threeColumnsWithHeadings", "fourColumns", "twoImageColumns", "threeImageColumns", "fourImageColumns", "tableLayout".
-The available CONTENT TYPES are: "heading1", "heading2", "heading3", "heading4", "title", "paragraph", "table", "resizable-column", "image", "blockquote", "numberedList", "bulletList", "todoList", "calloutBox", "codeBlock", "tableOfContents", "divider", "column".
+Our final JSON output is a combination of layouts and elements. The available LAYOUT TYPES are as follows: "accentLeft", "accentRight", "twoColumns", "twoColumnsWithHeadings", "threeColumns", "threeColumnsWithHeadings", "fourColumns", "tableLayout".
+The available CONTENT TYPES are: "heading1", "heading2", "heading3", "heading4", "title", "paragraph", "table", "resizable-column", "blockquote", "numberedList", "bulletList", "todoList", "calloutBox", "codeBlock", "tableOfContents", "divider", "column".
 
 The output must be a single JSON object.
 1. Write a layout based on the specific outline provided. Do not use types that are not mentioned in the example layouts.
 2. Ensure the layout is unique.
 3. Adhere to the structure of existing layouts.
 4. Fill placeholder data into content fields where required. If the outline does not provide specific content, use meaningful placeholder text from the outline's context or the "placeholder" field, ensuring it is non-empty.
-5. Generate unique image placeholders for the 'content' property of image components and also alt text according to the outline.
-6. Ensure proper formatting and schema alignment for the output JSON.
-7. The "content" property of the layout must strictly use only the "content" key. Do not use alternative names such as "content1", "content2", "content3", or any other variations—only "content" is permitted.
+5. Ensure proper formatting and schema alignment for the output JSON.
+6. The "content" property of the layout must strictly use only the "content" key. Do not use alternative names such as "content1", "content2", "content3", or any other variations—only "content" is permitted.
 
-8. The "content" property of the layout must start with a "column", and within the column's content property, you can use any of the CONTENT TYPES provided above. 
+7. The "content" property of the layout must start with a "column", and within the column's content property, you can use any of the CONTENT TYPES provided above. 
    - "resizable-column", "column", and other multi-element content types (e.g., "table", "numberedList", "bulletList", "todoList") must have their "content" property as an array because they may contain nested elements.
    - Static elements like "title", "heading1", "heading2", "heading3", "heading4", "paragraph", "blockquote", "calloutBox", "codeBlock", "tableOfContents", and "divider" must have their "content" property set to a string.
    - Here is an example of what one layout with one column with a title inside would look like:
@@ -1628,7 +1792,7 @@ The output must be a single JSON object.
      },
    })}
 
-9. Here is a final example output to ensure consistency and correctness:
+8. Here is a final example output to ensure consistency and correctness:
 ${JSON.stringify({
   id: uuidv4(),
   slideName: "Three Columns with Lists",
@@ -1725,28 +1889,22 @@ ${JSON.stringify({
   },
 })}
 
-10. Strictly ensure that the "content" property of all CONTENT TYPES ("heading1", "heading2", "heading3", "heading4", "title", "paragraph", "table", "resizable-column", "image", "blockquote", "numberedList", "bulletList", "todoList", "calloutBox", "codeBlock", "tableOfContents", "divider", "column") is never empty. Populate the "content" field as follows, with no exceptions:
+9. Strictly ensure that the "content" property of all CONTENT TYPES ("heading1", "heading2", "heading3", "heading4", "title", "paragraph", "table", "resizable-column", "blockquote", "numberedList", "bulletList", "todoList", "calloutBox", "codeBlock", "tableOfContents", "divider", "column") is never empty. Populate the "content" field as follows, with no exceptions:
    - For "heading1", "heading2", "heading3", "heading4", "title": Use the "placeholder" value or a concise, contextually relevant string based on the outline (e.g., "Section Title").
    - For "paragraph", "blockquote", "calloutBox": Use the "placeholder" value or a brief sentence relevant to the outline (e.g., "Description goes here.").
    - For "codeBlock": Use a sample code snippet relevant to the outline or "console.log('Example');".
    - For "table": Use an array with at least one row (e.g., [["Header1", "Header2"], ["Data1", "Data2"]]).
-   - For "resizable-column", "column": Use an array with at least one nested element (e.g., a "paragraph" or "image").
-   - For "image": Use a valid URL (e.g., from Unsplash) relevant to the outline.
+   - For "resizable-column", "column": Use an array with at least one nested element (e.g., a "paragraph").
    - For "numberedList": Always populate with at least three plain strings, each contextually relevant to the outline (e.g., ["Step 1: Define goals.", "Step 2: Assign tasks.", "Step 3: Review progress."]).
    - For "bulletList": Always populate with at least three plain strings, each contextually relevant to the outline (e.g., ["Feature 1", "Feature 2", "Feature 3"]).
    - For "todoList": Always populate with at least three strings prefixed with "[ ]" or "[x]", each contextually relevant to the outline (e.g., ["[ ] Task 1", "[x] Task 2", "[ ] Task 3"]).
    - For "tableOfContents": Use a string like "TOC Placeholder".
    - For "divider": Use a string like "Divider Line".
 
-11. Generate the JSON Output for the Following Outline:**  
-  **Outline:** ${outline}  
+10. Generate the JSON Output for the Following Outline:**  
+   **Outline:** ${outline}  
 
-12. Before finalizing the output, validate that the "content" arrays for "numberedList", "bulletList", and "todoList" are never empty and contain at least three items. If they are empty or have fewer than three items, populate them with contextually relevant defaults based on the outline or slideName.
-
-For Images:
-- The alt text should describe the image clearly and concisely.
-- Focus on the main subject(s) of the image and any relevant context.
-- Example: Instead of "An image of a laptop," use "A developer coding on a laptop in a dimly lit room."
+11. Before finalizing the output, validate that the "content" arrays for "numberedList", "bulletList", and "todoList" are never empty and contain at least three items. If they are empty or have fewer than three items, populate them with contextually relevant defaults based on the outline or slideName.
 
 Now generate the JSON output based on these rules.`;
 
