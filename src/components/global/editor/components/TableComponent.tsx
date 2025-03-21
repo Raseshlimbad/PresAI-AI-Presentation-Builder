@@ -372,43 +372,61 @@ const TableComponent = ({
   const [colSizes, setColSizes] = useState<number[]>([]);
   const autosaveTimerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // console.log("content:", content);
+
   /** 🔥 Recursive function to flatten nested content */
+  // const flattenContent = (data: TableRow[]): string[][] => {
+  //   if (!Array.isArray(data) || data.length === 0) return [];
+  
+  //   const allHeaders = new Set<string>();
+  
+  //   /** Collect all unique headers, excluding "id" */
+  //   const extractHeaders = (obj: TableRow) => {
+  //     Object.keys(obj).forEach((key) => {
+  //       if (key !== "id") {
+  //         allHeaders.add(key);
+  //       }
+  
+  //       const value = obj[key];
+  //       if (Array.isArray(value) && value.length > 0 && typeof value[0] === "object") {
+  //         value.forEach(extractHeaders); // Recursively extract headers from nested objects
+  //       }
+  //     });
+  //   };
+  
+  //   data.forEach(extractHeaders);
+  //   const headers = Array.from(allHeaders);
+  
+  //   /** Convert objects to row data, excluding "id" */
+  //   const processRows = (obj: TableRow): string[] => {
+  //     return headers.map((header) => {
+  //       const value = obj[header];
+  
+  //       if (Array.isArray(value) && value.length > 0 && typeof value[0] === "object") {
+  //         return value.map((nestedObj) => processRows(nestedObj).join(" | ")).join("\n");
+  //       }
+  
+  //       return typeof value === "string" ? value : ""; // Default empty cell if missing
+  //     });
+  //   };
+  
+  //   return [headers, ...data.map(processRows)];
+  // };
+
   const flattenContent = (data: TableRow[]): string[][] => {
     if (!Array.isArray(data) || data.length === 0) return [];
-
-    const allHeaders = new Set<string>();
-
-    /** Collect all unique headers from every object */
-    const extractHeaders = (obj: TableRow) => {
-      Object.keys(obj).forEach((key) => {
-        allHeaders.add(key);
-        const value = obj[key];
-
-        if (Array.isArray(value) && value.length > 0 && typeof value[0] === "object") {
-          value.forEach(extractHeaders); // Recursively extract headers from nested objects
-        }
-      });
-    };
-
-    data.forEach(extractHeaders);
-    const headers = Array.from(allHeaders);
-
-    /** Convert objects to row data */
+  
+    /** Convert objects to row data, excluding "id" and only including values at "0", "1", "2", ... */
     const processRows = (obj: TableRow): string[] => {
-      return headers.map((header) => {
-        const value = obj[header];
-
-        if (Array.isArray(value) && value.length > 0 && typeof value[0] === "object") {
-          return value.map((nestedObj) => processRows(nestedObj).join(" | ")).join("\n"); // Flatten nested content
-        }
-
-        return typeof value === "string" ? value : ""; // Default empty cell if missing
-      });
+      return Object.keys(obj)
+        .filter((key) => key === "0" || key === "1" || key === "2") // Only keep keys "0", "1", "2"
+        .map((key) => obj[key] as string); // Return values for those keys
     };
-
-    return [headers, ...data.map(processRows)];
+  
+    return data.map(processRows);
   };
 
+  
   /** 🔥 Initialize tableData recursively */
   const initializeTableData = () => {
     if (Array.isArray(content) && content.length > 0 && typeof content[0] === "object") {
@@ -519,13 +537,14 @@ const TableComponent = ({
                   {colIndex > 0 && !isPreview && <ResizableHandle />}
                   <ResizablePanel
                     defaultSize={colSizes[colIndex] || 100 / row.length}
-                    className="flex items-center justify-center"
+                    className={`flex items-center justify-center  ${rowIndex === 0 ? 'font-bold bg-gray-300 dark:bg-gray-800' : ''}`}
                   >
                     <input
                       value={cell}
                       onChange={(e) => updateCell(rowIndex, colIndex, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(e, rowIndex)}
-                      className="w-full h-full p-2 bg-transparent text-xs text-center border-r border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      // className="w-full h-full p-2 bg-transparent text-xs text-center border-r border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={`w-full h-full p-2 bg-transparent text-xs text-center border-r border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500`}
                       style={{ color: currentTheme.fontColor }}
                       placeholder="Type here"
                       readOnly={!isEditable || isPreview}

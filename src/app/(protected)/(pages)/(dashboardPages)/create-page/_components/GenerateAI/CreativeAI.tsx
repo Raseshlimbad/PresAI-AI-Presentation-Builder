@@ -233,7 +233,7 @@ const CreativeAI = ({ onBack }: Props) => {
                 {/* Select Content */}
                 <SelectContent className="w-fit">
                   {/* Map through 15 possible cards and show them as select items */}
-                  {Array.from({ length: 5 }, (_, i) => i + 6).map((num) => (
+                  {Array.from({ length: 15 }, (_, i) => i + 6).map((num) => (
                     <SelectItem
                       key={num}
                       value={num.toString()}
