@@ -1,10 +1,18 @@
-'use server'
+"use server";
 
 import { client } from "@/lib/prisma";
 import { onAuthenticateUser } from "./user";
-import { Category, OutlineCard, Slide, Theme } from "@/lib/types";
+import { OutlineCard, Slide } from "@/lib/types";
 import { JsonValue } from "@prisma/client/runtime/library";
 import { v4 as uuidv4 } from "uuid";
+
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+  api_secret: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET_KEY,
+});
 
 // Get All Projects #########################################################################################################################################
 export const getAllProjects = async () => {
@@ -75,7 +83,6 @@ export const getRecentProjects = async () => {
 
 // Recover Project #########################################################################################################################################
 export const recoverProject = async (projectId: string) => {
-
   try {
     // Check User
     const checkUser = await onAuthenticateUser();
@@ -85,17 +92,17 @@ export const recoverProject = async (projectId: string) => {
 
     // Recover Project
     const updatedProject = await client.project.update({
-      where:{
+      where: {
         id: projectId,
         userId: checkUser.user.id,
       },
-      data:{
+      data: {
         isDeleted: false,
-      }
-    })
+      },
+    });
 
     // If Failed to Recover Project
-    if(!updatedProject){
+    if (!updatedProject) {
       return { status: 500, error: "Failed to recover project" };
     }
 
@@ -118,17 +125,17 @@ export const deleteProject = async (projectId: string) => {
 
     // Delete Project
     const updatedProject = await client.project.update({
-      where:{
+      where: {
         id: projectId,
         userId: checkUser.user.id,
       },
-      data:{
+      data: {
         isDeleted: true,
-      }
-    })
+      },
+    });
 
     // If Failed to Delete Project
-    if(!updatedProject){
+    if (!updatedProject) {
       return { status: 500, error: "Failed to delete project" };
     }
 
@@ -138,22 +145,22 @@ export const deleteProject = async (projectId: string) => {
     console.log("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
-}
+};
 
 // Create Project #########################################################################################################################################
 export const createProject = async (title: string, outlines: OutlineCard[]) => {
   try {
     // Check if Title and Outlines are Required
-    if(!title || !outlines || outlines.length === 0){
+    if (!title || !outlines || outlines.length === 0) {
       return { status: 400, error: "Title and outlines are required" };
     }
 
     // Map Outlines
-    const alloutlines = outlines.map((outline) => outline.title)
+    const alloutlines = outlines.map((outline) => outline.title);
 
     // Check User
     const checkuser = await onAuthenticateUser();
-    if(checkuser.status !== 200 || !checkuser.user){
+    if (checkuser.status !== 200 || !checkuser.user) {
       return { status: 403, error: "User Not Authanticated" };
     }
 
@@ -169,7 +176,7 @@ export const createProject = async (title: string, outlines: OutlineCard[]) => {
     });
 
     // If Failed to Create Project
-    if(!project){
+    if (!project) {
       return { status: 500, error: "Failed to create project" };
     }
 
@@ -179,7 +186,7 @@ export const createProject = async (title: string, outlines: OutlineCard[]) => {
     console.log("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
-}
+};
 
 // Create Template Project 1 ####################################################################################################
 export const createTemplateProject = async (
@@ -202,7 +209,6 @@ export const createTemplateProject = async (
     if (checkUser.status !== 200 || !checkUser.user) {
       return { status: 403, error: "User Not Authenticated" };
     }
-
 
     // Prepare Slides to be saved as JSON
     // const serializedSlides = slides.map((slide) => ({
@@ -228,7 +234,7 @@ export const createTemplateProject = async (
         updatedAt: new Date(),
         isDeleted: false,
         isSellable: false,
-        themeName: 'dark', // Default theme (could be customized as needed)
+        themeName: "dark", // Default theme (could be customized as needed)
       },
     });
 
@@ -296,25 +302,22 @@ export const createTemplateProject = async (
 //   }
 // };
 
-
-
-
 // Get Project By ID #########################################################################################################################################
 export const getProjectById = async (projectId: string) => {
   try {
     // Check User
     const checkUser = await onAuthenticateUser();
-    if(checkUser.status !== 200 || !checkUser.user){
+    if (checkUser.status !== 200 || !checkUser.user) {
       return { status: 403, error: "User Not Authanticated" };
     }
 
     // Get Project
     const project = await client.project.findFirst({
-      where: { id: projectId}
-    })
+      where: { id: projectId },
+    });
 
     // If Project Not Found
-    if(!project){
+    if (!project) {
       return { status: 404, error: "Project Not Found" };
     }
 
@@ -324,7 +327,7 @@ export const getProjectById = async (projectId: string) => {
     console.log("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
-}
+};
 
 // Get Project Title #########################################################################################################################################
 export const getProjectTitle = async (projectId: string) => {
@@ -338,7 +341,7 @@ export const getProjectTitle = async (projectId: string) => {
     // Get Project Title by Project ID
     const project = await client.project.findFirst({
       where: { id: projectId, userId: checkUser.user.id, isDeleted: false },
-      select: { title: true },  // Only select the title
+      select: { title: true }, // Only select the title
     });
 
     // If Project Not Found
@@ -355,7 +358,10 @@ export const getProjectTitle = async (projectId: string) => {
 };
 
 // Update Project Title #########################################################################################################################################
-export const updateProjectTitle = async (projectId: string, newTitle: string) => {
+export const updateProjectTitle = async (
+  projectId: string,
+  newTitle: string
+) => {
   try {
     // Check if Project ID and Title are Required
     if (!projectId || !newTitle) {
@@ -387,33 +393,32 @@ export const updateProjectTitle = async (projectId: string, newTitle: string) =>
   }
 };
 
-
 // Update Slides #########################################################################################################################################
 export const updateSlides = async (projectId: string, slides: JsonValue) => {
   try {
     // Check User
     const checkUser = await onAuthenticateUser();
-    if(checkUser.status !== 200 || !checkUser.user){
+    if (checkUser.status !== 200 || !checkUser.user) {
       return { status: 403, error: "User Not Authanticated" };
     }
 
     // Check if Project ID and Slides are Required
-    if(!projectId || !slides){
+    if (!projectId || !slides) {
       return { status: 400, error: "Project ID and Slides are required" };
-        }
+    }
 
     // Update Slides
     const updatedProject = await client.project.updateMany({
       where: {
         id: projectId,
       },
-      data:{
+      data: {
         slides,
-      }
-    })
+      },
+    });
 
     // If Failed to Update Slides
-    if(!updatedProject){
+    if (!updatedProject) {
       return { status: 500, error: "Failed to update slides" };
     }
 
@@ -423,19 +428,19 @@ export const updateSlides = async (projectId: string, slides: JsonValue) => {
     console.log("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
-}
+};
 
 // Update Theme #########################################################################################################################################
 export const updateTheme = async (projectId: string, theme: string) => {
   try {
     // Check User
     const checkUser = await onAuthenticateUser();
-    if(checkUser.status !== 200 || !checkUser.user){
+    if (checkUser.status !== 200 || !checkUser.user) {
       return { status: 403, error: "User Not Authanticated" };
-      }
+    }
 
     // Check if Project ID and Theme are Required
-    if(!projectId || !theme){
+    if (!projectId || !theme) {
       return { status: 400, error: "Project ID and Theme are required" };
     }
 
@@ -446,11 +451,11 @@ export const updateTheme = async (projectId: string, theme: string) => {
       },
       data: {
         themeName: theme,
-      }
-    })
+      },
+    });
 
     // If Failed to Update Theme
-    if(!updatedProject){
+    if (!updatedProject) {
       return { status: 500, error: "Failed to update theme" };
     }
 
@@ -460,19 +465,19 @@ export const updateTheme = async (projectId: string, theme: string) => {
     console.log("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
-}
+};
 
 // Delete All Projects #########################################################################################################################################
 export const deleteAllProjects = async (projectIds: string[]) => {
   try {
     // Check if Project IDs are Required
-    if(!Array.isArray(projectIds) || projectIds.length === 0){
+    if (!Array.isArray(projectIds) || projectIds.length === 0) {
       return { status: 400, error: "Project IDs are required" };
     }
 
     // Check User
     const checkUser = await onAuthenticateUser();
-    if(checkUser.status !== 200 || !checkUser.user){
+    if (checkUser.status !== 200 || !checkUser.user) {
       return { status: 403, error: "User Not Authanticated" };
     }
 
@@ -488,7 +493,7 @@ export const deleteAllProjects = async (projectIds: string[]) => {
     });
 
     // If No Projects to Delete
-    if(projectsToDelete.length === 0){
+    if (projectsToDelete.length === 0) {
       return { status: 404, error: "No projects found to delete" };
     }
 
@@ -501,25 +506,60 @@ export const deleteAllProjects = async (projectIds: string[]) => {
     });
 
     // If Failed to Delete Projects
-    if(deletedProjects.count !== projectsToDelete.length){
+    if (deletedProjects.count !== projectsToDelete.length) {
       return { status: 500, error: "Failed to delete all projects" };
     }
 
     // Return Message on Success
-    return { status: 200, message: `${deletedProjects.count} projects successfully deleted.` };
-    
+    // return { status: 200, message: `${deletedProjects.count} projects successfully deleted.` };
+
+    // Delete Folders from Cloudinary
+    // Assuming the project name corresponds to a folder in Cloudinary
+    // for (const project of projectsToDelete) {
+    //   const projectFolderName = project.id; // Assuming `name` is the project folder name
+    //   // await cloudinary.api.delete_resources_by_prefix(projectFolderName);
+    //   await cloudinary.api
+    //     .delete_folder(`projected/${projectFolderName}`)
+    //     .then(console.log);
+    // }
+
+    for (const project of projectsToDelete) {
+      const projectFolderName = project.id; // Assuming `id` is the folder name
+
+      // First, delete all resources in the folder
+      try {
+        await cloudinary.api.delete_resources_by_prefix(`projected/${projectFolderName}`);
+        console.log(`All resources in folder 'projected/${projectFolderName}' deleted successfully.`);
+      } catch (err) {
+        console.log(`Error deleting resources in folder 'projected/${projectFolderName}':`, err);
+      }
+
+      // Now, delete the folder itself
+      try {
+        await cloudinary.api.delete_folder(`projected/${projectFolderName}`);
+        console.log(`Folder 'projected/${projectFolderName}' deleted successfully.`);
+      } catch (err) {
+        console.log(`Error deleting folder 'projected/${projectFolderName}':`, err);
+      }
+    }
+
+    // Return Message on Success
+    return {
+      status: 200,
+      message: `${deletedProjects.count} projects successfully deleted and Cloudinary folders removed.`,
+    };
   } catch (error) {
     console.log("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
-}
+};
 
 // Get Deleted Projects #########################################################################################################################################
 export const getDeletedProjects = async () => {
   try {
     // Check User
     const checkUser = await onAuthenticateUser();
-    if(checkUser.status !== 200 || !checkUser.user){
+    if (checkUser.status !== 200 || !checkUser.user) {
       return { status: 403, error: "User Not Authanticated" };
     }
 
@@ -532,21 +572,20 @@ export const getDeletedProjects = async () => {
       orderBy: {
         updatedAt: "desc",
       },
-    })
+    });
 
     // If No Deleted Projects Found
-    if(projects.length === 0){
-      return { status: 404, error: "No deleted projects found" , data: []};
+    if (projects.length === 0) {
+      return { status: 404, error: "No deleted projects found", data: [] };
     }
 
     // Return Deleted Projects
     return { status: 200, data: projects };
-    
   } catch (error) {
     console.log("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
-}
+};
 
 // Filter Projects #########################################################################################################################################
 export const filterProjects = async (searchTerm: string) => {
@@ -555,28 +594,28 @@ export const filterProjects = async (searchTerm: string) => {
     if (!searchTerm) return getAllProjects();
 
     // Check User
-      const checkUser = await onAuthenticateUser();
-      if(checkUser.status !== 200 || !checkUser.user){
-        return { status: 403, error: "User Not Authanticated" };
-      }
-  
+    const checkUser = await onAuthenticateUser();
+    if (checkUser.status !== 200 || !checkUser.user) {
+      return { status: 403, error: "User Not Authanticated" };
+    }
+
     // Get Filtered Projects
     const filteredProjects = await client.project.findMany({
       where: {
         title: {
           contains: searchTerm,
-          mode: 'insensitive',
+          mode: "insensitive",
         },
         isDeleted: false,
       },
       orderBy: {
         updatedAt: "desc",
-      }
+      },
     });
 
     // If No Filtered Projects Found
-    if(filteredProjects.length === 0){
-      return { status: 404, error: "No projects found"};
+    if (filteredProjects.length === 0) {
+      return { status: 404, error: "No projects found" };
     }
 
     // Return Filtered Projects

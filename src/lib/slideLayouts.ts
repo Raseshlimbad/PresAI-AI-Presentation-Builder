@@ -1,6 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 import { ContentType } from "./types";
 
+const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
+
+
 // Blank Card
 export const BlankCard = {
   slideName: "Blank card",
@@ -44,7 +47,7 @@ export const AccentLeft = {
             type: "image" as ContentType,
             name: "Image",
             content:
-              "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
             alt: "Title",
           },
           {
@@ -121,7 +124,7 @@ export const AccentRight = {
             name: "Image",
             restrictToDrop: true,
             content:
-              "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
             alt: "Title",
           },
         ],
@@ -157,7 +160,9 @@ export const ImageAndText = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  // `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
+                  "https://res.cloudinary.com/dpdb2wcfi/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg",
+                  // "nlgi63u4fnijpzm3slcm",
                 alt: "Title",
               },
             ],
@@ -241,7 +246,7 @@ export const TextAndImage = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
             ],
@@ -600,7 +605,7 @@ export const TwoImageColumns = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
               {
@@ -630,7 +635,7 @@ export const TwoImageColumns = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
               {
@@ -689,7 +694,7 @@ export const ThreeImageColumns = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
               {
@@ -719,7 +724,7 @@ export const ThreeImageColumns = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
               {
@@ -750,7 +755,7 @@ export const ThreeImageColumns = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
               {
@@ -809,7 +814,7 @@ export const FourImageColumns = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
               {
@@ -839,38 +844,7 @@ export const FourImageColumns = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                alt: "Title",
-              },
-              {
-                id: uuidv4(),
-                type: "heading3" as ContentType,
-                name: "Heading3",
-                content: "",
-                placeholder: "Heading 3",
-              },
-              {
-                id: uuidv4(),
-                type: "paragraph" as ContentType,
-                name: "Paragraph",
-                content: "",
-                placeholder: "Start typing...",
-              },
-            ],
-          },
-
-          {
-            id: uuidv4(),
-            type: "column" as ContentType,
-            name: "Column",
-            content: [
-              {
-                id: uuidv4(),
-                type: "image" as ContentType,
-                name: "Image",
-                className: "p-3",
-                content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
               {
@@ -901,7 +875,38 @@ export const FourImageColumns = {
                 name: "Image",
                 className: "p-3",
                 content:
-                  "https://plus.unsplash.com/premium_photo-1729004379397-ece899804701?q=80&w=2767&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
+                alt: "Title",
+              },
+              {
+                id: uuidv4(),
+                type: "heading3" as ContentType,
+                name: "Heading3",
+                content: "",
+                placeholder: "Heading 3",
+              },
+              {
+                id: uuidv4(),
+                type: "paragraph" as ContentType,
+                name: "Paragraph",
+                content: "",
+                placeholder: "Start typing...",
+              },
+            ],
+          },
+
+          {
+            id: uuidv4(),
+            type: "column" as ContentType,
+            name: "Column",
+            content: [
+              {
+                id: uuidv4(),
+                type: "image" as ContentType,
+                name: "Image",
+                className: "p-3",
+                content:
+                  `https://res.cloudinary.com/${cloudName}/image/upload/v1742558363/nlgi63u4fnijpzm3slcm.jpg`,
                 alt: "Title",
               },
               {

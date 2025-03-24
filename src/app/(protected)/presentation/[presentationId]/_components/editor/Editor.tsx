@@ -146,7 +146,7 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
     contentId: string,
     newContent: string | string[] | string[][]
   ) => {
-    console.log("Content changed:", slide, contentId, newContent);
+    console.log("Content changed:", slide , "contentId: " , contentId , "newContent: " , newContent);
     // If the editor is editable, update the content item
     if (isEditable) {
       updateContentItem(slide.id, contentId, newContent);

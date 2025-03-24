@@ -232,6 +232,10 @@ const CreativeAI = ({ onBack }: Props) => {
                 </SelectTrigger>
                 {/* Select Content */}
                 <SelectContent className="w-fit">
+                  {/* Default "No card" option */}
+                  <SelectItem key={0} value="0" className="font-semibold">
+                    No card
+                  </SelectItem>
                   {/* Map through 15 possible cards and show them as select items */}
                   {Array.from({ length: 15 }, (_, i) => i + 6).map((num) => (
                     <SelectItem

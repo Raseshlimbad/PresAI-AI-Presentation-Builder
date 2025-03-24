@@ -34,10 +34,10 @@ const UpperInfoBar = ({user} : Props) => {
       {/* Button Container */}
       <div className="flex flex-wrap gap-4 items-center justify-end">
         {/* Import Button */}
-        <Button className="bg-primary-80 rounded-lg hover:bg-[background-80] text-primary dark:bg-[#262626] font-semibold">
+        {/* <Button className="bg-primary-80 rounded-lg hover:bg-[background-80] text-primary dark:bg-[#262626] font-semibold">
           <Upload />
           Import
-        </Button>
+        </Button> */}
         {/* New Project Button */}
         <NewProjectButton user= {user}/>
       </div>
