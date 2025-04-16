@@ -155,8 +155,8 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
 
   return (
     <div
-      // Ref for the draggable slide
       ref={ref}
+      data-slide-container="true"
       className={cn(
         "w-full rounded-lg shadow-lg relative p-0 min-h-[400px] max-h-[800px]",
         "shadow-xl transition-shadow duration-300",
@@ -164,14 +164,13 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
         index === currentSlide ? "ring-2 ring-blue-500 ring-offset-2" : "",
         slide.className,
         isDragging ? "opacity-50" : "opacity-100"
-        
       )}
       style={{
         backgroundImage: currentTheme.gradientBackground,
       }}
       onClick={() => setCurrentSlide(index)}
-      onMouseEnter={() => setIsHovered(true)} // Set hover state
-      onMouseLeave={() => setIsHovered(false)} // Remove hover state
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="h-full w-full flex-grow overflow-hidden">
         {/* MasterRecursiveComponent */}

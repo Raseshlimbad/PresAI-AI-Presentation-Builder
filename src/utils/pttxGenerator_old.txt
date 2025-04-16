@@ -1,0 +1,1032 @@
+import PptxGenJS from "pptxgenjs";
+import { Slide, ContentItem, Theme } from "@/lib/types";
+import { useSlideStore } from "@/store/useSlideStore";
+import { v4 as uuidv4 } from "uuid";
+
+interface PptxOptions {
+  includePageNumbers?: boolean;
+  includeFooter?: boolean;
+  footerText?: string;
+}
+
+// Helper function to apply theme
+const applyTheme = (slide: PptxGenJS.Slide, theme: Theme) => {
+  return {
+    titleColor: theme.accentColor,
+    textColor: theme.fontColor,
+    backgroundColor: theme.slideBackgroundColor,
+    accentColor: theme.accentColor,
+  };
+};
+
+// Helper function to calculate vertical spacing
+const calculateVerticalSpacing = (depth: number, type: string): number => {
+  const baseSpacing = 0.5;
+  const spacingMap: { [key: string]: number } = {
+    title: 0.5,
+    heading1: 0.8,
+    heading2: 1.2,
+    heading3: 1.5,
+    heading4: 1.8,
+    paragraph: 2.0,
+    bulletList: 2.0,
+    numberedList: 2.0,
+    todoList: 2.0,
+    blockquote: 2.0,
+    codeBlock: 2.0,
+    table: 2.0,
+    image: 2.0,
+    divider: 2.0,
+  };
+  return baseSpacing + (spacingMap[type] || 1.0) + (depth * 0.5);
+};
+
+// Helper function to recursively generate content
+const generateRecursiveContent = (
+  slidePpt: PptxGenJS.Slide,
+  content: ContentItem,
+  theme: Theme,
+  xOffset: number = 0.5,
+  yOffset: number = 0.5,
+  width: number = 6,
+  depth: number = 0
+) => {
+  const currentTheme = applyTheme(slidePpt, theme);
+  const maxDepth = 5; // Prevent infinite recursion
+  const indentLevel = Math.min(depth, 3); // Limit indent levels for readability
+
+  // Handle nested content first
+  if (Array.isArray(content.content)) {
+    const itemWidth = width / content.content.length;
+    content.content.forEach((subContent, index) => {
+      if (typeof subContent === "object" && subContent !== null) {
+        const newXOffset = xOffset + (index * itemWidth);
+        generateRecursiveContent(
+          slidePpt,
+          subContent as ContentItem,
+          theme,
+          newXOffset,
+          yOffset,
+          itemWidth,
+          depth + 1
+        );
+      }
+    });
+    return;
+  }
+
+  // Calculate vertical position based on content type and depth
+  const verticalSpacing = calculateVerticalSpacing(depth, content.type);
+  const currentYOffset = yOffset + verticalSpacing;
+
+  // Handle different content types
+  switch (content.type) {
+    case "title":
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset,
+        y: currentYOffset,
+        fontSize: 36 - (depth * 2),
+        bold: true,
+        color: currentTheme.titleColor,
+        align: "center",
+        fontFace: theme.fontFamily,
+        w: width,
+      });
+      break;
+
+    case "heading1":
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset,
+        y: currentYOffset,
+        fontSize: 28 - (depth * 2),
+        bold: true,
+        color: currentTheme.titleColor,
+        fontFace: theme.fontFamily,
+        w: width,
+      });
+      break;
+
+    case "heading2":
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset,
+        y: currentYOffset,
+        fontSize: 22 - (depth * 2),
+        bold: true,
+        color: currentTheme.titleColor,
+        fontFace: theme.fontFamily,
+        w: width,
+      });
+      break;
+
+    case "heading3":
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset,
+        y: currentYOffset,
+        fontSize: 18 - (depth * 2),
+        bold: true,
+        color: currentTheme.titleColor,
+        fontFace: theme.fontFamily,
+        w: width,
+      });
+      break;
+
+    case "heading4":
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset,
+        y: currentYOffset,
+        fontSize: 16 - (depth * 2),
+        bold: true,
+        color: currentTheme.titleColor,
+        fontFace: theme.fontFamily,
+        w: width,
+      });
+      break;
+
+    case "paragraph":
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset,
+        y: currentYOffset,
+        fontSize: 14 - (depth * 1),
+        color: currentTheme.textColor,
+        lineSpacing: 1.2,
+        fontFace: theme.fontFamily,
+        indentLevel,
+        w: width,
+      });
+      break;
+
+    case "image":
+      slidePpt.addImage({
+        path: content.content as string,
+        x: xOffset,
+        y: currentYOffset,
+        w: width * 0.8,
+        h: width * 0.6,
+        sizing: { type: "contain", w: width * 0.8, h: width * 0.6 },
+      });
+      break;
+
+    case "table":
+      if (Array.isArray(content.content)) {
+        const tableData = (content.content as string[][]).map((row) =>
+          row.map((cell) => ({ 
+            text: cell, 
+            options: { 
+              color: currentTheme.textColor,
+              fontFace: theme.fontFamily,
+            } 
+          }))
+        );
+        
+        slidePpt.addTable(tableData, {
+          x: xOffset,
+          y: currentYOffset,
+          w: width,
+          h: width * 0.5,
+          border: { pt: 1, color: currentTheme.accentColor },
+          color: currentTheme.textColor,
+          fontFace: theme.fontFamily,
+        });
+      }
+      break;
+
+    case "bulletList":
+      if (Array.isArray(content.content)) {
+        const bulletText = (content.content as string[]).map((text) => ({
+          text,
+          options: { 
+            bullet: true,
+            color: currentTheme.textColor,
+            indentLevel: indentLevel,
+            fontFace: theme.fontFamily,
+          },
+        }));
+        slidePpt.addText(bulletText, {
+          x: xOffset,
+          y: currentYOffset,
+          fontSize: 14 - (depth * 1),
+          color: currentTheme.textColor,
+          fontFace: theme.fontFamily,
+          w: width,
+        });
+      }
+      break;
+
+    case "numberedList":
+      if (Array.isArray(content.content)) {
+        const numberedText = (content.content as string[]).map((text, index) => ({
+          text: `${index + 1}. ${text}`,
+          options: { 
+            color: currentTheme.textColor,
+            indentLevel: indentLevel,
+            fontFace: theme.fontFamily,
+          },
+        }));
+        slidePpt.addText(numberedText, {
+          x: xOffset,
+          y: currentYOffset,
+          fontSize: 14 - (depth * 1),
+          color: currentTheme.textColor,
+          fontFace: theme.fontFamily,
+          w: width,
+        });
+      }
+      break;
+
+    case "todoList":
+      if (Array.isArray(content.content)) {
+        const todoText = (content.content as string[]).map((text) => ({
+          text: `☐ ${text}`,
+          options: { 
+            color: currentTheme.textColor,
+            indentLevel: indentLevel,
+            fontFace: theme.fontFamily,
+          },
+        }));
+        slidePpt.addText(todoText, {
+          x: xOffset,
+          y: currentYOffset,
+          fontSize: 14 - (depth * 1),
+          color: currentTheme.textColor,
+          fontFace: theme.fontFamily,
+          w: width,
+        });
+      }
+      break;
+
+    case "blockquote":
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset,
+        y: currentYOffset,
+        fontSize: 18 - (depth * 1),
+        italic: true,
+        color: currentTheme.textColor,
+        align: "center",
+        fontFace: theme.fontFamily,
+        w: width,
+        fill: { color: "F5F5F5" },
+      });
+      break;
+
+    case "codeBlock":
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset,
+        y: currentYOffset,
+        fontSize: 14 - (depth * 1),
+        fontFace: "Courier New",
+        color: currentTheme.textColor,
+        fill: { color: "F5F5F5" },
+        w: width,
+      });
+      break;
+
+    case "calloutBox":
+      // Add background shape for callout box
+      slidePpt.addShape(PptxGenJS.ShapeType.rect, {
+        x: xOffset,
+        y: currentYOffset,
+        w: width,
+        h: 1.5,
+        fill: { color: "F5F5F5" },
+        line: { color: currentTheme.accentColor, width: 1 },
+      });
+      // Add text content
+      slidePpt.addText(content.content as string || content.placeholder || "", {
+        x: xOffset + 0.2,
+        y: currentYOffset + 0.2,
+        fontSize: 14 - (depth * 1),
+        color: currentTheme.textColor,
+        fontFace: theme.fontFamily,
+        w: width - 0.4,
+      });
+      break;
+
+    case "divider":
+      slidePpt.addShape(PptxGenJS.ShapeType.rect, {
+        x: xOffset,
+        y: currentYOffset,
+        w: width,
+        h: 0.1,
+        fill: { color: currentTheme.accentColor },
+      });
+      break;
+
+    case "tableOfContents":
+      if (Array.isArray(content.content)) {
+        const tocText = (content.content as string[]).map((text, index) => ({
+          text: `${index + 1}. ${text}`,
+          options: { 
+            color: currentTheme.textColor,
+            indentLevel: index,
+            fontFace: theme.fontFamily,
+          },
+        }));
+        slidePpt.addText(tocText, {
+          x: xOffset,
+          y: currentYOffset,
+          fontSize: 14 - (depth * 1),
+          color: currentTheme.textColor,
+          fontFace: theme.fontFamily,
+          w: width,
+        });
+      }
+      break;
+
+    default:
+      console.warn("Unknown content type:", content.type);
+      break;
+  }
+};
+
+// Main function to generate PPTX
+export const generateEnhancedPptx = (
+  slides: Slide[],
+  title: string,
+  options: PptxOptions = {}
+) => {
+  const {
+    includePageNumbers = true,
+    includeFooter = true,
+    footerText = "Generated by PresAI",
+  } = options;
+
+  const pptx = new PptxGenJS();
+  
+  // Set presentation properties
+  pptx.author = "PresAI";
+  pptx.company = "PresAI";
+  pptx.revision = "1";
+  pptx.subject = title;
+  pptx.title = title;
+
+  // Get the current theme from the store
+  const { currentTheme } = useSlideStore.getState();
+
+  slides.forEach((slide: Slide, index: number) => {
+    const slidePpt = pptx.addSlide();
+    
+    // Apply slide background
+    if (currentTheme.gradientBackground) {
+      slidePpt.background = { color: currentTheme.slideBackgroundColor };
+    }
+
+    // Add slide number if enabled
+    if (includePageNumbers) {
+      slidePpt.addText(`Slide ${index + 1}`, {
+        x: 0.5,
+        y: 6.5,
+        fontSize: 10,
+        color: currentTheme.fontColor,
+        align: "center",
+        fontFace: currentTheme.fontFamily,
+      });
+    }
+
+    // Add footer if enabled
+    if (includeFooter) {
+      slidePpt.addText(footerText, {
+        x: 0.5,
+        y: 6.8,
+        fontSize: 10,
+        color: currentTheme.fontColor,
+        align: "center",
+        fontFace: currentTheme.fontFamily,
+      });
+    }
+
+    // Generate content recursively
+    generateRecursiveContent(slidePpt, slide.content, currentTheme);
+  });
+
+  // Generate and download the PPTX file
+  pptx.writeFile({ fileName: `${title.replace(/\s+/g, "-")}-${uuidv4()}.pptx` });
+}; 
+
+
+
+
+
+
+
+############################################################################################################################
+
+
+
+
+
+
+
+import PptxGenJS from "pptxgenjs";
+import { Slide, ContentItem, Theme } from "@/lib/types";
+import { useSlideStore } from "@/store/useSlideStore";
+import { v4 as uuidv4 } from "uuid";
+
+interface PptxOptions {
+  includePageNumbers?: boolean;
+  includeFooter?: boolean;
+  footerText?: string;
+}
+
+// Helper function to get text content from a content item
+const getTextContent = (content: ContentItem): string => {
+  if (typeof content.content === "string") {
+    return content.content || content.placeholder || "";
+  }
+  return "";
+};
+
+// Helper function to calculate vertical position
+const calculateVerticalPosition = (index: number, type: string): number => {
+  const basePosition = 0.5;
+  const spacing = 0.4;
+  return basePosition + (index * spacing);
+};
+
+// Helper function to recursively process content
+const processContent = async (
+  slidePpt: PptxGenJS.Slide,
+  content: ContentItem,
+  theme: Theme,
+  index: number = 0,
+  depth: number = 0,
+  parentX: number = 0.5,
+  parentWidth: number = 9
+): Promise<number> => {
+  const fontSize = {
+    title: 44,
+    heading1: 32,
+    heading2: 28,
+    heading3: 24,
+    heading4: 20,
+    paragraph: 16,
+    default: 16
+  };
+
+  const yPosition = calculateVerticalPosition(index, content.type);
+  let nextIndex = index + 1;
+
+  // Handle different content types
+  switch (content.type) {
+    case "title":
+      slidePpt.addText(getTextContent(content), {
+        x: parentX,
+        y: yPosition,
+        w: parentWidth,
+        h: 0.8,
+        fontSize: fontSize.title,
+        bold: true,
+        color: theme.accentColor,
+        align: "center",
+        fontFace: theme.fontFamily,
+      });
+      break;
+
+    case "heading1":
+    case "heading2":
+    case "heading3":
+    case "heading4":
+      slidePpt.addText(getTextContent(content), {
+        x: parentX + (depth * 0.2),
+        y: yPosition,
+        w: parentWidth - (depth * 0.4),
+        h: 0.6,
+        fontSize: fontSize[content.type],
+        bold: true,
+        color: theme.accentColor,
+        fontFace: theme.fontFamily,
+      });
+      break;
+
+    case "paragraph":
+      slidePpt.addText(getTextContent(content), {
+        x: parentX + (depth * 0.2),
+        y: yPosition,
+        w: parentWidth - (depth * 0.4),
+        h: 0.5,
+        fontSize: fontSize.paragraph,
+        color: theme.fontColor,
+        fontFace: theme.fontFamily,
+        breakLine: true,
+      });
+      break;
+
+    case "bulletList":
+      if (Array.isArray(content.content)) {
+        const items = content.content as string[];
+        const bulletPoints = items.map(item => ({
+          text: item,
+          options: {
+            bullet: true,
+            color: theme.fontColor,
+            fontSize: fontSize.default,
+            fontFace: theme.fontFamily,
+          }
+        }));
+        slidePpt.addText(bulletPoints, {
+          x: parentX + (depth * 0.2),
+          y: yPosition,
+          w: parentWidth - (depth * 0.4),
+          h: items.length * 0.3,
+        });
+        nextIndex += items.length - 1;
+      }
+      break;
+
+    case "numberedList":
+      if (Array.isArray(content.content)) {
+        const items = content.content as string[];
+        const numberedPoints = items.map((item, idx) => ({
+          text: `${idx + 1}. ${item}`,
+          options: {
+            color: theme.fontColor,
+            fontSize: fontSize.default,
+            fontFace: theme.fontFamily,
+          }
+        }));
+        slidePpt.addText(numberedPoints, {
+          x: parentX + (depth * 0.2),
+          y: yPosition,
+          w: parentWidth - (depth * 0.4),
+          h: items.length * 0.3,
+        });
+        nextIndex += items.length - 1;
+      }
+      break;
+
+    case "table":
+      if (Array.isArray(content.content)) {
+        const tableData = (content.content as string[][]).map(row =>
+          row.map(cell => ({
+            text: cell,
+            options: {
+              color: theme.fontColor,
+              fontSize: fontSize.default,
+              fontFace: theme.fontFamily,
+              valign: 'middle' as const,
+            }
+          }))
+        );
+        
+        slidePpt.addTable(tableData, {
+          x: parentX + (depth * 0.2),
+          y: yPosition,
+          w: parentWidth - (depth * 0.4),
+          border: { pt: 1, color: theme.accentColor },
+          align: "left",
+          fontFace: theme.fontFamily,
+          fontSize: fontSize.default,
+        });
+        nextIndex += tableData.length;
+      }
+      break;
+
+    case "image":
+      try {
+        slidePpt.addImage({
+          path: content.content as string,
+          x: parentX + (depth * 0.2),
+          y: yPosition,
+          w: (parentWidth - (depth * 0.4)) * 0.8,
+          h: 3,
+          sizing: { 
+            type: "contain",
+            w: (parentWidth - (depth * 0.4)) * 0.8,
+            h: 3
+          },
+        });
+        nextIndex += 3;
+      } catch (error) {
+        console.error("Error adding image:", error);
+      }
+      break;
+
+    case "blockquote":
+      slidePpt.addText(getTextContent(content), {
+        x: parentX + (depth * 0.2) + 0.2,
+        y: yPosition,
+        w: parentWidth - (depth * 0.4) - 0.4,
+        h: 0.8,
+        fontSize: fontSize.default,
+        italic: true,
+        color: theme.fontColor,
+        fontFace: theme.fontFamily,
+        fill: { color: "F5F5F5" },
+      });
+      break;
+
+    case "codeBlock":
+      slidePpt.addText(getTextContent(content), {
+        x: parentX + (depth * 0.2),
+        y: yPosition,
+        w: parentWidth - (depth * 0.4),
+        h: 1,
+        fontSize: fontSize.default - 2,
+        fontFace: "Courier New",
+        color: theme.fontColor,
+        fill: { color: "F5F5F5" },
+      });
+      nextIndex += 2;
+      break;
+
+    case "divider":
+      slidePpt.addShape(PptxGenJS.ShapeType.line, {
+        x: parentX + (depth * 0.2),
+        y: yPosition,
+        w: parentWidth - (depth * 0.4),
+        h: 0,
+        line: { color: theme.accentColor, width: 1 },
+      });
+      break;
+
+    case "column":
+    case "resizable-column":
+      if (Array.isArray(content.content)) {
+        const columns = content.content as ContentItem[];
+        const columnWidth = (parentWidth - (depth * 0.4)) / columns.length;
+        
+        for (let i = 0; i < columns.length; i++) {
+          const columnX = parentX + (depth * 0.2) + (i * columnWidth);
+          nextIndex = await processContent(
+            slidePpt,
+            columns[i],
+            theme,
+            nextIndex,
+            depth + 1,
+            columnX,
+            columnWidth
+          );
+        }
+      }
+      break;
+  }
+
+  return nextIndex;
+};
+
+// Main function to generate PPTX
+export const generateEnhancedPptx = async (
+  slides: Slide[],
+  title: string,
+  options: PptxOptions = {}
+) => {
+  const {
+    includePageNumbers = true,
+    includeFooter = true,
+    footerText = "Generated by PresAI",
+  } = options;
+
+  try {
+    const { currentTheme } = useSlideStore.getState();
+    const pptx = new PptxGenJS();
+    
+    // Set presentation properties
+    pptx.author = "PresAI";
+    pptx.company = "PresAI";
+    pptx.revision = "1";
+    pptx.subject = title;
+    pptx.title = title;
+
+    // Process each slide
+    for (let i = 0; i < slides.length; i++) {
+      const slide = slides[i];
+      const slidePpt = pptx.addSlide();
+
+      // Set slide background
+      if (currentTheme.gradientBackground) {
+        slidePpt.background = { color: currentTheme.slideBackgroundColor };
+      }
+
+      // Process slide content
+      await processContent(slidePpt, slide.content, currentTheme);
+
+      // Add slide number if enabled
+      if (includePageNumbers) {
+        slidePpt.addText(`Slide ${i + 1}`, {
+          x: 0.5,
+          y: 6.5,
+          fontSize: 10,
+          color: currentTheme.fontColor,
+          align: "center",
+          fontFace: currentTheme.fontFamily,
+        });
+      }
+
+      // Add footer if enabled
+      if (includeFooter) {
+        slidePpt.addText(footerText, {
+          x: 0.5,
+          y: 6.8,
+          fontSize: 10,
+          color: currentTheme.fontColor,
+          align: "center",
+          fontFace: currentTheme.fontFamily,
+        });
+      }
+    }
+
+    // Generate and download the PPTX file
+    pptx.writeFile({ fileName: `${title.replace(/\s+/g, "-")}-${uuidv4()}.pptx` });
+
+  } catch (error) {
+    console.error('Error generating enhanced PPTX:', error);
+    throw error;
+  }
+}; 
+
+
+
+
+
+
+
+############################################################################################################################
+
+
+
+
+import PptxGenJS from "pptxgenjs";
+import { Slide, ContentItem, Theme } from "@/lib/types";
+import { useSlideStore } from "@/store/useSlideStore";
+
+// Helper function to get text content from a content item
+const getTextContent = (content: ContentItem): string => {
+  if (typeof content.content === "string") {
+    return content.content || content.placeholder || "";
+  }
+  return "";
+};
+
+// Helper function to calculate vertical position with better spacing
+const calculateVerticalPosition = (index: number, type: string): number => {
+  const basePosition = 0.5;
+  const spacing = type === "title" ? 0.8 : 0.5; // More spacing for titles
+  return basePosition + index * spacing;
+};
+
+// Helper function to recursively process content
+const processContent = async (
+  slidePpt: PptxGenJS.Slide,
+  content: ContentItem,
+  theme: Theme,
+  index: number = 0,
+  depth: number = 0,
+  parentX: number = 0.5,
+  parentWidth: number = 9
+): Promise<number> => {
+  const fontSize = {
+    title: 44,
+    heading1: 32,
+    heading2: 28,
+    heading3: 24,
+    heading4: 20,
+    paragraph: 16,
+    default: 16,
+  };
+
+  const yPosition = calculateVerticalPosition(index, content.type);
+  let nextIndex = index + 1;
+
+  // Handle different content types
+  switch (content.type) {
+    case "title":
+      slidePpt.addText(getTextContent(content), {
+        x: 0.5, // Center align title
+        y: yPosition,
+        w: 9, // Full width for title
+        h: 0.8,
+        fontSize: fontSize.title,
+        bold: true,
+        color: theme.accentColor,
+        align: "center",
+        fontFace: theme.fontFamily,
+        wrap: true,
+      });
+      break;
+
+    case "heading1":
+    case "heading2":
+    case "heading3":
+    case "heading4":
+      slidePpt.addText(getTextContent(content), {
+        x: 0.5 + depth * 0.3, // Indent for hierarchy
+        y: yPosition,
+        w: 8.5 - depth * 0.3, // Adjust width based on indent
+        h: 0.6,
+        fontSize: fontSize[content.type],
+        bold: true,
+        color: theme.accentColor,
+        fontFace: theme.fontFamily,
+        wrap: true,
+      });
+      break;
+
+    case "paragraph":
+      slidePpt.addText(getTextContent(content), {
+        x: 0.5 + depth * 0.3,
+        y: yPosition,
+        w: 8.5 - depth * 0.3,
+        h: 0.5,
+        fontSize: fontSize.paragraph,
+        color: theme.fontColor,
+        fontFace: theme.fontFamily,
+        breakLine: true,
+        wrap: true,
+      });
+      break;
+
+    case "bulletList":
+      if (Array.isArray(content.content)) {
+        const items = content.content as string[];
+        const bulletPoints = items.map((item) => ({
+          text: item,
+          options: {
+            bullet: true,
+            color: theme.fontColor,
+            fontSize: fontSize.default,
+            fontFace: theme.fontFamily,
+          },
+        }));
+        slidePpt.addText(bulletPoints, {
+          x: 0.5 + depth * 0.3,
+          y: yPosition,
+          w: 8.5 - depth * 0.3,
+          h: items.length * 0.4, // Increased height per item
+          wrap: true,
+        });
+        nextIndex += items.length;
+      }
+      break;
+
+    case "numberedList":
+      if (Array.isArray(content.content)) {
+        const items = content.content as string[];
+        const numberedPoints = items.map((item, index) => ({
+          // text: item,
+          text: `${index + 1}. ${item}\n`,
+          options: {
+            // bullet: true,
+            numbering: true,
+            color: theme.fontColor,
+            fontSize: fontSize.default,
+            fontFace: theme.fontFamily,
+          },
+        }));
+        slidePpt.addText(numberedPoints, {
+          x: 0.5 + depth * 0.3,
+          y: yPosition,
+          w: 8.5 - depth * 0.3,
+          h: items.length * 0.4,
+          wrap: true,
+        });
+        nextIndex += items.length;
+      }
+      break;
+
+    case "table":
+      if (Array.isArray(content.content)) {
+        const tableData = (content.content as string[][]).map((row) =>
+          row.map((cell) => ({
+            text: cell,
+            options: {
+              color: theme.fontColor,
+              fontSize: fontSize.default,
+              fontFace: theme.fontFamily,
+              valign: "middle" as const,
+            },
+          }))
+        );
+
+        slidePpt.addTable(tableData, {
+          x: parentX + depth * 0.2,
+          y: yPosition,
+          w: parentWidth - depth * 0.4,
+          border: { pt: 1, color: theme.accentColor },
+          align: "left",
+          fontFace: theme.fontFamily,
+          fontSize: fontSize.default,
+        });
+        nextIndex += tableData.length;
+      }
+      break;
+
+    case "image":
+      try {
+        slidePpt.addImage({
+          path: content.content as string,
+          x: parentX + depth * 0.2,
+          y: yPosition,
+          w: (parentWidth - depth * 0.4) * 0.8,
+          h: 3,
+          sizing: {
+            type: "contain",
+            w: (parentWidth - depth * 0.4) * 0.8,
+            h: 3,
+          },
+        });
+        nextIndex += 3;
+      } catch (error) {
+        console.error("Error adding image:", error);
+      }
+      break;
+
+    case "blockquote":
+      slidePpt.addText(getTextContent(content), {
+        x: parentX + depth * 0.2 + 0.2,
+        y: yPosition,
+        w: parentWidth - depth * 0.4 - 0.4,
+        h: 0.8,
+        fontSize: fontSize.default,
+        italic: true,
+        color: theme.fontColor,
+        fontFace: theme.fontFamily,
+        fill: { color: "F5F5F5" },
+      });
+      break;
+
+    case "codeBlock":
+      slidePpt.addText(getTextContent(content), {
+        x: parentX + depth * 0.2,
+        y: yPosition,
+        w: parentWidth - depth * 0.4,
+        h: 1,
+        fontSize: fontSize.default - 2,
+        fontFace: "Courier New",
+        color: theme.fontColor,
+        fill: { color: "F5F5F5" },
+      });
+      nextIndex += 2;
+      break;
+
+    case "divider":
+      slidePpt.addShape(PptxGenJS.ShapeType.line, {
+        x: parentX + depth * 0.2,
+        y: yPosition,
+        w: parentWidth - depth * 0.4,
+        h: 0,
+        line: { color: theme.accentColor, width: 1 },
+      });
+      break;
+
+    case "column":
+    case "resizable-column":
+      if (Array.isArray(content.content)) {
+        const columns = content.content as ContentItem[];
+        const columnWidth = (parentWidth - depth * 0.4) / columns.length;
+
+        for (let i = 0; i < columns.length; i++) {
+          const columnX = parentX + depth * 0.2 + i * columnWidth;
+          nextIndex = await processContent(
+            slidePpt,
+            columns[i],
+            theme,
+            nextIndex,
+            depth + 1,
+            columnX,
+            columnWidth
+          );
+        }
+      }
+      break;
+  }
+
+  return nextIndex;
+};
+
+// Main function to generate PPTX
+export const generateEnhancedPptx = async (
+  slides: Slide[],
+  title: string
+  // options: PptxOptions = {}
+) => {
+  try {
+    const { currentTheme } = useSlideStore.getState();
+    const pptx = new PptxGenJS();
+
+    // Set presentation properties
+    pptx.author = "PresAI";
+    pptx.company = "PresAI";
+    pptx.revision = "1";
+    pptx.subject = title;
+    pptx.title = title;
+
+    // Process each slide
+    for (let i = 0; i < slides.length; i++) {
+      const slide = slides[i];
+      const slidePpt = pptx.addSlide();
+
+      // Set slide background
+      if (currentTheme.gradientBackground) {
+        slidePpt.background = { color: currentTheme.slideBackgroundColor };
+      }
+
+      // Process slide content
+      await processContent(slidePpt, slide.content, currentTheme);
+    }
+
+    // Generate and download the PPTX file
+    pptx.writeFile({ fileName: `${title.replace(/\s+/g, "-")}.pptx` });
+  } catch (error) {
+    console.error("Error generating enhanced PPTX:", error);
+    throw error;
+  }
+};
