@@ -16,15 +16,39 @@ datasource db {
 }
 
 // User #########################################################################################################################################
+// model User {
+//   id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//   clerkId            String   @unique
+//   name               String
+//   email              String   @unique
+//   profileImage       String?
+//   subscription       Boolean? @default(false)
+//   createdAt          DateTime @default(now())
+//   updatedAt          DateTime @updatedAt
+//   lemonSqueezyApiKey String?
+//   storeID            String?
+//   webhookSecret      String?
+
+//   Projects          Project[] @relation("OwnedProjects")
+//   PurchasedProjects Project[] @relation("PurchasedProjects")
+// }
+
 model User {
-  id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  clerkId            String   @unique
+  id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  clerkId            String?   @unique  // Made optional for non-Clerk auth
   name               String
-  email              String   @unique
+  email              String    @unique
+  username           String?   @unique
+  password           String?   // Added for normal auth
+  passwordSalt       String?   // Added for password security
+  passwordResetToken String?   // Added for password reset functionality
+  resetTokenExpiry   DateTime? // Added for token expiration
   profileImage       String?
-  subscription       Boolean? @default(false)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  subscription       Boolean?  @default(false)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  lastLoginAt        DateTime  @default(now())
+  authMethod         String?   @default("email")
   lemonSqueezyApiKey String?
   storeID            String?
   webhookSecret      String?

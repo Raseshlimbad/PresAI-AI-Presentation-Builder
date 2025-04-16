@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useSlideStore } from "@/store/useSlideStore";
-import { Home, Play, Share, Loader2 } from "lucide-react";
+import { Home, Play, Share2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
@@ -149,7 +149,7 @@ const Navbar = ({ presentationId }: Props) => {
             backgroundColor: currentTheme.backgroundColor,
           }}
         >
-          <Share className="w-4 h-4" />
+          <Share2 className="w-4 h-4" />
         </Button>
 
         {/* Present Button */}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { filterProjects, getAllProjects } from '@/actions/project';
 // import NotFound from '@/components/global/not-found/NotFound';
 // import Projects from '@/components/global/projects';
@@ -64,9 +65,17 @@ import NotFound from '@/components/global/not-found/NotFound';
 import Projects from '@/components/global/projects';
 import React from 'react';
 
-const DashboardPage = async ({ searchParams }: { searchParams: { search?: string } }) => {
+// type DashboardPageProps = {
+//   params: { [key: string]: string };
+//   searchParams: { search?: string };
+// };
+
+// const DashboardPage = async ({ searchParams }: { searchParams: { search?: string } }) => {
+
+const DashboardPage = async ({ searchParams }: any) => {
   // Await searchParams before accessing its properties
-  const { search: searchTerm } = await searchParams;
+  // const { search: searchTerm } = await searchParams;
+  const { search: searchTerm } = searchParams;
 
   // Get the projects based on whether there's a search term
   const projectsResponse = searchTerm

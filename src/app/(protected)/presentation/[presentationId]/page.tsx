@@ -6,15 +6,14 @@ import { useSlideStore } from "@/store/useSlideStore";
 import { Loader2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { redirect, useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { toast } from "sonner";
 import Navbar from "./_components/editor-sidebar/Navbar/Navbar";
 import LayoutPreview from "./_components/editor-sidebar/left-sidebar/LayoutPreview";
-import Editor from "./_components/editor/Editor";
 import EditorSidebar from "./_components/editor-sidebar/right-sidebar";
-import { Slide } from "@/lib/types";
+import Editor from "./_components/editor/Editor";
 
 const Page = () => {
   // WIP: Create the presentation view

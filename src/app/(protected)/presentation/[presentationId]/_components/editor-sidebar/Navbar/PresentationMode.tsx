@@ -54,6 +54,7 @@ const PresentationMode = ({ onClose }: PresentationModeProps) => {
     window.addEventListener("keydown", handleKeyDown);
     //   remove event listener
     return () => window.removeEventListener("keydown", handleKeyDown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slides.length, currentSlideIndex]);
 
   return (

@@ -1,12 +1,9 @@
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { User } from '@prisma/client'
 import { Separator } from '@radix-ui/react-separator'
-import React from 'react'
-import SearchBar from './uspper-info-searchbar'
 import ThemeSwitcher from '../mode-toggle'
-import { Button } from '@/components/ui/button'
-import { Upload } from 'lucide-react'
 import NewProjectButton from './new-project-button'
+import SearchBar from './uspper-info-searchbar'
 
 type Props = {
     user: User

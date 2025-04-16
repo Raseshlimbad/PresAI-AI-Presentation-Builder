@@ -1,8 +1,6 @@
 import { MasterRecursiveComponent } from "@/app/(protected)/presentation/[presentationId]/_components/editor/MasterRecursiveComponent";
 import { Slide, Theme } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { Image } from "lucide-react";
-import React from "react";
 
 type Props = {
   slide: Slide;
@@ -36,11 +34,13 @@ const ThumbnailPreview = ({ slide, theme }: Props) => {
         ): (
           // If the slide is not defined, show the image
             // eslint-disable-next-line react/jsx-no-comment-textnodes
-            <div className="w-full h-full bg-gray-400 flex justify-center items-center">
-                <Image
-                 className="w-6 h-6 text-gray-500" 
-                 />
-            </div>
+            // <div className="w-full h-full bg-gray-400 flex justify-center items-center">
+            //     <Image
+            //      className="w-6 h-6 text-gray-500" 
+            //      alphabetic={true}
+            //      />
+            // </div>
+            <div></div>
         )}
     </div>
   );

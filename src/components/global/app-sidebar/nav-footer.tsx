@@ -1,4 +1,5 @@
-'use client'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
 
 import { buySubscription } from "@/actions/lemonSqueezy";
 import { Button } from "@/components/ui/button";
@@ -7,13 +8,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {SignedIn, useUser, UserButton} from '@clerk/nextjs'
+import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 import { User } from "@prisma/client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
   const { user, isSignedIn, isLoaded } = useUser();
   const [loading, setLoading] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [currentUser, setCurrentUser] = useState(prismaUser);
 
   if (!isLoaded || !isSignedIn) {
     return null;
@@ -23,10 +26,13 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
     setLoading(true);
     try {
       const res = await buySubscription(prismaUser.id);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
+
+  const handleUserUpdate = (updatedUser: User) => {
+    setCurrentUser(updatedUser);
+  };
+
   return (
     <SidebarMenu>
       <SidebarMenuItem className="flex flex-col items-start group-data-[collapsible=icon]:hidden">
@@ -50,10 +56,9 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
                 </Button>
               </div>
             </div>
-            
           </div>
         )}
-        <SignedIn>
+        {/* <SignedIn>
               <SidebarMenuButton
                 size={"lg"}
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
@@ -61,18 +66,35 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
                 <UserButton />
                 <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
                     <span className="truncate font-semibold">
-                        {user?.fullName}
+                        {prismaUser.name || prismaUser.username || user?.username}
                     </span>
-                    <span className="truncate  dark:text-secondary">
-                        {user?.emailAddresses[0].emailAddress}
+                    <span className="truncate dark:text-secondary">
+                        {prismaUser.email || user?.emailAddresses[0]?.emailAddress}
                     </span>
                 </div>
               </SidebarMenuButton>
-            </SignedIn>
+            </SignedIn> */}
+
+        <SignedIn>
+          <SidebarMenuButton
+            size={"lg"}
+            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+            onClick={() => setShowProfileModal(true)}
+          >
+            <UserButton />
+            <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
+              <span className="truncate font-semibold">
+                {currentUser.name || currentUser.username || user?.username}
+              </span>
+              <span className="truncate dark:text-secondary">
+                {currentUser.email || user?.emailAddresses[0]?.emailAddress}
+              </span>
+            </div>
+          </SidebarMenuButton>
+        </SignedIn>
       </SidebarMenuItem>
     </SidebarMenu>
   );
 };
 
 export default NavFooter;
-

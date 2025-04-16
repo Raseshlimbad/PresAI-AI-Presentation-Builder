@@ -941,11 +941,9 @@
 
 
 "use client";
-import React, { useState, useRef } from "react";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { AdvancedImage } from "@cloudinary/react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import React, { useRef, useState } from "react";
 
 interface ImageComponentProps {
   src: string;
@@ -962,7 +960,6 @@ const CustomImage = ({
   alt,
   className,
   isEditable,
-  isPreview,
   contentId,
   onComponentChange,
 }: ImageComponentProps) => {

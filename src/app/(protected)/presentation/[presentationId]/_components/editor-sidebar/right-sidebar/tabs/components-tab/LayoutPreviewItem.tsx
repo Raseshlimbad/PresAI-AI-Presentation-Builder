@@ -18,8 +18,6 @@ const LayoutPreviewItem = ({
     Icon,
     onClick,
     isSelected,
-    type,
-    component,
 }: LayoutPreviewItemProps) => {
     
   return (
