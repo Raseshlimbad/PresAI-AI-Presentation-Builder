@@ -112,7 +112,7 @@ const ProjectCard = ({
       });
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       // Show error toast
       toast.error("Oppse!", {
         description: "Something went wrong, Please contact support",
@@ -148,7 +148,7 @@ const ProjectCard = ({
       });
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Oppse!", {
         description: "Something went wrong, Please contact support",
       });
@@ -171,7 +171,7 @@ const ProjectCard = ({
         toast.error("Failed to update title");
       }
     } catch (error) {
-      console.log("Error updating title", error);
+      console.error("Error updating title", error);
       toast.error("Failed to update title");
     }
     setLoading(false);

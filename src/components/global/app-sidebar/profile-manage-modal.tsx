@@ -41,7 +41,7 @@ const ProfileManageModal = ({ open, onClose, user, onUpdate }: ProfileManageModa
         toast.error(res.message || "Failed to update username");
       }
     } catch (error) {
-        console.log("Error in updating username: ", error);
+        console.error("Error in updating username: ", error);
       toast.error("Failed to update username");
     } finally {
       setLoading(false);
@@ -64,7 +64,7 @@ const ProfileManageModal = ({ open, onClose, user, onUpdate }: ProfileManageModa
         toast.error(res.message || "Failed to update password");
       }
     } catch (error) {
-        console.log("Error in updating password: ", error);
+        console.error("Error in updating password: ", error);
       toast.error("Failed to update password");
     } finally {
       setLoading(false);
@@ -86,7 +86,7 @@ const ProfileManageModal = ({ open, onClose, user, onUpdate }: ProfileManageModa
         toast.error(res.message || "Failed to update profile image");
       }
     } catch (error) {
-        console.log("Error in updating profile image: ", error);
+        console.error("Error in updating profile image: ", error);
       toast.error("Failed to update profile image");
     } finally {
       setLoading(false);

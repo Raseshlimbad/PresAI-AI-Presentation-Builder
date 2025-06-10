@@ -880,7 +880,7 @@
 //         }
 //       }
 //     } catch (error) {
-//       console.log(error);
+//       console.error(error);
 //       setError("Upload failed: Network error");
 //     } finally {
 //       setUploading(false);
@@ -968,7 +968,7 @@ const CustomImage = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const params = useParams();
   const projectName = params.presentationId;
-  console.log("parans:" , params.presentationId)
+  // console.log("parans:" , params.presentationId)
 
   // Cloudinary setup
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
@@ -1014,11 +1014,11 @@ const CustomImage = ({
       );
 
       const data = await res.json();
-      console.log("Cloudinary Response:", data);
+      // console.log("Cloudinary Response:", data);
 
       if (data.secure_url) {
         const uploadedImageUrl = data.secure_url;
-        console.log("Uploaded Image URL:", uploadedImageUrl);
+        // console.log("Uploaded Image URL:", uploadedImageUrl);
 
         // Update parent component with the uploaded image URL
         onComponentChange(contentId, uploadedImageUrl);
@@ -1026,7 +1026,7 @@ const CustomImage = ({
         console.error("Failed to upload image.");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError("Upload failed: Network error");
     } finally {
       setUploading(false);

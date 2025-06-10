@@ -65,7 +65,7 @@ const ColumnComponent = ({
   const saveSizeChanges = useCallback(async () => {
     if (!isEditable) return;
 
-    console.log("Auto-saving column sizes...");
+    // console.log("Auto-saving column sizes...");
     await updateSlides(slideId, JSON.parse(JSON.stringify(columns)));
   }, [columns, slideId, isEditable]);
 

@@ -907,7 +907,7 @@ Now generate the JSON output based on these rules.`;
 
 
   try {
-    console.log(`Generating slide JSON ...`);
+    // console.log(`Generating slide JSON ...`);
 
     if (!process.env.GEMINI_API_KEY) {
       throw new Error("GEMINI_API_KEY is missing in environment variables.");
@@ -1117,7 +1117,7 @@ You are a creative AI tasked with generating list items for a JSON-based present
 
     // If no lists to populate, return the slide as-is
     if (listRequests.length === 0) {
-      console.log("No lists to populate. Returning original slide:", updatedSlide);
+      // console.log("No lists to populate. Returning original slide:", updatedSlide);
       return updatedSlide;
     }
 
@@ -1157,7 +1157,7 @@ You are a creative AI tasked with generating list items for a JSON-based present
         };
         applyContent(updatedSlide.content.content as ContentItem[]);
 
-        console.log("Populated Slide:", updatedSlide);
+        // console.log("Populated Slide:", updatedSlide);
         return updatedSlide;
       } catch (error) {
         console.error("Failed to parse or validate list items from API response:", error);
@@ -1193,7 +1193,7 @@ const applyFallback = (slide: Slide): Slide => {
     }
   };
   processContent(updatedSlide.content.content as ContentItem[]);
-  console.log("Applied fallback list items:", updatedSlide);
+  // console.log("Applied fallback list items:", updatedSlide);
   return updatedSlide;
 };
 
@@ -1305,8 +1305,8 @@ export const generateLayouts = async (ProjectId: string, theme: string) => {
     }
 
     // Testing
-    let i=1;
-    project.outlines.map((outline) => { console.log(`Outline ${i++} : ${outline}`) });
+    // let i=1;
+    // project.outlines.map((outline) => { console.log(`Outline ${i++} : ${outline}`) });
 
 
     // Generate Loayout Json data

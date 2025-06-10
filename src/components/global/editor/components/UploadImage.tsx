@@ -220,7 +220,7 @@ const UploadImage = ({ contentId, onComponentChange }: UploadImageProps) => {
 
   // Trigger file input click
   const handleButtonClick = () => {
-    console.log('Upload button clicked'); // Debug
+    // console.log('Upload button clicked'); // Debug
     setError(null); // Reset error state
     fileInputRef.current?.click();
   };
@@ -230,7 +230,7 @@ const UploadImage = ({ contentId, onComponentChange }: UploadImageProps) => {
     const file = event.target.files?.[0];
     if (!file) {
       setError('No file selected');
-      console.log('No file selected'); // Debug
+      // console.log('No file selected'); // Debug
       return;
     }
 
@@ -242,7 +242,7 @@ const UploadImage = ({ contentId, onComponentChange }: UploadImageProps) => {
     formData.append('file', file);
     const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "PresAI-AI_Presentation_Builder";
     formData.append('upload_preset', uploadPreset);
-    console.log('Uploading with preset:', uploadPreset); // Debug
+    // console.log('Uploading with preset:', uploadPreset); // Debug
 
     try {
       // Upload image to Cloudinary
@@ -258,7 +258,7 @@ const UploadImage = ({ contentId, onComponentChange }: UploadImageProps) => {
       // Get response data
       const data = await res.json();
       if (data.secure_url) {
-        console.log('Upload successful, URL:', data.secure_url); // Debug
+        // console.log('Upload successful, URL:', data.secure_url); // Debug
         onComponentChange(contentId, data.secure_url);
       } else {
         console.error('Upload failed, response:', data); // Debug

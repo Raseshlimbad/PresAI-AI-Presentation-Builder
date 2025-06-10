@@ -48,7 +48,7 @@ const Page = () => {
         setTheme(findTheme?.type === "dark" ? "dark" : "light");
         setProject(res.data);
 
-        console.log("Project Data at creation:", res.data);
+        // console.log("Project Data at creation:", res.data);
 
           setSlides(JSON.parse(JSON.stringify(res.data?.slides)));
 
@@ -97,7 +97,7 @@ const Page = () => {
         // }
 
       } catch (error) {
-        console.log(error);
+        console.error(error);
         // If the error is an instance of Error, show the error message
         toast.error("Error", {
           description: "Unexpected error occured",

@@ -40,7 +40,7 @@ export const getAllProjects = async () => {
     // Return Projects
     return { status: 200, data: projects };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -74,7 +74,7 @@ export const getRecentProjects = async () => {
     // Return Recent Projects
     return { status: 200, data: projects };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -107,7 +107,7 @@ export const recoverProject = async (projectId: string) => {
     // Return Project
     return { status: 200, data: updatedProject };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -140,7 +140,7 @@ export const deleteProject = async (projectId: string) => {
     // Return Project
     return { status: 200, data: updatedProject };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -181,7 +181,7 @@ export const createProject = async (title: string, outlines: OutlineCard[]) => {
     // Return Project
     return { status: 200, data: project };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -244,7 +244,7 @@ export const createTemplateProject = async (
     // Return Created Template Project
     return { status: 200, data: templateProject };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -295,7 +295,7 @@ export const createTemplateProject = async (
 //     // Return Project Data
 //     return { status: 200, data: project };
 //   } catch (error) {
-//     console.log("Error: ", error);
+//     console.error("Error: ", error);
 //     return { status: 500, message: "Internal Server Error" };
 //   }
 // };
@@ -322,7 +322,7 @@ export const getProjectById = async (projectId: string) => {
     // Return Project
     return { status: 200, data: project };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -350,7 +350,7 @@ export const getProjectTitle = async (projectId: string) => {
     // Return Project Title
     return { status: 200, data: { title: project.title } };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -386,7 +386,7 @@ export const updateProjectTitle = async (
     // Return Updated Project
     return { status: 200, data: updatedProject };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -423,7 +423,7 @@ export const updateSlides = async (projectId: string, slides: JsonValue) => {
     // Return Project
     return { status: 200, data: updatedProject };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -460,7 +460,7 @@ export const updateTheme = async (projectId: string, theme: string) => {
     // Return Project
     return { status: 200, data: updatedProject };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -527,17 +527,17 @@ export const deleteAllProjects = async (projectIds: string[]) => {
       // First, delete all resources in the folder
       try {
         await cloudinary.api.delete_resources_by_prefix(`projected/${projectFolderName}`);
-        console.log(`All resources in folder 'projected/${projectFolderName}' deleted successfully.`);
+        // console.log(`All resources in folder 'projected/${projectFolderName}' deleted successfully.`);
       } catch (err) {
-        console.log(`Error deleting resources in folder 'projected/${projectFolderName}':`, err);
+        console.error(`Error deleting resources in folder 'projected/${projectFolderName}':`, err);
       }
 
       // Now, delete the folder itself
       try {
         await cloudinary.api.delete_folder(`projected/${projectFolderName}`);
-        console.log(`Folder 'projected/${projectFolderName}' deleted successfully.`);
+        // console.log(`Folder 'projected/${projectFolderName}' deleted successfully.`);
       } catch (err) {
-        console.log(`Error deleting folder 'projected/${projectFolderName}':`, err);
+        console.error(`Error deleting folder 'projected/${projectFolderName}':`, err);
       }
     }
 
@@ -547,7 +547,7 @@ export const deleteAllProjects = async (projectIds: string[]) => {
       message: `${deletedProjects.count} projects successfully deleted and Cloudinary folders removed.`,
     };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -580,7 +580,7 @@ export const getDeletedProjects = async () => {
     // Return Deleted Projects
     return { status: 200, data: projects };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };
@@ -619,7 +619,7 @@ export const filterProjects = async (searchTerm: string) => {
     // Return Filtered Projects
     return { status: 200, data: filteredProjects };
   } catch (error) {
-    console.log("Error: ", error);
+    console.error("Error: ", error);
     return { status: 500, message: "Internal Server Error" };
   }
 };

@@ -47,7 +47,7 @@ const ThemeChooser = () => {
             description: 'Theme updated successfully',
         })
     } catch (error) {
-        console.log(error);
+        console.error(error);
         // Show Error Toast
         toast.error('Error',{
             description: 'Failed to update theme',

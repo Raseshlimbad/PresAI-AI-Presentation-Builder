@@ -44,7 +44,7 @@ const DeleteAllButton = ({ projects }: Props) => {
       router.refresh();
     } catch (error) {
       // Show an error toast
-      console.log("Error deleting all projects: ", error);
+      console.error("Error deleting all projects: ", error);
       toast.error("Error", { description: "Error deleting all projects" });
     }
 
