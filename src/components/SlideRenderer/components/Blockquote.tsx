@@ -21,10 +21,10 @@ const Blockquote: React.FC<BlockquoteProps> = ({ children, className }) => {
         className
       )}
       style={{
-        borderLeftColor: currentTheme.accentColor, // Uses theme's accent color for styling
+        borderLeftColor: currentTheme.accentColor,
       }}
     >
-      {children} {/* Displays the text content inside */}
+      {children}
     </blockquote>
   );
 };

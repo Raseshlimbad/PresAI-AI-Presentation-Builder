@@ -195,7 +195,7 @@ export const ImageComponent = {
   id: uuidv4(),
   type: "image" as ContentType,
   name: "Custom Image",
-  content: "", // Image URL (you can add this dynamically)
-  alt: "Image", // Alt text for accessibility
-  placeholder: "Add Image URL here", // Placeholder for the image URL input field
+  content: "",
+  alt: "Image",
+  placeholder: "Add Image URL here",
 };

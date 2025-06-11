@@ -5,7 +5,7 @@ import React from "react";
 interface ParagraphProps {
   className?: string;
   styles?: React.CSSProperties;
-  value: string; // Readonly value to display text
+  value: string; 
 }
 
 // Paragraph Component (Readonly Mode)

@@ -57,25 +57,6 @@ const CalloutBox = ({ type, children, className }: CalloutBoxProps) => {
         },
       };
 
-  // return (
-  //   <div
-  //   className={cn(
-  //       'rounded-lg border-l-4 flex items-start p-4',
-  //       colors[type].bg,
-  //       colors[type].border,
-  //       colors[type].text,
-  //       className
-  //   )}
-  //   >
-  //       {/* Icon */}
-  //       <Icon className='w-5 h-5 mr-3 mt-0.5' />
-  //       {/* Content */}
-  //       <div>
-  //       {children}
-  //       </div>
-  //   </div>
-  // )
-
   return (
     <div
       className={cn(

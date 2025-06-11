@@ -48,53 +48,7 @@ const Page = () => {
         setTheme(findTheme?.type === "dark" ? "dark" : "light");
         setProject(res.data);
 
-        // console.log("Project Data at creation:", res.data);
-
           setSlides(JSON.parse(JSON.stringify(res.data?.slides)));
-
-
-        // // Check if res.data.slides is a string
-        // if (res.data && typeof res.data.slides === "string") {
-        //   // If slides is a string, parse it
-        //   setSlides(JSON.parse(res.data?.slides));
-        // } else {
-        //   // If slides is not a string, assume it's already in the correct format
-        //   setSlides(JSON.parse(JSON.stringify(res.data?.slides)));
-        // }
-
-
-        // Check if slides is an array
-        // if (Array.isArray(res.data.slides)) {
-        //   // Handle slides content
-        //   const slidesWithParsedContent = res.data.slides.map((slide) => {
-        //     // Check if the content is a string and parse it if necessary
-        //     if (typeof slide?.content === 'string') {
-        //       try {
-        //         // Safely parse the content if it's a string
-        //         const parsedContent = JSON.parse(slide.content);
-
-        //         // Ensure that parsedContent is an object that contains the `content` property
-        //         if (parsedContent && typeof parsedContent === 'object' && 'content' in parsedContent) {
-        //           // Type assertion: we now assume parsedContent is of the correct type
-        //           slide.content = (parsedContent as { content: any }).content; // Update the content
-        //         }
-        //       } catch (error) {
-        //         console.error("Error parsing slide content:", error);
-        //         toast.error("Error", {
-        //           description: "Failed to parse slide content",
-        //         });
-        //       }
-        //     }
-        //     return slide;
-        //   });
-
-        //   // Set the slides
-        //   setSlides(slidesWithParsedContent);
-        // } else {
-        //   toast.error("Error", {
-        //     description: "Slides data is not in the expected format",
-        //   });
-        // }
 
       } catch (error) {
         console.error(error);
@@ -108,9 +62,6 @@ const Page = () => {
       }
     })();
   }, [params.presentationId, setSlides, setCurrentTheme, setProject, setTheme]);
-
-
-  
 
   // If the project is loading, show a loading indicator
   if (isLoading) {

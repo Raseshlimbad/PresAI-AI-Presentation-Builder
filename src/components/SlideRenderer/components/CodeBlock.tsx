@@ -9,7 +9,6 @@ interface CodeBlockProps {
   className?: string;
 }
 
-// CodeBlock component (Display Only)
 const CodeBlock: React.FC<CodeBlockProps> = ({ code = "", language = "plaintext", className }) => {
   const { currentTheme } = useSlideStore();
 

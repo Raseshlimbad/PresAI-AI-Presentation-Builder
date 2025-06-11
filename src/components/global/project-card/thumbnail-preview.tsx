@@ -9,7 +9,6 @@ type Props = {
 
 const ThumbnailPreview = ({ slide, theme }: Props) => {
   return (
-    // Thumbnail Preview
     <div
       className={cn(
         "w-full relative aspect-[16/9] rounded-lg overflow-hidden transition-all duration-200 p-2"

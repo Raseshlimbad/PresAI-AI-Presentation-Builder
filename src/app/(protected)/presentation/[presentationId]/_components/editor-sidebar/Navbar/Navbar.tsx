@@ -7,9 +7,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
 import PresentationMode from "./PresentationMode";
-
-// Server Action Imports (use these server actions)
-import { getProjectTitle, updateProjectTitle } from "@/actions/project";  // assuming this is the path to the server actions
+import { getProjectTitle, updateProjectTitle } from "@/actions/project";
 
 type Props = {
   presentationId: string;

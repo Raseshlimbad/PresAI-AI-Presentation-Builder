@@ -26,7 +26,6 @@ const CreatePage = ({ onSelectOption }: Props) => {
 
     // Render the Create Page Component
   return (
-    
     // Motion.div for the container
     <motion.div
       variants={containerVariants}

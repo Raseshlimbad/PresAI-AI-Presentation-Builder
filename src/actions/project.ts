@@ -208,16 +208,6 @@ export const createTemplateProject = async (
       return { status: 403, error: "User Not Authenticated" };
     }
 
-    // Prepare Slides to be saved as JSON
-    // const serializedSlides = slides.map((slide) => ({
-    //   id: slide.id,
-    //   slideName: slide.slideName,
-    //   type: slide.type,
-    //   slideOrder: slide.slideOrder,
-    //   content: JSON.stringify(slide.content), // Serialize the content (or ensure it's JSON-safe)
-    //   className: slide.className || '',
-    // }));
-
     const serializedSlides = JSON.stringify(slides);
 
     // Create Template Project
@@ -232,7 +222,7 @@ export const createTemplateProject = async (
         updatedAt: new Date(),
         isDeleted: false,
         isSellable: false,
-        themeName: "dark", // Default theme (could be customized as needed)
+        themeName: "dark", // Default theme
       },
     });
 
@@ -248,57 +238,6 @@ export const createTemplateProject = async (
     return { status: 500, message: "Internal Server Error" };
   }
 };
-
-// Create Template Project 2 #########################################################################################################################################
-// export const createTemplateProject = async (templateData: any) => {
-//   try {
-//     // Check if Template Data is Provided
-//     if (!templateData || !templateData.name || !templateData.outlines || templateData.outlines.length === 0) {
-//       return { status: 400, error: "Template data, name, and outlines are required" };
-//     }
-
-//     const { name, description, category, thumbnail, outlines, slides } = templateData;
-
-//     // Check User Authentication
-//     const checkuser = await onAuthenticateUser();
-//     if (checkuser.status !== 200 || !checkuser.user) {
-//       return { status: 403, error: "User Not Authenticated" };
-//     }
-
-//     // Map Outlines
-//     const allOutlines = outlines.map((outline : OutlineCard) => outline.title);
-
-//     // Prepare Project Data
-//     const projectData = {
-//       title: name,
-//       outlines: allOutlines,
-//       slides: slides || [], // Can be an empty array if no slides are provided
-//       thumbnail: thumbnail || null,
-//       userId: checkuser.user.id,
-//       createdAt: new Date(),
-//       updatedAt: new Date(),
-//       isDeleted: false,
-//       isSellable: false,
-//       themeName: 'light', // Assuming default theme
-//     };
-
-//     // Create Project from Template Data
-//     const project = await client.project.create({
-//       data: projectData,
-//     });
-
-//     // Check if Project Creation Failed
-//     if (!project) {
-//       return { status: 500, error: "Failed to create project from template" };
-//     }
-
-//     // Return Project Data
-//     return { status: 200, data: project };
-//   } catch (error) {
-//     console.error("Error: ", error);
-//     return { status: 500, message: "Internal Server Error" };
-//   }
-// };
 
 // Get Project By ID #########################################################################################################################################
 export const getProjectById = async (projectId: string) => {
@@ -508,26 +447,12 @@ export const deleteAllProjects = async (projectIds: string[]) => {
       return { status: 500, error: "Failed to delete all projects" };
     }
 
-    // Return Message on Success
-    // return { status: 200, message: `${deletedProjects.count} projects successfully deleted.` };
-
-    // Delete Folders from Cloudinary
-    // Assuming the project name corresponds to a folder in Cloudinary
-    // for (const project of projectsToDelete) {
-    //   const projectFolderName = project.id; // Assuming `name` is the project folder name
-    //   // await cloudinary.api.delete_resources_by_prefix(projectFolderName);
-    //   await cloudinary.api
-    //     .delete_folder(`projected/${projectFolderName}`)
-    //     .then(console.log);
-    // }
-
     for (const project of projectsToDelete) {
       const projectFolderName = project.id; // Assuming `id` is the folder name
 
       // First, delete all resources in the folder
       try {
         await cloudinary.api.delete_resources_by_prefix(`projected/${projectFolderName}`);
-        // console.log(`All resources in folder 'projected/${projectFolderName}' deleted successfully.`);
       } catch (err) {
         console.error(`Error deleting resources in folder 'projected/${projectFolderName}':`, err);
       }
@@ -535,7 +460,6 @@ export const deleteAllProjects = async (projectIds: string[]) => {
       // Now, delete the folder itself
       try {
         await cloudinary.api.delete_folder(`projected/${projectFolderName}`);
-        // console.log(`Folder 'projected/${projectFolderName}' deleted successfully.`);
       } catch (err) {
         console.error(`Error deleting folder 'projected/${projectFolderName}':`, err);
       }

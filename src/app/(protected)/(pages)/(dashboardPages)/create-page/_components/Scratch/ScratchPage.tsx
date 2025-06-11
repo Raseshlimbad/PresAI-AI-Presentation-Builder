@@ -7,13 +7,6 @@ import { ChevronLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import useScratchStore from "@/store/useStartScratchStore";
 import { v4 as uuidv4 } from "uuid";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import CardList from "../Common/CardList";
 import { OutlineCard } from "@/lib/types";

@@ -23,12 +23,6 @@ interface SlideState {
     contentId: string,
     newContent: string | string[] | string[][]
   ) => void;
-  addComponentInSlide: (
-    slideId: string,
-    item: ContentItem,
-    index: number,
-    parentId?: string
-  ) => void;
 }
 
 // Default Theme
@@ -90,21 +84,6 @@ export const useSlideStore = create(
             return item;
           };
 
-          // return {
-          //   slides: state.slides.map((slide) =>
-          //     slide.id === slideId
-          //       ? {
-          //           ...slide,
-          //           content: Array.isArray(slide.content)
-          //             ? slide.content.map((item) =>
-          //                 updateContentRecursively(item as ContentItem)
-          //               )
-          //             : slide.content,
-          //         }
-          //       : slide
-          //   ),
-          // };
-
           // Return the updated slides
           return {
             // Map through the slides and update the content recursively
@@ -128,52 +107,8 @@ export const useSlideStore = create(
 
       // Current Theme
       currentTheme: defaultTheme,
-
       // Set Current Theme
       setCurrentTheme: (theme: Theme) => set({ currentTheme: theme }),
-
-      // addComponentInSlide with all comments 
-      // addComponentInSlide: (
-      //   slideId: string,    // ID of the slide where the item should be added
-      //   item: ContentItem,  // The new content item to insert
-      //   index: number,      // The position where the item should be inserted
-      //   parentId?: string   // (Optional) ID of the parent content item, if inserting into nested content
-      // ) => {
-      //   set((state) => {
-      //     // Map through the slides to find the one that needs updating
-      //     const updatedSlides = state.slides.map((slide) => {
-      //       if (slide.id === slideId) {
-              
-      //         // Recursive function to traverse content structure and insert the new item
-      //         const updateContentRecursively = (content: ContentItem): ContentItem => {
-      //           // If the current content matches the parentId and contains an array of content
-      //           if (content.id === parentId && Array.isArray(content.content)) {
-      //             const updatedContent = [...content.content]; // Clone existing content array
-      //             updatedContent.splice(index, 0, item); // Insert the new item at the specified index
-      
-      //             return {
-      //               ...content,  // Preserve existing properties
-      //               content: updatedContent as unknown as string[], // Update content with new item
-      //             };
-      //           }
-      //           return content; // If no match, return content unchanged
-      //         };
-      
-      //         // Return the updated slide with modified content
-      //         return {
-      //           ...slide,
-      //           content: updateContentRecursively(slide.content),
-      //         };
-      //       }
-      //       return slide; // If slideId doesn't match, return slide unchanged
-      //     });
-      
-      //     // Update the state with the new slides array
-      //     return {
-      //       slides: updatedSlides,
-      //     };
-      //   });
-      // },
       
       // Add Component In Slide
       addComponentInSlide: (

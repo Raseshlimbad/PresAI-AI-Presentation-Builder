@@ -1,6 +1,5 @@
 "use client";
 
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Sidebar,
   SidebarContent,
@@ -35,8 +34,6 @@ const AppSidebar = ({
   }, []);
 
   if (!mounted) {
-    // Prevent hydration mismatch by not rendering image until theme is available
-    // return <div style={{ height: "70px", width: "140px" }} />;
     return (
       <div className="h-[70px] w-[140px] flex items-center justify-center">
         <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-gray-300"></div>
@@ -57,15 +54,6 @@ const AppSidebar = ({
           size={"lg"}
           className="data-[state=open]:text-sidebar-accent-foreground flex justify-center"
         >
-          {/* <div className="flex aspect-square size-8 items-center justify-normal text-sidebar-primary-foreground">
-            <Avatar className="h-12 w-20">
-              <AvatarImage
-                src={ "/PresAi_dark.png" }
-                alt="PresAI-logo"
-              />
-                <AvatarFallback className="">PresAI</AvatarFallback>
-            </Avatar>
-        </div> */}
         {/* Link to the dashboard */}
           <Link href="/dashboard">
           {theme === "light" ? (
@@ -88,9 +76,6 @@ const AppSidebar = ({
             />
           )}
           </Link>
-          {/* <span className="truncate text-primary text-3xl font-semibold pl-2">
-            PresAI
-        </span> */}
         </SidebarMenuButton>
       </SidebarHeader>
       {/* Sidebar Content */}

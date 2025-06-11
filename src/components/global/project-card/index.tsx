@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { JsonValue } from "@prisma/client/runtime/library";
@@ -65,16 +64,16 @@ const ProjectCard = ({
   // Add a useEffect to handle project title updates
   useEffect(() => {
     if (newTitle !== title) {
-      setNewTitle(title); // Reset the newTitle if the prop 'title' changes
+      setNewTitle(title);
     }
   }, [title]);
 
   useEffect(() => {
-    setIsClient(true); // Ensure rendering is done after the client-side hydration
+    setIsClient(true);
   }, []);
 
   if (!isClient) {
-    return null; // Prevent SSR mismatch before client is ready
+    return null;
   }
 
   // Handle Navigation to the presentation
@@ -229,7 +228,6 @@ const ProjectCard = ({
                     variant={"ghost"}
                     disabled={loading}
                     className="bg-background-80 dark:bg-background-90"
-                    // onClick={(e: React.MouseEvent<HTMLButtonElement>) => e.stopPropagation()}
                   >
                     Recover
                   </Button>
@@ -248,9 +246,7 @@ const ProjectCard = ({
                   {/* 3-Dots Menu */}
                   <DropdownMenu>
                     <DropdownMenuTrigger>
-                      {/* <Button variant="ghost" size="icon"> */}
                       <MoreHorizontal />
-                      {/* </Button> */}
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem onClick={() => setIsRenaming(true)}>
@@ -283,12 +279,12 @@ const ProjectCard = ({
                     <Button
                       onClick={handleUpdateTitle}
                       variant="default"
-                      disabled={loading} // Disable the button while loading
+                      disabled={loading}
                     >
                       {loading ? (
-                        <Loader2 className="animate-spin w-5 h-5" /> // Render spinner during loading
+                        <Loader2 className="animate-spin w-5 h-5" />
                       ) : (
-                        "Update Title" // Show text when not loading
+                        "Update Title"
                       )}
                     </Button>
                     <Button

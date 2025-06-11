@@ -1,4 +1,3 @@
-// components/Sidebar.jsx
 import React from 'react';
 import { Layout, LayoutGrid, Search, PenTool, BookOpen, Frame } from 'lucide-react';
 import { Category } from '@/lib/types';

@@ -146,7 +146,6 @@ const DraggableSlide: React.FC<DraggableSlideProps> = ({
     contentId: string,
     newContent: string | string[] | string[][]
   ) => {
-    // console.log("Content changed:", slide , "contentId: " , contentId , "newContent: " , newContent);
     // If the editor is editable, update the content item
     if (isEditable) {
       updateContentItem(slide.id, contentId, newContent);
@@ -260,7 +259,6 @@ const Editor = ({ isEditable }: Props) => {
 
     // If the item is a layout, add the layout to the project
     if (item.type === "LAYOUT") {
-      // console.log("Dropping layout:", item);
       addSlideAtIndex(
         {
           ...item.component,
