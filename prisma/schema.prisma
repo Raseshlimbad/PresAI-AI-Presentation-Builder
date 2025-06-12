@@ -35,21 +35,22 @@ datasource db {
 
 model User {
   id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  clerkId            String?   @unique  // Made optional for non-Clerk auth
+  clerkId            String?   @unique // Made optional for non-Clerk auth
   name               String
   email              String    @unique
   username           String?   @unique
-  password           String?   // Added for normal auth
-  passwordSalt       String?   // Added for password security
-  passwordResetToken String?   // Added for password reset functionality
+  password           String? // Added for normal auth
+  passwordSalt       String? // Added for password security
+  passwordResetToken String? // Added for password reset functionality
   resetTokenExpiry   DateTime? // Added for token expiration
   profileImage       String?
   subscription       Boolean?  @default(false)
+  subscriptionStart  DateTime?
+  subscriptionEnd    DateTime?
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   lastLoginAt        DateTime  @default(now())
   authMethod         String?   @default("email")
-  lemonSqueezyApiKey String?
   storeID            String?
   webhookSecret      String?
 

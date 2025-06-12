@@ -1,6 +1,6 @@
 "use client";
 
-import { buySubscription } from "@/actions/lemonSqueezy";
+import { buySubscription, confirmSubscription } from "@/actions/stripe";
 import { Button } from "@/components/ui/button";
 import {
   SidebarMenu,
@@ -9,28 +9,44 @@ import {
 } from "@/components/ui/sidebar";
 import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 import { User } from "@prisma/client";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
   const { user, isSignedIn, isLoaded } = useUser();
   const [loading, setLoading] = useState(false);
-  const [showProfileModal, setShowProfileModal] = useState(false);
-  const [currentUser, setCurrentUser] = useState(prismaUser);
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  if (!isLoaded || !isSignedIn) {
-    return null;
-  }
+  useEffect(() => {
+    const sessionId = searchParams.get("session_id");
+    if (sessionId) {
+      (async () => {
+        const result = await confirmSubscription(sessionId);
+        if (result.success) {
+          toast.success(result.message || "Subscription confirmed!");
+        } else {
+          toast.error(result.message || "Subscription verification failed.");
+        }
+        router.replace("/dashboard");
+      })();
+    }
+  }, [searchParams, router]);
 
   const handleUpgrading = async () => {
     setLoading(true);
-    try {
-      const res = await buySubscription(prismaUser.id);
-    } catch (error) {}
+    const result = await buySubscription(prismaUser.id, prismaUser.email);
+    if (result?.success) toast.success(result.message);
+    if (result?.url) {
+      router.push(result.url);
+    } else {
+      toast.error(result?.message || "Something went wrong");
+      setLoading(false);
+    }
   };
 
-  const handleUserUpdate = (updatedUser: User) => {
-    setCurrentUser(updatedUser);
-  };
+  if (!isLoaded || !isSignedIn) return null;
 
   return (
     <SidebarMenu>
@@ -50,6 +66,7 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
                   variant={"default"}
                   size={"lg"}
                   onClick={handleUpgrading}
+                  disabled={loading}
                 >
                   {loading ? "Upgrading..." : "Upgrade"}
                 </Button>
@@ -57,36 +74,19 @@ const NavFooter = ({ prismaUser }: { prismaUser: User }) => {
             </div>
           </div>
         )}
-        {/* <SignedIn>
-              <SidebarMenuButton
-                size={"lg"}
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-              >
-                <UserButton />
-                <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
-                    <span className="truncate font-semibold">
-                        {prismaUser.name || prismaUser.username || user?.username}
-                    </span>
-                    <span className="truncate dark:text-secondary">
-                        {prismaUser.email || user?.emailAddresses[0]?.emailAddress}
-                    </span>
-                </div>
-              </SidebarMenuButton>
-            </SignedIn> */}
 
         <SignedIn>
           <SidebarMenuButton
             size={"lg"}
             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            onClick={() => setShowProfileModal(true)}
           >
             <UserButton />
             <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
               <span className="truncate font-semibold">
-                {currentUser.name || currentUser.username || user?.username}
+                {prismaUser.name || prismaUser.username || user?.username}
               </span>
               <span className="truncate dark:text-secondary">
-                {currentUser.email || user?.emailAddresses[0]?.emailAddress}
+                {prismaUser.email || user?.emailAddresses[0]?.emailAddress}
               </span>
             </div>
           </SidebarMenuButton>

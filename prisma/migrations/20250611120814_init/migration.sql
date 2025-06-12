@@ -1,14 +1,22 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
-    "clerkId" TEXT NOT NULL,
+    "clerkId" TEXT,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "username" TEXT,
+    "password" TEXT,
+    "passwordSalt" TEXT,
+    "passwordResetToken" TEXT,
+    "resetTokenExpiry" TIMESTAMP(3),
     "profileImage" TEXT,
     "subscription" BOOLEAN DEFAULT false,
+    "subscriptionStart" TIMESTAMP(3),
+    "subscriptionEnd" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "lemonSqueezyApiKey" TEXT,
+    "lastLoginAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "authMethod" TEXT DEFAULT 'email',
     "storeID" TEXT,
     "webhookSecret" TEXT,
 
@@ -46,6 +54,9 @@ CREATE UNIQUE INDEX "User_clerkId_key" ON "User"("clerkId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
 CREATE INDEX "_PurchasedProjects_B_index" ON "_PurchasedProjects"("B");
