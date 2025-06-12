@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { filterProjects, getAllProjects } from '@/actions/project';
 import NotFound from '@/components/global/not-found/NotFound';
 import Projects from '@/components/global/projects';
