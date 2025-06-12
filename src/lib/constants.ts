@@ -1,26 +1,20 @@
-import { Home, LayoutTemplate, Settings, Trash } from "lucide-react";
 import {
-  Category,
-  ComponentGroup,
-  LayoutGroup,
-  Template,
-  Theme,
-} from "./types";
-import {
-  BlankCard,
   AccentLeft,
   AccentRight,
+  BlankCard,
+  FourColumns,
+  FourImageColumns,
   ImageAndText,
   TextAndImage,
-  TwoColumns,
   ThreeColumns,
-  TwoColumnsWithHeadings,
   ThreeColumnsWithHeadings,
-  FourColumns,
-  TwoImageColumns,
-  FourImageColumns,
   ThreeImageColumns,
+  TwoColumns,
+  TwoColumnsWithHeadings,
+  TwoImageColumns,
 } from "@/lib/slideLayouts";
+import { Home, Trash } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
 import {
   BlankCardIcon,
   FourColumnsIcon,
@@ -48,7 +42,13 @@ import {
   Title,
   TodoListComponent,
 } from "./slideCompoennts";
-import { v4 as uuidv4 } from "uuid";
+import {
+  Category,
+  ComponentGroup,
+  LayoutGroup,
+  Template,
+  Theme,
+} from "./types";
 
 // Data for the dashboard
 export const data = {
